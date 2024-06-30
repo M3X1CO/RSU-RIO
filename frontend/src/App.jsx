@@ -111,7 +111,7 @@ const handleSearchName=(event) => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h2>RSU RIO DATABASE</h2>
       <Notification message={successMessage} errorMessage={errorMessage} />
       <Filter 
       searchName={searchName} 
