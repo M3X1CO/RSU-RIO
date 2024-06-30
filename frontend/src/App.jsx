@@ -116,9 +116,9 @@ const handleSearchName=(event) => {
       <Filter 
       searchName={searchName} 
       handleSearchName={handleSearchName} />
-        <h3>Add a new</h3>
+        <h3>Add a New Student</h3>
         <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
-        <h3>Numbers</h3>
+        <h3>Students</h3>
         <Persons persons={filterItems} deleteName={deleteName} />
     </div>
   )
