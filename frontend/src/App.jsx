@@ -8,8 +8,8 @@ import Notification from './components/Notification';
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
-  const [newNumber, setNewNumber] = useState('')
-  const [searchName, setSearchName] = useState('')
+  const [newPassportNumber, setNewPassportNumber] = useState('')
+  const [searchPassportNumber, setSearchPassportNumber] = useState('')
   const [filterItems, setFilterItems] = useState([])
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -28,15 +28,15 @@ const App = () => {
     fetchData()
   }, [])
 
-  const addName=(event) => {
+  const addName = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
 
     const nameExists = persons.find((person) => person.name.toLowerCase() === newName.toLowerCase())
     
-    const nameObject= {
+    const nameObject = {
       name: newName,
-      number: newNumber
+      passportNumber: newPassportNumber
     }
 
     if (nameExists) {
@@ -48,7 +48,7 @@ const App = () => {
         setPersons(persons.map(person => person.id !== nameExists.id ? person : returnedPerson))
         setFilterItems(filterItems.map(person => person.id !== nameExists.id ? person : returnedPerson))
       }).catch(error => {
-        setErrorMessage(`Information of ${newName}' has already been deleted from the server`)
+        setErrorMessage(`Information of ${newName} has already been deleted from the server`)
         setTimeout(() => {
           setErrorMessage(null)
         }, 4000)
@@ -67,13 +67,13 @@ const App = () => {
       })
     }
     setNewName('');
-    setNewNumber('');
-    setSearchName('');
+    setNewPassportNumber('');
+    setSearchPassportNumber('');
   }
 
-  const deleteName=(id) => {
+  const deleteName = (id) => {
     const person = persons.find(person => person.id === id)
-    const confirmDelete = window.confirm(`Delete ${person.name} ?`)
+    const confirmDelete = window.confirm(`Delete ${person.name}?`)
     if (confirmDelete) {
       notes.remove(id)
       .then(() => {
@@ -81,7 +81,7 @@ const App = () => {
         setFilterItems(filterItems.filter(person => person.id !== id))
       })
       .catch(error => {
-        setErrorMessage(`${person.name}' has already been deleted from the server`)
+        setErrorMessage(`${person.name} has already been deleted from the server`)
         setTimeout(() => {
           setErrorMessage(null)
         }, 4000)
@@ -91,19 +91,19 @@ const App = () => {
     }
   }
 
-  const handleNameChange=(event) => {
+  const handleNameChange = (event) => {
     setNewName(event.target.value) 
   }
 
-  const handleNumberChange=(event) => {
-    setNewNumber(event.target.value) 
+  const handlePassportNumberChange = (event) => {
+    setNewPassportNumber(event.target.value) 
   }
 
-  const handleSearchName=(event) => {
-    setSearchName(event.target.value)
+  const handleSearchPassportNumber = (event) => {
+    setSearchPassportNumber(event.target.value)
 
     const filterItems = persons.filter(person => {
-      if (person.number.toLowerCase().includes(event.target.value.toLowerCase())) {
+      if (person.passportNumber.toLowerCase().includes(event.target.value.toLowerCase())) {
         return person
       }})
     setFilterItems(filterItems)
@@ -114,15 +114,15 @@ const App = () => {
       <h2>RSU RIO DATABASE</h2>
       <Notification message={successMessage} errorMessage={errorMessage} />
       <Filter 
-        searchName={searchName} 
-        handleSearchName={handleSearchName} />
+        searchName={searchPassportNumber} 
+        handleSearchName={handleSearchPassportNumber} />
       <h3>Add a New Student</h3>
       <PersonForm 
         addName={addName} 
         newName={newName} 
         handleNameChange={handleNameChange} 
-        newNumber={newNumber} 
-        handleNumberChange={handleNumberChange} />
+        newNumber={newPassportNumber} 
+        handleNumberChange={handlePassportNumberChange} />
       <h3>Students</h3>
       <Persons 
         persons={filterItems} 
