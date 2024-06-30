@@ -45,10 +45,10 @@ const Names = ({ person, deleteName }) => {
       <div>
         <form onSubmit={addName}>
           <div style={{ marginBottom: '10px' }}>
-            Name:<br/> <input id="nameInput" name="name" value={newName} onChange={handleNameChange} />
+            Name:<br/> <input id="nameInput" name="name" value={newName} onChange={handleNameChange} autoComplete="off" />
           </div>
           <div style={{ marginBottom: '10px' }}>
-            Passport Number:<br/> <input id="passportNumberInput" name="passportNumber" value={newNumber} onChange={handleNumberChange} />
+            Passport Number:<br/> <input id="passportNumberInput" name="passportNumber" value={newNumber} onChange={handleNumberChange} autoComplete="off" />
           </div>
           <div>
             <button type="submit">Submit</button>
