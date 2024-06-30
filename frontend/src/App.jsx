@@ -14,19 +14,19 @@ const App = () => {
   const [successMessage, setSuccessMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const initialNotes = await notes.getAll()
-          setPersons(initialNotes)
-          setFilterItems(initialNotes)
-    } catch (error) {
-      console.error('Error fetching data', error)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const initialNotes = await notes.getAll()
+        setPersons(initialNotes)
+        setFilterItems(initialNotes)
+      } catch (error) {
+        console.error('Error fetching data', error)
+      }
     }
-  }
 
-  fetchData()
-}, [])
+    fetchData()
+  }, [])
 
   const addName=(event) => {
     event.preventDefault()
@@ -71,55 +71,62 @@ useEffect(() => {
     setSearchName('');
   }
 
-const deleteName=(id) => {
-  const person = persons.find(person => person.id === id)
-  const confirmDelete = window.confirm(`Delete ${person.name} ?`)
-  if (confirmDelete) {
-    notes.remove(id)
-    .then(() => {
-      setPersons(persons.filter(person => person.id !== id))
-      setFilterItems(filterItems.filter(person => person.id !== id))
-    })
-    .catch(error => {
-      setErrorMessage(`${person.name}' has already been deleted from the server`)
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 4000)
-      setPersons(persons.filter(person => person.id !== id))
-      setFilterItems(filterItems.filter(person => person.id !== id))
-    }, [])
+  const deleteName=(id) => {
+    const person = persons.find(person => person.id === id)
+    const confirmDelete = window.confirm(`Delete ${person.name} ?`)
+    if (confirmDelete) {
+      notes.remove(id)
+      .then(() => {
+        setPersons(persons.filter(person => person.id !== id))
+        setFilterItems(filterItems.filter(person => person.id !== id))
+      })
+      .catch(error => {
+        setErrorMessage(`${person.name}' has already been deleted from the server`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 4000)
+        setPersons(persons.filter(person => person.id !== id))
+        setFilterItems(filterItems.filter(person => person.id !== id))
+      }, [])
+    }
   }
-}
 
-const handleNameChange=(event) => {
- setNewName(event.target.value) 
-}
+  const handleNameChange=(event) => {
+    setNewName(event.target.value) 
+  }
 
-const handleNumberChange=(event) => {
-  setNewNumber(event.target.value) 
-}
+  const handleNumberChange=(event) => {
+    setNewNumber(event.target.value) 
+  }
 
-const handleSearchName=(event) => {
-  setSearchName(event.target.value)
+  const handleSearchName=(event) => {
+    setSearchName(event.target.value)
 
-  const filterItems = persons.filter(person => {
-    if (person.name.toLowerCase().includes(event.target.value.toLowerCase())) {
-      return person
-    }})
+    const filterItems = persons.filter(person => {
+      if (person.number.toLowerCase().includes(event.target.value.toLowerCase())) {
+        return person
+      }})
     setFilterItems(filterItems)
-}
+  }
 
   return (
     <div>
       <h2>RSU RIO DATABASE</h2>
       <Notification message={successMessage} errorMessage={errorMessage} />
       <Filter 
-      searchName={searchName} 
-      handleSearchName={handleSearchName} />
-        <h3>Add a New Student</h3>
-        <PersonForm addName={addName} newName={newName} handleNameChange={handleNameChange} newNumber={newNumber} handleNumberChange={handleNumberChange} />
-        <h3>Students</h3>
-        <Persons persons={filterItems} deleteName={deleteName} />
+        searchName={searchName} 
+        handleSearchName={handleSearchName} />
+      <h3>Add a New Student</h3>
+      <PersonForm 
+        addName={addName} 
+        newName={newName} 
+        handleNameChange={handleNameChange} 
+        newNumber={newNumber} 
+        handleNumberChange={handleNumberChange} />
+      <h3>Students</h3>
+      <Persons 
+        persons={filterItems} 
+        deleteName={deleteName} />
     </div>
   )
 }

@@ -21,10 +21,10 @@ return (
     <div>
     <form onSubmit={addName}>
         <div>
-        Name: <input value={newName} onChange={handleNameChange} />
+        Name:<br/> <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-        Passport Number: <input value={newNumber} onChange={handleNumberChange} />
+        Passport Number:<br/> <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
         <button type="submit">Submit</button>
