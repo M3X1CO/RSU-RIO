@@ -12,7 +12,7 @@ if (!url) {
 
 console.log('Connecting to MongoDB');
 
-mongoose.connect(url)
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -21,8 +21,8 @@ mongoose.connect(url)
   });
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  passportNumber: String,
+  name: { type: String, required: true },
+  passportNumber: { type: String, required: true },
 });
 
 personSchema.set('toJSON', {
@@ -33,6 +33,6 @@ personSchema.set('toJSON', {
   }
 });
 
-const Person = mongoose.model('Person', personSchema, 'RSU-RIO-DATABASE');
+const Person = mongoose.model('Person', personSchema);
 
 module.exports = Person;

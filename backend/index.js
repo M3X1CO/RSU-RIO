@@ -66,7 +66,7 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.delete('/api/persons/:id', async (request, response, next) => {
   try {
-    const deletedPerson = await Person.findByIdAndRemove(request.params.id);
+    const deletedPerson = await Person.findByIdAndDelete(request.params.id);
     if (!deletedPerson) {
       return response.status(404).json({ error: 'Person not found' });
     }
