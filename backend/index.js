@@ -64,12 +64,17 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error));
 });
 
-app.delete('/api/persons/:id', (request, response, next) => {
-  Person.findByIdAndRemove(request.params.id)
-    .then(() => {
-      response.status(204).end();
-    })
-    .catch(error => next(error));
+app.delete('/api/persons/:id', async (request, response, next) => {
+  try {
+    const deletedPerson = await Person.findByIdAndRemove(request.params.id);
+    if (!deletedPerson) {
+      return response.status(404).json({ error: 'Person not found' });
+    }
+    response.status(204).end();
+  } catch (error) {
+    console.error('Error deleting person:', error.message);
+    next(error); 
+  }
 });
 
 const unknownEndpoint = (request, response) => {

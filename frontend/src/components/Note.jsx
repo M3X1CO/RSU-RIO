@@ -2,7 +2,7 @@ const Names = ({ person, deleteName }) => {
     return (
       <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid lightgray'}}>
         {person.name} {person.passportNumber} 
-        <button style={{ marginRight: '4em'}} onClick={() => deleteName(person.id)}>delete</button>
+        <button style={{ marginRight: '4em'}} onClick={() => deleteName(person.id)}>Delete</button>
       </div>
     )
   }
