@@ -20,10 +20,10 @@ const Names = ({ person, deleteName }) => {
     return (
       <div>
         <form onSubmit={addName}>
-          <div>
+          <div style={{ marginBottom: '10px' }}>
             Name:<br/> <input value={newName} onChange={handleNameChange} />
           </div>
-          <div>
+          <div style={{ marginBottom: '10px' }}>
             Passport Number:<br/> <input value={newNumber} onChange={handleNumberChange} />
           </div>
           <div>
@@ -32,7 +32,7 @@ const Names = ({ person, deleteName }) => {
         </form>
       </div>
     )
-  }
+  }  
   
   const Persons = ({ persons, deleteName }) => {
     return (
