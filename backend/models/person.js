@@ -33,6 +33,6 @@ personSchema.set('toJSON', {
   }
 });
 
-const Person = mongoose.model('Person', personSchema, RSU-RIO-DATABASE);
+const Person = mongoose.model('Person', personSchema, 'RSU-RIO-DATABASE');
 
 module.exports = Person;
