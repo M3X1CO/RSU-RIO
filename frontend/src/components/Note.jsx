@@ -10,7 +10,7 @@ const Names = ({ person, deleteName }) => {
   const Filter = ({ searchName, handleSearchName }) => {
     return (
       <div>
-        SEARCH: {' '}
+        SEARCH:<br/> {' '}
         <input value={searchName} onChange={handleSearchName} />
       </div>
     )

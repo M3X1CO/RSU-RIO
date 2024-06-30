@@ -112,6 +112,7 @@ const App = () => {
   return (
     <div>
       <h2>RSU RIO DATABASE</h2>
+      <br/>
       <Notification message={successMessage} errorMessage={errorMessage} />
       <Filter 
         searchName={searchPassportNumber} 
