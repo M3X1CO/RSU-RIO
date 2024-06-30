@@ -29,47 +29,41 @@ const App = () => {
   }, [])
 
   const addName = (event) => {
-    event.preventDefault()
-    console.log('button clicked', event.target)
-
-    const nameExists = persons.find((person) => person.name.toLowerCase() === newName.toLowerCase())
-    
+    event.preventDefault();
+  
+    const nameExists = persons.find((person) => person.passportNumber === newPassportNumber);
+  
+    if (nameExists) {
+      setErrorMessage(`Person with Passport Number ${newPassportNumber} already exists`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 4000);
+      return;
+    }
+  
     const nameObject = {
       name: newName,
-      passportNumber: newPassportNumber
-    }
-
-    if (nameExists) {
-      const confirmed = window.confirm(`Do you wish to update ${nameExists.name}?`)
-      if (!confirmed) {
-        return
-      }
-      notes.update(nameExists.id, nameObject).then(returnedPerson => {
-        setPersons(persons.map(person => person.id !== nameExists.id ? person : returnedPerson))
-        setFilterItems(filterItems.map(person => person.id !== nameExists.id ? person : returnedPerson))
-      }).catch(error => {
-        setErrorMessage(`Information of ${newName} has already been deleted from the server`)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 4000)
-      })
-
-    } else {
-      notes.create(nameObject)
+      passportNumber: newPassportNumber,
+    };
+  
+    notes.create(nameObject)
       .then(returnedPerson => {
-        console.log(returnedPerson)
         setPersons(persons.concat(returnedPerson));
         setFilterItems(filterItems.concat(returnedPerson));
-        setSuccessMessage(`Added ${newName}`)
+        setSuccessMessage(`Added ${newName}`);
         setTimeout(() => {
-          setSuccessMessage(null)
-        }, 4000)
+          setSuccessMessage(null);
+        }, 4000);
       })
-    }
+      .catch(error => {
+        console.error('Error adding person:', error);
+      });
+  
     setNewName('');
     setNewPassportNumber('');
     setSearchPassportNumber('');
-  }
+  };
+  
 
   const deleteName = (id) => {
     const person = persons.find(person => person.id === id)
