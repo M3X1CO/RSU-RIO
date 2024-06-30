@@ -12,7 +12,7 @@ if (!url) {
 
 console.log('Connecting to MongoDB');
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url)
   .then(() => {
     console.log('Connected to MongoDB');
   })

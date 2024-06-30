@@ -1,11 +1,36 @@
+import React, { useState } from 'react';
+
 const Names = ({ person, deleteName }) => {
-    return (
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid lightgray'}}>
-        {person.name} {person.passportNumber} 
-        <button style={{ marginRight: '4em'}} onClick={() => deleteName(person.id)}>Delete</button>
+  const [showAdditionalSection, setShowAdditionalSection] = useState(false);
+
+  const toggleAdditionalSection = () => {
+    setShowAdditionalSection(!showAdditionalSection);
+  };
+
+  return (
+    <div style={{ borderBottom: '1px solid lightgray', marginBottom: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          {person.name} {person.passportNumber}
+        </div>
+        <div>
+          <button onClick={() => deleteName(person.id)}>Delete</button>
+          <button onClick={toggleAdditionalSection}>
+            {showAdditionalSection ? 'Hide' : 'Show'} Details
+          </button>
+        </div>
       </div>
-    )
-  }
+      {showAdditionalSection && (
+        <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f0f0f0' }}>
+          {/* This is the blank section for future use */}
+          <h4>Additional Details</h4>
+          <p>This section can be used to add more information about {person.name}.</p>
+          {/* You can add form fields, text inputs, or any other content here for future use */}
+        </div>
+      )}
+    </div>
+  );
+};
   
   const Filter = ({ searchName, handleSearchName }) => {
     return (
