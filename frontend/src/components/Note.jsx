@@ -41,14 +41,52 @@ const Filter = ({ searchName, handleSearchName }) => {
   }  
   
   const PersonForm = ({ addName, newName, handleNameChange, newNumber, handleNumberChange }) => {
+    const [nameError, setNameError] = useState('');
+    const [passportError, setPassportError] = useState('');
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+  
+      if (!newName.trim() && !newNumber.trim()) {
+        setNameError('Name and passport number are required.');
+        setPassportError('');
+      } else if (!newName.trim()) {
+        setNameError('Name is required.');
+        setPassportError('');
+      } else if (!newNumber.trim()) {
+        setPassportError('Passport number is required.');
+        setNameError('');
+      } else {
+        setNameError('');
+        setPassportError('');
+        addName(event);
+      }
+    };
+  
     return (
       <div>
-        <form onSubmit={addName}>
+        <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
-            Name:<br/> <input id="nameInput" name="name" value={newName} onChange={handleNameChange} autoComplete="off" />
+            Name:<br/> 
+            <input 
+              id="nameInput" 
+              name="name" 
+              value={newName} 
+              onChange={handleNameChange} 
+              autoComplete="off" 
+            />
+            {nameError && <span style={{ color: 'red' }}>{nameError}</span>}
           </div>
           <div style={{ marginBottom: '10px' }}>
-            Passport Number:<br/> <input id="passportNumberInput" name="passportNumber" value={newNumber} onChange={handleNumberChange} autoComplete="off" />
+            Passport Number:<br/> 
+            <input 
+              id="passportNumberInput" 
+              name="passportNumber" 
+              value={newNumber} 
+              onChange={handleNumberChange} 
+              autoComplete="off" 
+            />
+            {passportError && <span style={{ color: 'red' }}>{passportError}</span>}
           </div>
           <div>
             <button type="submit">Submit</button>
@@ -56,7 +94,7 @@ const Filter = ({ searchName, handleSearchName }) => {
         </form>
       </div>
     );
-  }  
+  };  
   
   const Persons = ({ persons, deleteName }) => {
     return (
