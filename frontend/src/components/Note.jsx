@@ -14,8 +14,8 @@ const Names = ({ person, deleteName }) => {
           {person.name} {person.passportNumber}
         </div>
         <div>
-          <button onClick={() => deleteName(person.id)}>Delete</button>
           <button onClick={toggleAdditionalSection}>
+          <button onClick={() => deleteName(person.id)}>Delete</button>
             {showAdditionalSection ? 'Hide' : 'Show'} Details
           </button>
         </div>
