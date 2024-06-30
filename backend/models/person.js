@@ -22,7 +22,7 @@ mongoose.connect(url)
 
 const personSchema = new mongoose.Schema({
   name: String,
-  number: String,
+  passportNumber: String,
 });
 
 personSchema.set('toJSON', {
@@ -33,6 +33,6 @@ personSchema.set('toJSON', {
   }
 });
 
-const Person = mongoose.model('Person', personSchema, 'phonebook');
+const Person = mongoose.model('Person', personSchema, 'RSU-RIO-DATABASE');
 
 module.exports = Person;
