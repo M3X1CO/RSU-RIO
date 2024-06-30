@@ -31,14 +31,14 @@ const Names = ({ person, deleteName }) => {
   );
 };
   
-  const Filter = ({ searchName, handleSearchName }) => {
+const Filter = ({ searchName, handleSearchName }) => {
     return (
       <div>
         SEARCH:<br/> {' '}
-        <input value={searchName} onChange={handleSearchName} />
+        <input id="searchInput" name="search" value={searchName} onChange={handleSearchName} autoComplete="off" />
       </div>
-    )
-  }
+    );
+  }  
   
   const PersonForm = ({ addName, newName, handleNameChange, newNumber, handleNumberChange }) => {
     return (
