@@ -61,6 +61,11 @@ const Filter = ({ searchName, handleSearchName }) => {
         setPassportError('');
         addName(event);
       }
+
+      setTimeout(() => {
+        setNameError('');
+        setPassportError('');
+      }, 4000);
     };
   
     return (
