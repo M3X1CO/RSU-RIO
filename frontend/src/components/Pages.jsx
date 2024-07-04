@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const Pages = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [student, setStudent] = useState(null);
 
   useEffect(() => {
@@ -29,6 +30,16 @@ const Pages = () => {
 
   return (
     <div>
+      <button
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          left: '1rem',
+        }}
+        onClick={() => navigate('/')}
+      >
+        Return Home
+      </button>
       <h2>{student.name}</h2>
       <p>Passport: {student.passport}</p>
       {/* Add more student details here */}
