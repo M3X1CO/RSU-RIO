@@ -105,8 +105,8 @@ const App = () => {
       <br/>
       <Notification message={successMessage} errorMessage={errorMessage} />
       <Filter 
-        searchName={searchPassportNumber} 
-        handleSearchName={handleSearchPassportNumber} />
+        searchPassportNumber={searchPassportNumber} 
+        handleSearchPassportNumber={handleSearchPassportNumber} />
       <h3>Add a New Student</h3>
       <StudentForm 
         addName={addName} 
