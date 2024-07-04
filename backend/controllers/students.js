@@ -1,5 +1,16 @@
-const studentRouter = require('express').Router()
+const express = require('express')
+const mongoose = require('mongoose')
+const studentRouter = express.Router()
 const Student = require('../models/student')
+
+// Middleware for validating object IDs
+const validateObjectId = (req, res, next) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send('Invalid ID')
+  }
+  next()
+}
 
 studentRouter.get('/', (request, response, next) => {
   Student.find({})
@@ -9,16 +20,16 @@ studentRouter.get('/', (request, response, next) => {
     .catch(error => next(error))
 })
 
-studentRouter.get('/:id', (request, response, next) => {
-  Student.findById(request.params.id)
-    .then(student => {
-      if (student) {
-        response.json(student)
-      } else {
-        response.status(404).end()
-      }
-    })
-    .catch(error => next(error))
+studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
+  try {
+    const student = await Student.findById(request.params.id)
+    if (!student) {
+      return response.status(404).send('Student not found')
+    }
+    response.json(student)
+  } catch (error) {
+    next(error)
+  }
 })
 
 studentRouter.post('/', (request, response, next) => {
@@ -36,15 +47,18 @@ studentRouter.post('/', (request, response, next) => {
     .catch(error => next(error))
 })
 
-studentRouter.delete('/:id', (request, response, next) => {
+studentRouter.delete('/:id', validateObjectId, (request, response, next) => {
   Student.findByIdAndDelete(request.params.id)
-    .then(() => {
+    .then(result => {
+      if (!result) {
+        return response.status(404).send('Student not found')
+      }
       response.status(204).end()
     })
     .catch(error => next(error))
 })
 
-studentRouter.put('/:id', (request, response, next) => {
+studentRouter.put('/:id', validateObjectId, (request, response, next) => {
   const body = request.body
 
   const student = {
@@ -54,6 +68,9 @@ studentRouter.put('/:id', (request, response, next) => {
 
   Student.findByIdAndUpdate(request.params.id, student, { new: true })
     .then(updatedStudent => {
+      if (!updatedStudent) {
+        return response.status(404).send('Student not found')
+      }
       response.json(updatedStudent)
     })
     .catch(error => next(error))

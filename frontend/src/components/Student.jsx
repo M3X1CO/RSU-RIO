@@ -26,7 +26,6 @@ const Names = ({ student, deleteName }) => {
         <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f0f0f0', position: 'relative' }}>
           <h4>Additional Details</h4>
           <p>This section can be used to add more information about {student.name}.</p>
-          {/* You can add form fields, text inputs, or any other content here for future use */}
           <button 
             style={{
               position: 'absolute',
@@ -34,9 +33,9 @@ const Names = ({ student, deleteName }) => {
               right: '1rem'
             }}
             onClick={() => navigate(`/students/${student.id}`)}
-            >
-              View Students Page
-            </button>
+          >
+            View Students Page
+          </button>
         </div>
       )}
     </div>
