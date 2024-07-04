@@ -31,15 +31,15 @@ const Names = ({ student, deleteName }) => {
   );
 };
   
-const Filter = ({ searchName, handleSearchName }) => {
+const Filter = ({ searchPassportNumber, handleSearchPassportNumber }) => {
   return (
     <div>
-      SEARCH:<br/> {' '}
+      SEARCH PASSPORT #:<br/> {' '}
       <input 
         id="searchInput" 
         name="search" 
-        value={searchName} 
-        onChange={handleSearchName} 
+        value={searchPassportNumber} 
+        onChange={handleSearchPassportNumber} 
         autoComplete="off" 
       />
     </div>
