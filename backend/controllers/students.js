@@ -1,7 +1,7 @@
 const studentRouter = require('express').Router()
 const Student = require('../models/student')
 
-studentRouter.get('/', (request, response) => {
+studentRouter.get('/', (request, response, next) => {
   Student.find({})
     .then(students => {
       response.json(students)
