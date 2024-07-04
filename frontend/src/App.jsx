@@ -91,10 +91,16 @@ const App = () => {
   };
 
   const handleSearchPassportNumber = (event) => {
-    setSearchPassportNumber(event.target.value);
+    const searchTerm = event.target.value.toLowerCase();
+
+    setSearchPassportNumber(searchTerm);
 
     const filteredItems = students.filter(student => {
-      return student.passport.toLowerCase().includes(event.target.value.toLowerCase());
+      if (student.passport) {
+        return student.passport.toLowerCase().includes(searchTerm);
+      }
+      return false;
+
     });
     setFilterItems(filteredItems);
   };
