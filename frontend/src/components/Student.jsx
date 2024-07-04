@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Names = ({ student, deleteName }) => {
   const [showAdditionalSection, setShowAdditionalSection] = useState(false);
+  const navigate = useNavigate();
 
   const toggleAdditionalSection = () => {
     setShowAdditionalSection(!showAdditionalSection);
@@ -31,7 +33,7 @@ const Names = ({ student, deleteName }) => {
               bottom: '1rem',
               right: '1rem'
             }}
-            onClick={() => alert('Button clicked')}
+            onClick={() => navigate(`/students/${student.id}`)}
             >
               View Students Page
             </button>

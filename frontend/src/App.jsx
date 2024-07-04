@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Names, Filter, StudentForm, Students } from './components/Student';
+import Pages from './components/Pages';
 import studentsService from './services/students';
 import Notification from './components/Notification';
 
@@ -106,25 +108,40 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h2>RSU RIO DATABASE</h2>
-      <br/>
-      <Notification message={successMessage} errorMessage={errorMessage} />
-      <Filter 
-        searchPassportNumber={searchPassportNumber} 
-        handleSearchPassportNumber={handleSearchPassportNumber} />
-      <h3>Add a New Student</h3>
-      <StudentForm 
-        addName={addName} 
-        newName={newName} 
-        handleNameChange={handleNameChange} 
-        newNumber={newPassportNumber} 
-        handleNumberChange={handlePassportNumberChange} />
-      <h3>Students</h3>
-      <Students 
-        students={filterItems} 
-        deleteName={deleteName} />
-    </div>
+    <Router>
+      <div>
+        <h2>RSU RIO DATABASE</h2>
+        <br/>
+        <Notification message={successMessage} errorMessage={errorMessage} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Filter 
+                  searchPassportNumber={searchPassportNumber} 
+                  handleSearchPassportNumber={handleSearchPassportNumber} 
+                />
+                <h3>Add a New Student</h3>
+                <StudentForm 
+                  addName={addName} 
+                  newName={newName} 
+                  handleNameChange={handleNameChange} 
+                  newNumber={newPassportNumber} 
+                  handleNumberChange={handlePassportNumberChange} 
+                />
+                <h3>Students</h3>
+                <Students 
+                  students={filterItems} 
+                  deleteName={deleteName} 
+                />
+              </>
+            }
+          />
+          <Route path="/students/:id" element={<Pages students={students} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
