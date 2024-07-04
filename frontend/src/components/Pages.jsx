@@ -33,8 +33,8 @@ const Pages = () => {
       <button
         style={{
           position: 'absolute',
-          top: '1rem',
-          left: '1rem',
+          top: '1.5rem',
+          right: '1rem',
         }}
         onClick={() => navigate('/')}
       >
