@@ -49,8 +49,7 @@ studentRouter.put('/:id', (request, response, next) => {
 
   const student = {
     name: body.name,
-    age: body.age,
-    email: body.email,
+    passport: body.passport
   }
 
   Student.findByIdAndUpdate(request.params.id, student, { new: true })
