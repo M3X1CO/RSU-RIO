@@ -33,7 +33,7 @@ const Names = ({ student, deleteName }) => {
             }}
             onClick={() => alert('Button clicked')}
             >
-              Bottom Right Button
+              View Students Page
             </button>
         </div>
       )}
