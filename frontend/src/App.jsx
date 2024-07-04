@@ -1,107 +1,103 @@
-import { useState, useEffect } from 'react'
-import { Names, Filter, PersonForm, Persons } from './components/Note';
-import axios from 'axios'
-import notes from './services/notes'
+import React, { useState, useEffect } from 'react';
+import { Names, Filter, StudentForm, Students } from './components/Student';
+import studentsService from './services/students';
 import Notification from './components/Notification';
 
-
 const App = () => {
-  const [persons, setPersons] = useState([]) 
-  const [newName, setNewName] = useState('')
-  const [newPassportNumber, setNewPassportNumber] = useState('')
-  const [searchPassportNumber, setSearchPassportNumber] = useState('')
-  const [filterItems, setFilterItems] = useState([])
-  const [successMessage, setSuccessMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [students, setStudents] = useState([]);
+  const [newName, setNewName] = useState('');
+  const [newPassportNumber, setNewPassportNumber] = useState('');
+  const [searchPassportNumber, setSearchPassportNumber] = useState('');
+  const [filterItems, setFilterItems] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const initialNotes = await notes.getAll()
-        setPersons(initialNotes)
-        setFilterItems(initialNotes)
+        const initialStudents = await studentsService.getAll();
+        setStudents(initialStudents);
+        setFilterItems(initialStudents);
       } catch (error) {
-        console.error('Error fetching data', error)
+        console.error('Error fetching data', error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const addName = (event) => {
     event.preventDefault();
-  
-    const nameExists = persons.find((person) => person.passportNumber === newPassportNumber);
-  
-    if (nameExists) {
-      setErrorMessage(`Person with Passport Number ${newPassportNumber} already exists`);
+
+    const studentExists = students.find((student) => student.passport === newPassportNumber);
+
+    if (studentExists) {
+      setErrorMessage(`Student with Passport Number ${newPassportNumber} already exists`);
       setTimeout(() => {
         setErrorMessage(null);
       }, 4000);
       return;
     }
-  
-    const nameObject = {
+
+    const studentObject = {
       name: newName,
-      passportNumber: newPassportNumber,
+      passport: newPassportNumber,
     };
-  
-    notes.create(nameObject)
-      .then(returnedPerson => {
-        setPersons(persons.concat(returnedPerson));
-        setFilterItems(filterItems.concat(returnedPerson));
+
+    studentsService.create(studentObject)
+      .then(returnedStudent => {
+        setStudents([...students, returnedStudent]);
+        setFilterItems([...filterItems, returnedStudent]);
         setSuccessMessage(`Added ${newName}`);
         setTimeout(() => {
           setSuccessMessage(null);
         }, 4000);
       })
       .catch(error => {
-        console.error('Error adding person:', error);
+        console.error('Error adding student:', error);
       });
-  
+
     setNewName('');
     setNewPassportNumber('');
     setSearchPassportNumber('');
   };
-  
 
   const deleteName = (id) => {
-    const person = persons.find(person => person.id === id)
-    const confirmDelete = window.confirm(`Delete ${person.name}?`)
+    const student = students.find(student => student.id === id);
+    const confirmDelete = window.confirm(`Delete ${student.name}?`);
     if (confirmDelete) {
-      notes.remove(id)
-      .then(() => {
-        setPersons(persons.filter(person => person.id !== id))
-        setFilterItems(filterItems.filter(person => person.id !== id))
-      })
-      .catch(error => {
-        setErrorMessage(`${person.name} has already been deleted from the server`)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 4000)
-        setPersons(persons.filter(person => person.id !== id))
-        setFilterItems(filterItems.filter(person => person.id !== id))
-      }, [])
+      studentsService.remove(id)
+        .then(() => {
+          setStudents(students.filter(student => student.id !== id));
+          setFilterItems(filterItems.filter(student => student.id !== id));
+        })
+        .catch(error => {
+          setErrorMessage(`${student.name} has already been deleted from the server`);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 4000);
+          setStudents(students.filter(student => student.id !== id));
+          setFilterItems(filterItems.filter(student => student.id !== id));
+        });
     }
-  }
+  };
 
   const handleNameChange = (event) => {
-    setNewName(event.target.value) 
-  }
+    setNewName(event.target.value);
+  };
 
   const handlePassportNumberChange = (event) => {
-    setNewPassportNumber(event.target.value) 
-  }
+    setNewPassportNumber(event.target.value);
+  };
 
   const handleSearchPassportNumber = (event) => {
-    setSearchPassportNumber(event.target.value)
+    setSearchPassportNumber(event.target.value);
 
-    const filterItems = persons.filter(person => {
-      if (person.passportNumber.toLowerCase().includes(event.target.value.toLowerCase())) {
-        return person
-      }})
-    setFilterItems(filterItems)
-  }
+    const filteredItems = students.filter(student => {
+      return student.passport.toLowerCase().includes(event.target.value.toLowerCase());
+    });
+    setFilterItems(filteredItems);
+  };
 
   return (
     <div>
@@ -112,18 +108,18 @@ const App = () => {
         searchName={searchPassportNumber} 
         handleSearchName={handleSearchPassportNumber} />
       <h3>Add a New Student</h3>
-      <PersonForm 
+      <StudentForm 
         addName={addName} 
         newName={newName} 
         handleNameChange={handleNameChange} 
         newNumber={newPassportNumber} 
         handleNumberChange={handlePassportNumberChange} />
       <h3>Students</h3>
-      <Persons 
-        persons={filterItems} 
+      <Students 
+        students={filterItems} 
         deleteName={deleteName} />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
