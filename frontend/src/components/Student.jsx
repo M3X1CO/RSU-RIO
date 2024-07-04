@@ -21,10 +21,20 @@ const Names = ({ student, deleteName }) => {
         </div>
       </div>
       {showAdditionalSection && (
-        <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f0f0f0' }}>
+        <div style={{ marginTop: '1rem', padding: '1rem', backgroundColor: '#f0f0f0', position: 'relative' }}>
           <h4>Additional Details</h4>
           <p>This section can be used to add more information about {student.name}.</p>
           {/* You can add form fields, text inputs, or any other content here for future use */}
+          <button 
+            style={{
+              position: 'absolute',
+              bottom: '1rem',
+              right: '1rem'
+            }}
+            onClick={() => alert('Button clicked')}
+            >
+              Bottom Right Button
+            </button>
         </div>
       )}
     </div>
