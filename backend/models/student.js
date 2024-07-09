@@ -8,8 +8,8 @@ const studentSchema = new mongoose.Schema({
   },
   passport: {
     type: String,
-    required: true,
-    minlength: 5
+    // required: true,
+    default: '0',
   }
 })
 

@@ -53,23 +53,6 @@ test('A valid student can be added', async () => {
   assert(names.includes('testStudent1'))
 })
 
-test('Student without passport is not added', async () => {
-  const newStudent = {
-    name: 'John Doe'
-  }
-
-  let studentsAtStart = await helper.studentsInDb()
-
-  await api
-    .post('/api/students')
-    .send(newStudent)
-    .expect(400)
-
-  const studentsAtEnd = await helper.studentsInDb()
-
-  assert.strictEqual(studentsAtEnd.length, helper.initialStudents.length)
-})
-
 test('A specific student can be viewed', async () => {
   const studentsAtStart = await helper.studentsInDb()
 
@@ -99,6 +82,38 @@ test('A student can be deleted', async () => {
   assert(!names.includes(studentToDelete.name))
 
   assert.strictEqual(studentsAtEnd.length, helper.initialStudents.length - 1)
+})
+
+test('Students are returned as json and have an id property instead of _id', async () => {
+  const response = await api
+      .get('/api/students')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+  const student = response.body[0]
+  assert(student.id, 'The student should have an id property')
+  assert.strictEqual(student._id, undefined, 'The student should not have an _id property')
+})
+
+test('Student without passport property defaults to 0', async () => {
+  const newStudent = {
+    name: 'testStudent',
+  }
+
+  await api
+    .post('/api/students')
+    .send(newStudent)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const response = await helper.studentsInDb()
+
+  console.log('Response from studentsInDb:', response);
+
+  const addedStudent = response.find(student => student.name === 'testStudent')
+  console.log('Added student:', addedStudent);
+
+  assert.strictEqual(addedStudent.passport, '0', 'The passport property should default to 0')
 })
 
 after(async () => {
