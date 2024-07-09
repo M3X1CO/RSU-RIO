@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const personSchema = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -13,7 +13,7 @@ const personSchema = new mongoose.Schema({
   }
 })
 
-personSchema.set('toJSON', {
+studentSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
@@ -21,6 +21,6 @@ personSchema.set('toJSON', {
   }
 })
 
-const Person = mongoose.model('Person', personSchema, 'RSU-RIO-DATABASE')
+const Student = mongoose.model('Student', studentSchema, 'RSU-RIO-DATABASE')
 
-module.exports = Person
+module.exports = Student

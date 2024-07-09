@@ -12,12 +12,9 @@ const validateObjectId = (req, res, next) => {
   next()
 }
 
-studentRouter.get('/', (request, response, next) => {
-  Student.find({})
-    .then(students => {
-      response.json(students)
-    })
-    .catch(error => next(error))
+studentRouter.get('/', async (request, response, next) => {
+  const students = await Student.find({})
+  response.json(students)
 })
 
 studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
@@ -32,19 +29,19 @@ studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
   }
 })
 
-studentRouter.post('/', (request, response, next) => {
+studentRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   const student = new Student({
     name: body.name,
     passport: body.passport,
   })
-
-  student.save()
-    .then(savedStudent => {
-      response.json(savedStudent)
-    })
-    .catch(error => next(error))
+  try {
+    const savedStudent = await student.save()
+    response.status(201).json(savedStudent)
+  } catch(error) {
+    next(error)
+  }
 })
 
 studentRouter.delete('/:id', validateObjectId, (request, response, next) => {
