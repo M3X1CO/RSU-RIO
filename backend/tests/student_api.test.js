@@ -69,6 +69,37 @@ test('Student without passport is not added', async () => {
   assert.strictEqual(studentsAtEnd.length, helper.initialStudents.length)
 })
 
+test('A specific student can be viewed', async () => {
+  const studentsAtStart = await helper.studentsInDb()
+
+  const studentToView = studentsAtStart[0]
+
+
+  const resultStudent = await api
+    .get(`/api/students/${studentToView.id}`)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  assert.deepStrictEqual(resultStudent.body, studentToView)
+})
+
+test('A student can be deleted', async () => {
+  const studentsAtStart = await helper.studentsInDb()
+  const studentToDelete = studentsAtStart[0]
+
+
+  await api
+    .delete(`/api/students/${studentToDelete.id}`)
+    .expect(204)
+
+  const studentsAtEnd = await helper.studentsInDb()
+
+  const names = studentsAtEnd.map(r => r.name)
+  assert(!names.includes(studentToDelete.name))
+
+  assert.strictEqual(studentsAtEnd.length, helper.initialStudents.length - 1)
+})
+
 after(async () => {
   await mongoose.connection.close()
 })
