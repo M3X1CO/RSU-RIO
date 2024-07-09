@@ -18,15 +18,11 @@ studentRouter.get('/', async (request, response, next) => {
 })
 
 studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
-  try {
-    const student = await Student.findById(request.params.id)
-    if (!student) {
-      return response.status(404).send('Student not found')
-    }
-    response.json(student)
-  } catch (error) {
-    next(error)
+  const student = await Student.findById(request.params.id)
+  if (!student) {
+    return response.status(404).send('Student not found')
   }
+  response.json(student)
 })
 
 studentRouter.post('/', async (request, response, next) => {
@@ -36,26 +32,19 @@ studentRouter.post('/', async (request, response, next) => {
     name: body.name,
     passport: body.passport,
   })
-  try {
-    const savedStudent = await student.save()
-    response.status(201).json(savedStudent)
-  } catch(error) {
-    next(error)
+  const savedStudent = await student.save()
+  response.status(201).json(savedStudent)
+})
+
+studentRouter.delete('/:id', validateObjectId, async (request, response, next) => {
+  const result = await Student.findByIdAndDelete(request.params.id)
+  if (!result) {
+    return response.status(404).send('Student not found')
   }
+  response.status(204).end()
 })
 
-studentRouter.delete('/:id', validateObjectId, (request, response, next) => {
-  Student.findByIdAndDelete(request.params.id)
-    .then(result => {
-      if (!result) {
-        return response.status(404).send('Student not found')
-      }
-      response.status(204).end()
-    })
-    .catch(error => next(error))
-})
-
-studentRouter.put('/:id', validateObjectId, (request, response, next) => {
+studentRouter.put('/:id', validateObjectId, async (request, response, next) => {
   const body = request.body
 
   const student = {
@@ -63,14 +52,12 @@ studentRouter.put('/:id', validateObjectId, (request, response, next) => {
     passport: body.passport
   }
 
-  Student.findByIdAndUpdate(request.params.id, student, { new: true })
-    .then(updatedStudent => {
-      if (!updatedStudent) {
-        return response.status(404).send('Student not found')
-      }
-      response.json(updatedStudent)
-    })
-    .catch(error => next(error))
+  const updatedStudent = await Student.findByIdAndUpdate(request.params.id, student, { new: true })
+
+  if (!updatedStudent) {
+    return response.status(404).send('Student not found')
+  }
+  response.json(updatedStudent)
 })
 
 module.exports = studentRouter

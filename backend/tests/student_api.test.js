@@ -10,10 +10,11 @@ const Student = require('../models/student')
 
 beforeEach(async () => {
   await Student.deleteMany({})
-  let studentObject = new Student(helper.initialStudents[0])
-  await studentObject.save()
-  studentObject = new Student(helper.initialStudents[1])
-  await studentObject.save()
+
+  const studentObjects = helper.initialStudents
+    .map(student => new Student(student))
+  const promiseArray = studentObjects.map(student => student.save())
+  await Promise.all(promiseArray)
 })
 
 test('Students are returned as json', async () => {
