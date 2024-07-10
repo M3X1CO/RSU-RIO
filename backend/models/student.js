@@ -10,6 +10,10 @@ const studentSchema = new mongoose.Schema({
     type: String,
     // required: true,
     default: '0',
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 })
 

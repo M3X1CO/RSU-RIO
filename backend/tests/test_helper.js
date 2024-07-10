@@ -1,4 +1,5 @@
 const Student = require('../models/student')
+const User = require('../models/user')
 
 const initialStudents = [
   {
@@ -24,8 +25,14 @@ const studentsInDb = async () => {
   return students.map(student => student.toJSON())
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(u => u.toJSON())
+}
+
 module.exports = {
   initialStudents,
   nonExistingId,
-  studentsInDb
+  studentsInDb,
+  usersInDb,
 }
