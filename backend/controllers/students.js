@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const studentRouter = express.Router()
 const Student = require('../models/student')
+const User = require('../models/user')
 
 // Middleware for validating object IDs
 const validateObjectId = (req, res, next) => {
@@ -13,7 +14,8 @@ const validateObjectId = (req, res, next) => {
 }
 
 studentRouter.get('/', async (request, response) => {
-  const students = await Student.find({})
+  const students = await Student
+    .find({}).populate('user', { username: 1, name: 1 })
   response.json(students)
 })
 
@@ -26,13 +28,19 @@ studentRouter.get('/:id', validateObjectId, async (request, response) => {
 })
 
 studentRouter.post('/', async (request, response) => {
-  const body = request.body
+  const { name, passport, userId } = request.body
+
+  const user = await User.findById(userId)
 
   const student = new Student({
-    name: body.name,
-    passport: body.passport,
+    name: name,
+    passport: passport,
+    user: user.id
   })
   const savedStudent = await student.save()
+  user.students = user.students.concat(savedStudent._id)
+  await user.save()
+  
   response.status(201).json(savedStudent)
 })
 
