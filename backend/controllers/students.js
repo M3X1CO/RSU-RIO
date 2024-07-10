@@ -12,12 +12,12 @@ const validateObjectId = (req, res, next) => {
   next()
 }
 
-studentRouter.get('/', async (request, response, next) => {
+studentRouter.get('/', async (request, response) => {
   const students = await Student.find({})
   response.json(students)
 })
 
-studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
+studentRouter.get('/:id', validateObjectId, async (request, response) => {
   const student = await Student.findById(request.params.id)
   if (!student) {
     return response.status(404).send('Student not found')
@@ -25,7 +25,7 @@ studentRouter.get('/:id', validateObjectId, async (request, response, next) => {
   response.json(student)
 })
 
-studentRouter.post('/', async (request, response, next) => {
+studentRouter.post('/', async (request, response) => {
   const body = request.body
 
   const student = new Student({
@@ -36,7 +36,7 @@ studentRouter.post('/', async (request, response, next) => {
   response.status(201).json(savedStudent)
 })
 
-studentRouter.delete('/:id', validateObjectId, async (request, response, next) => {
+studentRouter.delete('/:id', validateObjectId, async (request, response) => {
   const result = await Student.findByIdAndDelete(request.params.id)
   if (!result) {
     return response.status(404).send('Student not found')
@@ -44,7 +44,7 @@ studentRouter.delete('/:id', validateObjectId, async (request, response, next) =
   response.status(204).end()
 })
 
-studentRouter.put('/:id', validateObjectId, async (request, response, next) => {
+studentRouter.put('/:id', validateObjectId, async (request, response) => {
   const body = request.body
 
   const student = {
