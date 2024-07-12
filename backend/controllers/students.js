@@ -36,10 +36,19 @@ studentRouter.post('/', async (request, response) => {
 })
 
 studentRouter.delete('/:id', validateObjectId, async (request, response) => {
-  const result = await Student.findByIdAndDelete(request.params.id)
-  if (!result) {
-    return response.status(404).send('Student not found')
+  const studentId = request.params.id
+  const user = request.user
+
+  const student = await Student.findById(studentId)
+  if (!student) {
+    return response.status(404).json({ error: 'student not found' })
   }
+
+  if (student.user.toString() !== user.id) {
+    return response.status(401).json({ error: 'only the creator of the student can delete' })
+  }
+
+  await Student.findByIdAndDelete(studentId)
   response.status(204).end()
 })
 
