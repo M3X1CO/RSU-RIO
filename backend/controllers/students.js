@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const mongoose = require('mongoose')
 const studentRouter = express.Router()
@@ -11,6 +12,14 @@ const validateObjectId = (req, res, next) => {
     return res.status(400).send('Invalid ID')
   }
   next()
+}
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
 }
 
 studentRouter.get('/', async (request, response) => {
@@ -28,9 +37,14 @@ studentRouter.get('/:id', validateObjectId, async (request, response) => {
 })
 
 studentRouter.post('/', async (request, response) => {
-  const { name, passport, userId } = request.body
+  const { name, passport } = request.body
 
-  const user = await User.findById(userId)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+  
+  const user = await User.findById(decodedToken.id)
 
   const student = new Student({
     name: name,
