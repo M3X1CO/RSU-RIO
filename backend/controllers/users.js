@@ -5,10 +5,6 @@ const User = require('../models/user')
 usersRouter.post('/', async (request, response) => {
   const { username, name, password } = request.body
 
-  if (!username || !password) {
-    return response.status(400).json({ error: 'username and password are required' })
-  }
-
   if (username.length < 6 || password.length < 6) {
     return response.status(400).json({ error: 'Username and password must be at least 6 characters long' })
   }
@@ -29,7 +25,8 @@ usersRouter.post('/', async (request, response) => {
 
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('students', { name: 1, passport: 1 })
+    .find({})
+    .populate('students', { name: 1, passport: 1 })
   response.json(users)
 })
 

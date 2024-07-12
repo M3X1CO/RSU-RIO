@@ -24,12 +24,15 @@ const getTokenFrom = request => {
 
 studentRouter.get('/', async (request, response) => {
   const students = await Student
-    .find({}).populate('user', { username: 1, name: 1 })
+    .find({})
+    .populate('user', { username: 1, name: 1 })
   response.json(students)
 })
 
 studentRouter.get('/:id', validateObjectId, async (request, response) => {
-  const student = await Student.findById(request.params.id)
+  const student = await Student
+  .findById(request.params.id)
+  .populate('user', { username: 1, name: 1 })
   if (!student) {
     return response.status(404).send('Student not found')
   }
