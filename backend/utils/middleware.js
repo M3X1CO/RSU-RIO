@@ -28,7 +28,7 @@ const getTokenFrom = (request, response, next) => {
 
 const verifyToken = (request, response, next) => {
   const token = request.token
-  
+
   if (request.path === '/api/login') {
     return next()
   }
@@ -74,12 +74,12 @@ const userExtractor = async (request, response, next) => {
 }
 
 const validateObjectId = (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.params
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send('Invalid ID');
+    return res.status(400).send('Invalid ID')
   }
-  next();
-};
+  next()
+}
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })

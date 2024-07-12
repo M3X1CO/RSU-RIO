@@ -11,8 +11,8 @@ studentRouter.get('/', async (request, response) => {
 
 studentRouter.get('/:id', validateObjectId, async (request, response) => {
   const student = await Student
-  .findById(request.params.id)
-  .populate('user', { username: 1, name: 1 })
+    .findById(request.params.id)
+    .populate('user', { username: 1, name: 1 })
   if (!student) {
     return response.status(404).send('Student not found')
   }

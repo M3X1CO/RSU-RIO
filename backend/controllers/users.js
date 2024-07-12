@@ -32,15 +32,15 @@ usersRouter.post('/', async (request, response) => {
 })
 
 usersRouter.delete('/:id', async (request, response) => {
-  const userId = request.params.id;
-  const user = await User.findByIdAndDelete(userId);
-  
+  const userId = request.params.id
+  const user = await User.findByIdAndDelete(userId)
+
   if (!user) {
-    return response.status(404).json({ error: 'User not found' });
+    return response.status(404).json({ error: 'User not found' })
   }
 
-  response.status(204).end(); 
-});
+  response.status(204).end()
+})
 
 usersRouter.get('/', async (request, response) => {
   const users = await User
