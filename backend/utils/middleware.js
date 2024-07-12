@@ -13,6 +13,11 @@ const requestLogger = (request, response, next) => {
 
 const getTokenFrom = (request, response, next) => {
   const authorization = request.get('Authorization')
+
+  if (request.path === '/api/login') {
+    return next()
+  }
+
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     request.token = authorization.substring(7)
   } else {
@@ -23,6 +28,10 @@ const getTokenFrom = (request, response, next) => {
 
 const verifyToken = (request, response, next) => {
   const token = request.token
+  
+  if (request.path === '/api/login') {
+    return next()
+  }
 
   if (!token) {
     return response.status(401).json({ error: 'token missing' })
@@ -39,6 +48,17 @@ const verifyToken = (request, response, next) => {
 
 const userExtractor = async (request, response, next) => {
   const decodedToken = request.decodedToken
+
+  if (request.path === '/api/login') {
+    const { username } = request.body
+    const user = await User.findOne({ username })
+
+    if (!user) {
+      return response.status(401).json({ error: 'user not found' })
+    }
+    request.user = user
+    return next()
+  }
 
   if (!decodedToken || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
