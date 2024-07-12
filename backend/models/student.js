@@ -7,7 +7,7 @@ const studentSchema = new mongoose.Schema({
   },
   passport: {
     type: String,
-    default: '0',
+    default: '0'
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
