@@ -3,11 +3,11 @@ const User = require('../models/user')
 
 const initialStudents = [
   {
-    name: 'Tony',
+    name: 'Tonyis',
     passport: 'anything',
   },
   {
-    name: 'Tony2',
+    name: 'Tonywas',
     passport: 'anything2',
   },
 ]
