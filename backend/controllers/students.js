@@ -40,7 +40,7 @@ studentRouter.post('/', async (request, response) => {
   const savedStudent = await student.save()
   user.students = user.students.concat(savedStudent._id)
   await user.save()
-  
+
   response.status(201).json(savedStudent)
 })
 
