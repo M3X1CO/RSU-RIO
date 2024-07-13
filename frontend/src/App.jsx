@@ -30,13 +30,34 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      // Fetch students when user logs in or when isLoggedIn changes
-      studentsService.getAll().then(initialStudents => {
-        setStudents(initialStudents);
-      });
-    }
+    const fetchData = async () => {
+      try {
+        if (isLoggedIn) {
+          const initialStudents = await studentsService.getAll();
+          setStudents(initialStudents);
+        }
+      } catch (error) {
+        console.error('Error fetching data', error);
+      }
+    };
+  
+    const checkUserLoggedIn = () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser');
+      if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON);
+        setUser(user);
+        studentsService.setToken(user.token);
+        setIsLoggedIn(true);
+      }
+    };
+  
+    checkUserLoggedIn(); // Check user on mount
+  
+    fetchData(); // Fetch data when isLoggedIn changes
+  
   }, [isLoggedIn]); // Watch for changes in isLoggedIn state
+  
+  
 
   const addName = (event) => {
     event.preventDefault();
