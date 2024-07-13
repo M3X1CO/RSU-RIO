@@ -166,6 +166,36 @@ const App = () => {
     </form>
   );
 
+  const studentForm = () => (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <Filter 
+              searchPassportNumber={searchPassportNumber} 
+              handleSearchPassportNumber={handleSearchPassportNumber} 
+              />
+            <h3>Add a New Student</h3>
+            <StudentForm 
+              addName={addName} 
+              newName={newName} 
+              handleNameChange={handleNameChange} 
+              newNumber={newPassportNumber} 
+              handleNumberChange={handlePassportNumberChange} 
+              />
+            <h3>Students</h3>
+            <Students 
+              students={filterItems} 
+              deleteName={deleteName} 
+              />
+          </>
+        }
+        />
+      <Route path="/students/:id" element={<Pages students={students} />} /> 
+    </Routes>
+  )
+
   return (
     <Router>
       <div>
@@ -180,34 +210,6 @@ const App = () => {
             {studentForm()}
           </div>
         }
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Filter 
-                  searchPassportNumber={searchPassportNumber} 
-                  handleSearchPassportNumber={handleSearchPassportNumber} 
-                />
-                <h3>Add a New Student</h3>
-                <StudentForm 
-                  addName={addName} 
-                  newName={newName} 
-                  handleNameChange={handleNameChange} 
-                  newNumber={newPassportNumber} 
-                  handleNumberChange={handlePassportNumberChange} 
-                />
-                <h3>Students</h3>
-                <Students 
-                  students={filterItems} 
-                  deleteName={deleteName} 
-                />
-              </>
-            }
-          />
-          <Route path="/students/:id" element={<Pages students={students} />} />
-        </Routes>
       </div>
     </Router>
   );
