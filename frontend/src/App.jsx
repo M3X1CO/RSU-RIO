@@ -208,16 +208,29 @@ const App = () => {
     </Routes>
   )
 
-  const renderStudentList = () => (
-    <div>
-      <h2>Student List</h2>
-      {filterItems.length > 0 ? (
-        <Students students={filterItems} deleteName={deleteName} />
-      ) : (
-        <Students students={students} deleteName={deleteName} />
-      )}
-    </div>
-  );  
+  const renderStudentList = () => {
+    useEffect(() => {
+      const filteredItems = students.filter(student => {
+        if (student.passport) {
+          return student.passport.toLowerCase().includes(searchPassportNumber.toLowerCase());
+        }
+        return false;
+      });
+      setFilterItems(filteredItems);
+    }, [students, searchPassportNumber]);
+  
+    return (
+      <div>
+        <h2>Student List</h2>
+        {filterItems.length > 0 ? (
+          <Students students={filterItems} deleteName={deleteName} />
+        ) : (
+          <Students students={students} deleteName={deleteName} />
+        )}
+      </div>
+    );
+  };
+  
 
   return (
     <Router>
