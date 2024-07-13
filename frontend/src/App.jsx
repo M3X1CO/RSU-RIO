@@ -25,7 +25,7 @@ const App = () => {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
       studentsService.setToken(user.token);
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -36,15 +36,19 @@ const App = () => {
         .getAll()
         .then(initialStudents => {
           setStudents(initialStudents);
-      });
+          setFilterItems(initialStudents); // Initialize filterItems with all students
+        })
+        .catch(error => {
+          console.error('Error fetching students:', error);
+        });
     }
   }, [isLoggedIn]); // Watch for changes in isLoggedIn state
 
   const addName = (event) => {
     event.preventDefault();
-  
+
     const studentExists = students.find((student) => student.passport === newPassportNumber);
-  
+
     if (studentExists) {
       setErrorMessage(`Student with Passport Number ${newPassportNumber} already exists`);
       setTimeout(() => {
@@ -52,24 +56,24 @@ const App = () => {
       }, 4000);
       return;
     }
-  
+
     const studentObject = {
       name: newName,
       passport: newPassportNumber,
     };
-  
+
     studentsService.create(studentObject)
       .then(returnedStudent => {
         // Update the state with the new student
         setStudents([...students, returnedStudent]);
-  
+
         // Update filterItems to include the new student if it matches the filter
         const updatedFilterItems = [...filterItems];
         if (returnedStudent.passport.toLowerCase().includes(searchPassportNumber.toLowerCase())) {
           updatedFilterItems.push(returnedStudent);
         }
         setFilterItems(updatedFilterItems);
-  
+
         setSuccessMessage(`Added ${newName}`);
         setTimeout(() => {
           setSuccessMessage(null);
@@ -78,12 +82,11 @@ const App = () => {
       .catch(error => {
         console.error('Error adding student:', error);
       });
-  
+
     setNewName('');
     setNewPassportNumber('');
     setSearchPassportNumber('');
   };
-  
 
   const deleteName = (id) => {
     const student = students.find(student => student.id === id);
@@ -91,7 +94,10 @@ const App = () => {
     if (confirmDelete) {
       studentsService.remove(id)
         .then(() => {
+          // Update students state by filtering out the deleted student
           setStudents(students.filter(student => student.id !== id));
+
+          // Update filterItems state by filtering out the deleted student
           setFilterItems(filterItems.filter(student => student.id !== id));
         })
         .catch(error => {
@@ -99,6 +105,7 @@ const App = () => {
           setTimeout(() => {
             setErrorMessage(null);
           }, 4000);
+          // Still update UI optimistically if the server request fails
           setStudents(students.filter(student => student.id !== id));
           setFilterItems(filterItems.filter(student => student.id !== id));
         });
@@ -118,6 +125,7 @@ const App = () => {
 
     setSearchPassportNumber(searchTerm);
 
+    // Filter students based on the search term and update filterItems state
     const filteredItems = students.filter(student => {
       if (student.passport) {
         return student.passport.toLowerCase().includes(searchTerm);
@@ -142,7 +150,7 @@ const App = () => {
       setUser(user);
       setUsername('');
       setPassword('');
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
     } catch (exception) {
       setErrorMessage('Wrong credentials');
       setTimeout(() => {
@@ -189,64 +197,54 @@ const App = () => {
         path="/"
         element={
           <>
-            <Filter 
-              searchPassportNumber={searchPassportNumber} 
-              handleSearchPassportNumber={handleSearchPassportNumber} 
-              />
+            <Filter
+              searchPassportNumber={searchPassportNumber}
+              handleSearchPassportNumber={handleSearchPassportNumber}
+            />
             <h3>Add a New Student</h3>
-            <StudentForm 
-              addName={addName} 
-              newName={newName} 
-              handleNameChange={handleNameChange} 
-              newNumber={newPassportNumber} 
-              handleNumberChange={handlePassportNumberChange} 
-              />
+            <StudentForm
+              addName={addName}
+              newName={newName}
+              handleNameChange={handleNameChange}
+              newNumber={newPassportNumber}
+              handleNumberChange={handlePassportNumberChange}
+            />
           </>
         }
-        />
-      <Route path="/students/:id" element={<Pages students={students} />} /> 
+      />
+      <Route path="/students/:id" element={<Pages students={students} />} />
     </Routes>
-  )
+  );
 
-  const renderStudentList = () => {
-    useEffect(() => {
-      const filteredItems = students.filter(student => {
-        if (student.passport) {
-          return student.passport.toLowerCase().includes(searchPassportNumber.toLowerCase());
-        }
-        return false;
-      });
-      setFilterItems(filteredItems);
-    }, [students, searchPassportNumber]);
-  
-    return (
-      <div>
-        <h2>Student List</h2>
-        {filterItems.length > 0 ? (
-          <Students students={filterItems} deleteName={deleteName} />
-        ) : (
-          <Students students={students} deleteName={deleteName} />
-        )}
-      </div>
-    );
-  };
-  
+  const renderStudentList = () => (
+    <div>
+      <h2>Student List</h2>
+      {filterItems.length > 0 ? (
+        <Students students={filterItems} deleteName={deleteName} />
+      ) : (
+        <Students students={students} deleteName={deleteName} />
+      )}
+    </div>
+  );
 
   return (
     <Router>
       <div>
         <h1>{isLoggedIn ? 'RSU RIO DATABASE' : 'Login'}</h1>
-        <br/>
+        <br />
         <Notification message={successMessage} errorMessage={errorMessage} />
 
-        {user === null ?
-        loginForm() :
-        <div>
-          <p className="logged-in">{user.name} logged-in <button onClick={handleLogout}>Logout</button></p>
-          {studentForm()}
-        </div>
-        }
-        
+        {user === null ? (
+          loginForm()
+        ) : (
+          <div>
+            <p className="logged-in">
+              {user.name} logged-in <button onClick={handleLogout}>Logout</button>
+            </p>
+            {studentForm()}
+          </div>
+        )}
+
         {isLoggedIn && renderStudentList()}
       </div>
     </Router>
