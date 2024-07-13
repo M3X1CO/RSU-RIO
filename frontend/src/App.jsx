@@ -197,15 +197,15 @@ const App = () => {
     </Routes>
   )
 
-  const renderStudentList = () => {
+  const renderStudentList = () => (
     <div>
-      <h2>Studnet List</h2>
+      <h2>Student List</h2>
       <Students 
         students={filterItems} 
         deleteName={deleteName} 
       />
-  </div>
-  }
+    </div>
+  );
 
   return (
     <Router>
