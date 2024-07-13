@@ -9,7 +9,7 @@ studentRouter.get('/', async (request, response) => {
   response.json(students)
 })
 
-studentRouter.get('/:id', validateObjectId, async (request, response) => {
+studentRouter.get('/:id', validateObjectId, userExtractor, async (request, response) => {
   const student = await Student
     .findById(request.params.id)
     .populate('user', { username: 1, name: 1 })
@@ -35,7 +35,7 @@ studentRouter.post('/', async (request, response) => {
   response.status(201).json(savedStudent)
 })
 
-studentRouter.delete('/:id', validateObjectId, async (request, response) => {
+studentRouter.delete('/:id', validateObjectId, userExtractor, async (request, response) => {
   const studentId = request.params.id
   const user = request.user
 
@@ -52,7 +52,7 @@ studentRouter.delete('/:id', validateObjectId, async (request, response) => {
   response.status(204).end()
 })
 
-studentRouter.put('/:id', validateObjectId, async (request, response) => {
+studentRouter.put('/:id', validateObjectId, userExtractor, async (request, response) => {
   const body = request.body
 
   const student = {
