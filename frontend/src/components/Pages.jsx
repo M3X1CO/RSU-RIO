@@ -8,8 +8,13 @@ const Pages = () => {
 
   useEffect(() => {
     const fetchStudent = async () => {
+      const token = localStorage.getItem('token'); // or retrieve it from your auth context
       try {
-        const response = await fetch(`/api/students/${id}`);
+        const response = await fetch(`/api/students/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (response.ok) {
           const data = await response.json();
           setStudent(data);
