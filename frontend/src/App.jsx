@@ -30,34 +30,15 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (isLoggedIn) {
-          const initialStudents = await studentsService.getAll();
+    if (isLoggedIn) {
+      // Fetch students when user logs in or when isLoggedIn changes
+      studentsService
+        .getAll()
+        .then(initialStudents => {
           setStudents(initialStudents);
-        }
-      } catch (error) {
-        console.error('Error fetching data', error);
-      }
-    };
-  
-    const checkUserLoggedIn = () => {
-      const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser');
-      if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON);
-        setUser(user);
-        studentsService.setToken(user.token);
-        setIsLoggedIn(true);
-      }
-    };
-  
-    checkUserLoggedIn(); // Check user on mount
-  
-    fetchData(); // Fetch data when isLoggedIn changes
-  
+      });
+    }
   }, [isLoggedIn]); // Watch for changes in isLoggedIn state
-  
-  
 
   const addName = (event) => {
     event.preventDefault();
@@ -221,12 +202,13 @@ const App = () => {
   const renderStudentList = () => (
     <div>
       <h2>Student List</h2>
-      <Students 
-        students={filterItems} 
-        deleteName={deleteName} 
-      />
+      {filterItems.length > 0 ? (
+        <Students students={filterItems} deleteName={deleteName} />
+      ) : (
+        <Students students={students} deleteName={deleteName} />
+      )}
     </div>
-  );
+  );  
 
   return (
     <Router>
