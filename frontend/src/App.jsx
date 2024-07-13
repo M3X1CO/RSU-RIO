@@ -42,9 +42,9 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault();
-
+  
     const studentExists = students.find((student) => student.passport === newPassportNumber);
-
+  
     if (studentExists) {
       setErrorMessage(`Student with Passport Number ${newPassportNumber} already exists`);
       setTimeout(() => {
@@ -52,16 +52,24 @@ const App = () => {
       }, 4000);
       return;
     }
-
+  
     const studentObject = {
       name: newName,
       passport: newPassportNumber,
     };
-
+  
     studentsService.create(studentObject)
       .then(returnedStudent => {
+        // Update the state with the new student
         setStudents([...students, returnedStudent]);
-        setFilterItems([...filterItems, returnedStudent]);
+  
+        // Update filterItems to include the new student if it matches the filter
+        const updatedFilterItems = [...filterItems];
+        if (returnedStudent.passport.toLowerCase().includes(searchPassportNumber.toLowerCase())) {
+          updatedFilterItems.push(returnedStudent);
+        }
+        setFilterItems(updatedFilterItems);
+  
         setSuccessMessage(`Added ${newName}`);
         setTimeout(() => {
           setSuccessMessage(null);
@@ -70,11 +78,12 @@ const App = () => {
       .catch(error => {
         console.error('Error adding student:', error);
       });
-
+  
     setNewName('');
     setNewPassportNumber('');
     setSearchPassportNumber('');
   };
+  
 
   const deleteName = (id) => {
     const student = students.find(student => student.id === id);
