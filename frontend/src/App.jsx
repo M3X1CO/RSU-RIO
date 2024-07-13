@@ -17,6 +17,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser');
@@ -24,22 +25,18 @@ const App = () => {
       const user = JSON.parse(loggedUserJSON);
       setUser(user);
       studentsService.setToken(user.token);
+      setIsLoggedIn(true)
     }
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const initialStudents = await studentsService.getAll();
+    if (isLoggedIn) {
+      // Fetch students when user logs in or when isLoggedIn changes
+      studentService.getAll().then(initialStudents => {
         setStudents(initialStudents);
-        setFilterItems(initialStudents);
-      } catch (error) {
-        console.error('Error fetching data', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+      });
+    }
+  }, [isLoggedIn]); // Watch for changes in isLoggedIn state
 
   const addName = (event) => {
     event.preventDefault();
@@ -134,12 +131,21 @@ const App = () => {
       setUser(user);
       setUsername('');
       setPassword('');
+      setIsLoggedIn(true)
     } catch (exception) {
       setErrorMessage('Wrong credentials');
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
     }
+  };
+
+  const handleLogout = () => {
+    // Clear user data from localStorage and reset state
+    window.localStorage.removeItem('loggedStudentappUser');
+    studentService.setToken(null);
+    setUser(null);
+    setIsLoggedIn(false);
   };
 
   const loginForm = () => (
@@ -204,7 +210,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h2>RSU RIO DATABASE</h2>
+        <h1>{isLoggedIn ? 'RSU RIO DATABASE' : 'Login'}</h1>
         <br/>
         <Notification message={successMessage} errorMessage={errorMessage} />
 
