@@ -32,7 +32,7 @@ const App = () => {
   useEffect(() => {
     if (isLoggedIn) {
       // Fetch students when user logs in or when isLoggedIn changes
-      studentService.getAll().then(initialStudents => {
+      studentsService.getAll().then(initialStudents => {
         setStudents(initialStudents);
       });
     }
