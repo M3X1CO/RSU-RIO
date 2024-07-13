@@ -143,7 +143,7 @@ const App = () => {
   const handleLogout = () => {
     // Clear user data from localStorage and reset state
     window.localStorage.removeItem('loggedStudentappUser');
-    studentService.setToken(null);
+    studentsService.setToken(null);
     setUser(null);
     setIsLoggedIn(false);
   };
