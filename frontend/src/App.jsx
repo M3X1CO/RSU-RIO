@@ -184,17 +184,22 @@ const App = () => {
               newNumber={newPassportNumber} 
               handleNumberChange={handlePassportNumberChange} 
               />
-            <h3>Students</h3>
-            <Students 
-              students={filterItems} 
-              deleteName={deleteName} 
-              />
           </>
         }
         />
       <Route path="/students/:id" element={<Pages students={students} />} /> 
     </Routes>
   )
+
+  const renderStudentList = () => {
+    <div>
+      <h2>Studnet List</h2>
+      <Students 
+        students={filterItems} 
+        deleteName={deleteName} 
+      />
+  </div>
+  }
 
   return (
     <Router>
@@ -204,12 +209,14 @@ const App = () => {
         <Notification message={successMessage} errorMessage={errorMessage} />
 
         {user === null ?
-          loginForm() :
-          <div>
-            <p>{user.name} logged-in</p>
-            {studentForm()}
-          </div>
+        loginForm() :
+        <div>
+          <p className="logged-in">{user.name} logged-in <button onClick={handleLogout}>Logout</button></p>
+          {studentForm()}
+        </div>
         }
+        
+        {isLoggedIn && renderStudentList()}
       </div>
     </Router>
   );
