@@ -1,6 +1,15 @@
+const jwt = require('jsonwebtoken')
 const studentRouter = require('express').Router()
 const Student = require('../models/student')
-const validateObjectId = require('../utils/middleware').validateObjectId
+const User = require('../models/user')
+
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
 
 studentRouter.get('/', async (request, response) => {
   const students = await Student
@@ -9,50 +18,7 @@ studentRouter.get('/', async (request, response) => {
   response.json(students)
 })
 
-studentRouter.get('/:id', validateObjectId, async (request, response) => {
-  const student = await Student
-    .findById(request.params.id)
-    .populate('user', { username: 1, name: 1 })
-  if (!student) {
-    return response.status(404).send('Student not found')
-  }
-  response.json(student)
-})
-
-studentRouter.post('/', async (request, response) => {
-  const { name, passport } = request.body
-  const user = request.user
-
-  const student = new Student({
-    name: name,
-    passport: passport,
-    user: user.id
-  })
-  const savedStudent = await student.save()
-  user.students = user.students.concat(savedStudent._id)
-  await user.save()
-
-  response.status(201).json(savedStudent)
-})
-
-studentRouter.delete('/:id', validateObjectId, async (request, response) => {
-  const studentId = request.params.id
-  const user = request.user
-
-  const student = await Student.findById(studentId)
-  if (!student) {
-    return response.status(404).json({ error: 'student not found' })
-  }
-
-  if (student.user.toString() !== user.id) {
-    return response.status(401).json({ error: 'only the creator of the student can delete' })
-  }
-
-  await Student.findByIdAndDelete(studentId)
-  response.status(204).end()
-})
-
-studentRouter.put('/:id', validateObjectId, async (request, response) => {
+studentRouter.put('/:id', validateObjectId, async (request, response, next) => {
   const body = request.body
 
   const student = {
@@ -60,12 +26,49 @@ studentRouter.put('/:id', validateObjectId, async (request, response) => {
     passport: body.passport
   }
 
-  const updatedStudent = await Student.findByIdAndUpdate(request.params.id, student, { new: true })
+  Student.findByIdAndUpdate(request.params.id, student, { new: true })
+    .then(updatedStudent => {
+      response.json(updatedStudent)
+    })
+    .catch(error => next(error))
+})
 
-  if (!updatedStudent) {
-    return response.status(404).send('Student not found')
+studentRouter.post('/', async (request, response) => {
+  const { name, passport } = request.body
+  const token = getTokenFrom(request)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
   }
-  response.json(updatedStudent)
+  
+  const user = await User.findById(decodedToken.id)
+
+  const student = new Student({
+    name,
+    passport,
+    user: user._id
+  })
+
+  const savedStudent = await student.save()
+  user.students = user.students.concat(savedStudent._id)
+  await user.save()
+
+  response.status(201).json(savedStudent)
+})
+
+studentRouter.get('/:id', async (request, response) => {
+  const student = await Student.findById(request.params.id)
+  if (student) {
+    response.json(student)
+  } else {
+    response.status(404).end()
+  }
+})
+
+studentRouter.delete('/:id', async (request, response) => {
+  await Student.findByIdAndDelete(request.params.id)
+  response.status(204).end()
 })
 
 module.exports = studentRouter
