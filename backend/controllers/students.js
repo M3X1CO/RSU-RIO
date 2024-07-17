@@ -12,13 +12,11 @@ const getTokenFrom = request => {
 }
 
 studentRouter.get('/', async (request, response) => {
-  const students = await Student
-    .find({})
-    .populate('user', { username: 1, name: 1 })
+  const students = await Student.find({}).populate('user', { username: 1, name: 1 })
   response.json(students)
 })
 
-studentRouter.put('/:id', validateObjectId, async (request, response, next) => {
+studentRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
   const student = {
@@ -36,12 +34,12 @@ studentRouter.put('/:id', validateObjectId, async (request, response, next) => {
 studentRouter.post('/', async (request, response) => {
   const { name, passport } = request.body
   const token = getTokenFrom(request)
-  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
 
   if (!decodedToken.id) {
     return response.status(401).json({ error: 'token invalid' })
   }
-  
+
   const user = await User.findById(decodedToken.id)
 
   const student = new Student({

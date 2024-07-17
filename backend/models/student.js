@@ -23,6 +23,4 @@ studentSchema.set('toJSON', {
   }
 })
 
-const Student = mongoose.model('Student', studentSchema, 'RSU-RIO-DATABASE')
-
-module.exports = Student
+module.exports = mongoose.model('Student', studentSchema, 'RSU-RIO-DATABASE')
