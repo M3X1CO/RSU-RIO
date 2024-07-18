@@ -115,11 +115,12 @@ const App = () => {
       <ul>
         {students.map(student => (
           <Student 
-            key={student.id} 
-            name={student.name} 
-            passport={student.passport} 
-            user={student.user} 
-            deleteStudent={deleteStudent} 
+            key={student.id}
+            id={student.id}
+            name={student.name}
+            passport={student.passport}
+            user={student.user}
+            deleteStudent={deleteStudent}
           />
         ))}
       </ul>
