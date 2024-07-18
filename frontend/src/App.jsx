@@ -37,7 +37,7 @@ const App = () => {
           setErrorMessage(null)
         }, 5000)
       })
-  }, [studentsService])
+  }, [user])
 
   const handleLogin = async (username, password) => {
     try {
