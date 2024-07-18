@@ -18,7 +18,6 @@ const StudentForm = ({ createStudent }) => {
     event.preventDefault()
     createStudent(newStudent)
 
-    // Reset form fields
     setNewStudent({
       name: '',
       passport: ''
