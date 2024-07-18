@@ -19,7 +19,7 @@ const Student = ({ name, passport, user, deleteStudent }) => {
           <p>Created by: {user.name}</p>
         </div>
       )}
-      <button onClick={() => deleteStudent(student.id)}>Delete</button>
+      <button onClick={() => deleteStudent(id)}>Delete</button>
     </div>
   )
 }
