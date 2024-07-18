@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Student = ({ name, passport, user }) => {
+const Student = ({ name, passport, user, deleteStudent }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleDetails = () => {
@@ -19,6 +19,7 @@ const Student = ({ name, passport, user }) => {
           <p>Created by: {user.name}</p>
         </div>
       )}
+      <button onClick={() => deleteStudent(student.id)}>Delete</button>
     </div>
   )
 }
