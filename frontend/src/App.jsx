@@ -76,11 +76,11 @@ const App = () => {
     return (
       <div>
         <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>log in</button>
+          <button onClick={() => setLoginVisible(true)}>Log In</button>
         </div>
         <div style={showWhenVisible}>
           <LoginForm handleSubmit={handleLogin} />
-          <button onClick={() => setLoginVisible(false)}>cancel</button>
+          <button onClick={() => setLoginVisible(false)}>Cancel</button>
         </div>
       </div>
     )
@@ -101,7 +101,7 @@ const App = () => {
       </div>}
       <ul>
         {students.map(student => (
-          <Student key={student.id} name={student.name} passport={student.passport} />
+          <Student key={student.id} name={student.name} passport={student.passport} user={student.user} />
         ))}
       </ul>
       <Footer />

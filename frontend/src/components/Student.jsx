@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Student = ({ name, passport }) => {
+const Student = ({ name, passport, user }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleDetails = () => {
@@ -15,8 +15,8 @@ const Student = ({ name, passport }) => {
       </button>
       {showDetails && (
         <div>
-          {/* Add additional details here */}
           <p>Additional details about the student</p>
+          <p>Created by: {user.name}</p>
         </div>
       )}
     </div>
