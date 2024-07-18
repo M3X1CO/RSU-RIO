@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Student from './components/Student'
 import Notification from './components/Notification'
 import Footer from './components/Footer'
@@ -10,10 +10,7 @@ import StudentForm from './components/StudentForm'
 
 const App = () => {
   const [students, setStudents] = useState([])
-  const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [loginVisible, setLoginVisible] = useState(false)
 
@@ -27,31 +24,27 @@ const App = () => {
       studentsService.setToken(user.token)
     }
   }, [])
-  
+
   useEffect(() => {
     studentsService.getAll()
       .then(initialStudents => {
-        setStudents(initialStudents);
+        setStudents(initialStudents)
       })
       .catch(error => {
-        console.error('Error fetching students:', error);
-        setErrorMessage('Failed to fetch students');
-      });
-  }, []);
-  
-  
-  const handleLogin = async (event) => {
-    event.preventDefault()
-
-    try {
-      const user = await loginService.login({
-        username, password,
+        console.error('Error fetching students:', error)
+        setErrorMessage('Failed to fetch students')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
+  }, [studentsService])
+
+  const handleLogin = async (username, password) => {
+    try {
+      const user = await loginService.login({ username, password })
       window.localStorage.setItem('loggedStudentappUser', JSON.stringify(user))
       studentsService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
     } catch (error) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
@@ -59,13 +52,20 @@ const App = () => {
       }, 5000)
     }
   }
-  
+
   const addStudent = (studentObject) => {
     studentFormRef.current.toggleVisibility()
     studentsService
       .create(studentObject)
       .then(returnedStudent => {
-        setStudents(students.concat(returnedStudent))
+        setStudents([...students, returnedStudent])
+      })
+      .catch(error => {
+        console.error('Error adding student:', error)
+        setErrorMessage('Failed to add student')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
       })
   }
 
@@ -79,13 +79,7 @@ const App = () => {
           <button onClick={() => setLoginVisible(true)}>log in</button>
         </div>
         <div style={showWhenVisible}>
-          <LoginForm
-            username={username}
-            password={password}
-            handleUsernameChange={({ target }) => setUsername(target.value)}
-            handlePasswordChange={({ target }) => setPassword(target.value)}
-            handleSubmit={handleLogin}
-          />
+          <LoginForm handleSubmit={handleLogin} />
           <button onClick={() => setLoginVisible(false)}>cancel</button>
         </div>
       </div>
@@ -102,9 +96,7 @@ const App = () => {
       {user && <div>
         <p>{user.name} logged in</p>
         <Togglable buttonLabel='New Student' ref={studentFormRef}>
-          <StudentForm
-            createStudent={addStudent}
-          />
+          <StudentForm createStudent={addStudent} />
         </Togglable>
       </div>}
       <ul>
