@@ -65,7 +65,7 @@ const App = () => {
     studentsService
       .create(studentObject)
       .then(returnedStudent => {
-        setStudents(student.concat(returnedStudent))
+        setStudents(students.concat(returnedStudent))
       })
   }
 
