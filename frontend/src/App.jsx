@@ -70,17 +70,19 @@ const App = () => {
   }
 
   const deleteStudent = async (id) => {
-    try {
-      await studentsService.remove(id)
-      setStudents(students.filter(student => student.id !== id))
-    } catch (error) {
-      console.error('Error deleting student:', error)
-      setErrorMessage('Failed to delete student')
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+    if (window.confirm('Are you sure you want to delete this student?')) {
+      try {
+        await studentsService.remove(id)
+        setStudents(students.filter(student => student.id !== id))
+      } catch (error) {
+        console.error('Error deleting student:', error)
+        setErrorMessage('Failed to delete student')
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      }
     }
-  }
+  }  
 
   const loginForm = () => {
     const hideWhenVisible = { display: loginVisible ? 'none' : '' }
