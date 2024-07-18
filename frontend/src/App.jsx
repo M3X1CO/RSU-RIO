@@ -29,12 +29,16 @@ const App = () => {
   }, [])
   
   useEffect(() => {
-    studentsService
-    .getAll()
-    .then(initialStudents => {
-      setStudents(initialStudents)
-    })
-  }, [])
+    studentsService.getAll()
+      .then(initialStudents => {
+        setStudents(initialStudents);
+      })
+      .catch(error => {
+        console.error('Error fetching students:', error);
+        setErrorMessage('Failed to fetch students');
+      });
+  }, []);
+  
   
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -105,7 +109,7 @@ const App = () => {
       </div>}
       <ul>
         {students.map(student => (
-          <Student key={student.id} student={student} />
+          <Student key={student.id} name={student.name} passport={student.passport} />
         ))}
       </ul>
       <Footer />
