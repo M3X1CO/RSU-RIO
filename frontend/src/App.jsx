@@ -92,11 +92,11 @@ const App = () => {
     return (
       <div>
         <div style={hideWhenVisible}>
-          <button onClick={() => setLoginVisible(true)}>Log In</button>
+          <button onClick={() => setLoginVisible(true)} className="login-button">Log In</button>
         </div>
         <div style={showWhenVisible}>
           <LoginForm handleSubmit={handleLogin} />
-          <button onClick={() => setLoginVisible(false)}>Cancel</button>
+          <button onClick={() => setLoginVisible(false)}className="cancel-button">Cancel</button>
         </div>
       </div>
     )
