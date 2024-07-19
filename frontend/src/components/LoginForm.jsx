@@ -21,18 +21,18 @@ const LoginForm = ({ handleSubmit }) => {
   };
 
   return (
-    <div>
+    <div className="login-form">
       <h2>Login</h2>
 
       <form onSubmit={handleFormSubmit}>
-        <div>
+        <div className="form-group">
           username
           <input
             value={username}
             onChange={handleUsernameChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           password
           <input
             type="password"
@@ -40,7 +40,9 @@ const LoginForm = ({ handleSubmit }) => {
             onChange={handlePasswordChange}
           />
         </div>
-        <button type="submit" className="login-button">login</button>
+        <div className="centered-button-container">
+          <button type="submit" className="login-button">login</button>
+        </div>
       </form>
     </div>
   );
