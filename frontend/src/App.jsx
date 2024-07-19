@@ -90,11 +90,11 @@ const App = () => {
     const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
     return (
-      <div>
+      <div className="form-container">
         <div style={hideWhenVisible}>
           <button onClick={() => setLoginVisible(true)} className="login-button">Log In</button>
         </div>
-        <div style={showWhenVisible}>
+        <div style={showWhenVisible} className="togglableContent">
           <LoginForm handleSubmit={handleLogin} />
           <button onClick={() => setLoginVisible(false)}className="cancel-button">Cancel</button>
         </div>

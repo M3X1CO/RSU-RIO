@@ -1,51 +1,59 @@
+/* General Heading */
 h1 {
   color: green;
   font-style: italic;
 }
 
+/* Note styling */
 .note {
   color: grey;
   padding-top: 3px;
   font-size: 15px;
 }
 
+/* Error styling */
 .error {
   color: red;
   background: lightgrey;
   font-size: 20px;
-  border-style: solid;
+  border: 1px solid red;
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
 }
 
+/* User Info */
 .user-info {
-  position: absolute; /* Position relative to the nearest positioned ancestor */
-  top: 1rem;          /* Adjust top margin as needed */
-  right: 1rem;        /* Adjust right margin as needed */
-  background-color: #007bff; /* Match button color */
-  color: white;       /* Text color for contrast */
-  padding: 0.1rem .25rem; /* Padding for visual spacing */
-  border-radius: 5px; /* Rounded corners */
-  font-size: 28px;   /* Font size for readability */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: #007bff;
+  color: white;
+  padding: 0.1rem 0.5rem; /* Adjusted for better spacing */
+  border-radius: 5px;
+  font-size: 20px; /* Reduced size for better fit */
   font-weight: bold;
   display: flex;
-  align-items: center; /* Center text vertically */
+  align-items: center;
   white-space: nowrap;
   line-height: 1.2;
 }
 
+/* User Info Icon (if used) */
 .user-info .icon {
-  margin-right: 0.5rem; /* Space between icon and text (if using an icon) */
+  margin-right: 0.5rem;
 }
 
-/* Optional: Add hover effect if needed */
+/* Hover effect for User Info */
 .user-info:hover {
-  background-color: #0056b3; /* Darker blue for hover effect */
+  background-color: #0056b3;
 }
 
-.new-student-button {
-  margin-left: 1.5rem;
+/* Buttons */
+.new-student-button,
+.login-button,
+.submit-button,
+.toggle-details-button {
   background-color: #007bff;
   color: white;
   padding: 10px 15px;
@@ -54,76 +62,18 @@ h1 {
   cursor: pointer;
   font-size: 20px;
   transition: background-color 0.3s ease;
+  margin-left: 1.5rem; /* Space between buttons */
 }
 
-.new-student-button:hover {
+/* Hover effects for Buttons */
+.new-student-button:hover,
+.login-button:hover,
+.submit-button:hover,
+.toggle-details-button:hover {
   background-color: #0056b3;
 }
 
-.login-button {
-  margin-left: 1.5rem;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
-}
-
-.student-form {
-  max-width: 600px;       /* Set a maximum width for the form */
-  margin: 0 auto;         /* Center the form horizontally */
-  padding: 20px;          /* Add padding inside the form container */
-  border: 1px solid #ddd; /* Add a border around the form */
-  border-radius: 8px;     /* Add rounded corners to the form */
-  background-color: #fff; /* Set a white background color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
-}
-
-/* Styling for form groups */
-.form-group {
-  margin-bottom: 15px; /* Add space between form elements */
-}
-
-/* Styling for form labels */
-.form-group label {
-  display: block;       /* Ensure labels are displayed as block elements */
-  margin-bottom: 5px;   /* Add space below labels */
-  font-weight: bold;    /* Make labels bold */
-}
-
-/* Styling for form inputs */
-.form-input {
-  width: 100%;          /* Make inputs full-width */
-  padding: 10px;       /* Add padding inside inputs */
-  border: 1px solid #ccc; /* Add a border around inputs */
-  border-radius: 4px;  /* Add rounded corners to inputs */
-  box-sizing: border-box; /* Ensure padding and border are included in element's width */
-  font-size: 16px;     /* Set a readable font size */
-}
-
-.submit-button {
-  margin-left: 1rem;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #0056b3;
-}
-
+/* Special Cancel Button */
 .cancel-button {
   background-color: red;
   color: white;
@@ -132,36 +82,23 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 1rem; /* Space above cancel button */
+  margin-top: 1rem;
+  margin-left: 0; /* No left margin for cancel button */
 }
 
+/* Hover effect for Cancel Button */
 .cancel-button:hover {
-  background-color: #cc0000; /* Darker red for hover effect */
+  background-color: #cc0000;
 }
 
+/* Centered Button Container */
 .centered-button-container {
   display: flex;
   justify-content: center; /* Center button horizontally */
 }
 
-.toggle-details-button {
-  margin-left: 1rem;
-  background-color: #007bff; 
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-details-button:hover {
-  background-color: #0056b3;
-}
-
+/* Delete Button */
 .delete-button {
-  margin-left: 1rem;
   background-color: red;
   color: white;
   padding: 10px 15px;
@@ -170,23 +107,59 @@ h1 {
   cursor: pointer;
   font-size: 20px;
   transition: background-color 0.3s ease;
+  margin-left: 1rem;
 }
 
+/* Hover effect for Delete Button */
 .delete-button:hover {
   background-color: #ff9999;
 }
 
+/* Student List */
 .student-list {
-  list-style-type: none; /* Remove bullet points */
-  padding: 0;            /* Remove default padding */
-  margin: 0;             /* Remove default margin */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Optional: Add styling for individual student items */
+/* Individual Student Item */
 .student-list .student {
-  border: 1px solid #ccc; /* Add a border around each student item */
-  padding: 10px;          /* Add padding inside each student item */
-  margin-bottom: 10px;    /* Add margin below each student item */
-  border-radius: 4px;     /* Optional: Add rounded corners */
-  background-color: #f9f9f9; /* Optional: Add a background color */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+/* Student Form */
+.student-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Form Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Form Inputs */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
