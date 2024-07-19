@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Student = ({ name, passport, user, handleDelete }) => {
+const Student = ({ name, passport, id, user, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleDetails = () => {
