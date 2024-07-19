@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Student = ({ student, name, passport, user, handleDelete }) => {
+const Student = ({ student, user, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleDetails = () => {
@@ -17,9 +17,9 @@ const Student = ({ student, name, passport, user, handleDelete }) => {
     <li className='student'>
       <p>
         <strong>Student's Name: </strong> 
-        <span style={{ color: 'green' }}>{name}<br/></span> 
+        <span style={{ color: 'green' }}>{student.name}<br/></span> 
         <strong>Student's Passport Number: </strong> 
-        <span style={{ color: 'green' }}>{passport}</span>
+        <span style={{ color: 'green' }}>{student.passport}</span>
       </p>
       <button onClick={toggleDetails}>
         {showDetails ? 'Hide Details' : 'Show Details'}
