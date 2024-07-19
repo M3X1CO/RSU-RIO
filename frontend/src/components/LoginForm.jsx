@@ -47,7 +47,7 @@ const LoginForm = ({ handleSubmit }) => {
             placeholder="Enter password"
           />
         </div>
-        <div className="centered-button-container">
+        <div>
           <button type="submit" className="login-button">Login</button>
         </div>
       </form>
