@@ -60,6 +60,22 @@ h1 {
   background-color: #0056b3;
 }
 
+.login-button {
+  margin-left: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
 .student-form {
   max-width: 600px;       /* Set a maximum width for the form */
   margin: 0 auto;         /* Center the form horizontally */
