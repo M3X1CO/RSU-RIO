@@ -19,6 +19,53 @@ h1 {
   margin-bottom: 10px;
 }
 
+.student-form {
+  max-width: 600px;       /* Set a maximum width for the form */
+  margin: 0 auto;         /* Center the form horizontally */
+  padding: 20px;          /* Add padding inside the form container */
+  border: 1px solid #ddd; /* Add a border around the form */
+  border-radius: 8px;     /* Add rounded corners to the form */
+  background-color: #fff; /* Set a white background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
+
+/* Styling for form groups */
+.form-group {
+  margin-bottom: 15px; /* Add space between form elements */
+}
+
+/* Styling for form labels */
+.form-group label {
+  display: block;       /* Ensure labels are displayed as block elements */
+  margin-bottom: 5px;   /* Add space below labels */
+  font-weight: bold;    /* Make labels bold */
+}
+
+/* Styling for form inputs */
+.form-input {
+  width: 100%;          /* Make inputs full-width */
+  padding: 10px;       /* Add padding inside inputs */
+  border: 1px solid #ccc; /* Add a border around inputs */
+  border-radius: 4px;  /* Add rounded corners to inputs */
+  box-sizing: border-box; /* Ensure padding and border are included in element's width */
+  font-size: 16px;     /* Set a readable font size */
+}
+
+.submit-button {
+  margin-left: 1rem;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
 
 .toggle-details-button {
   margin-left: 1rem;
@@ -35,7 +82,6 @@ h1 {
 .toggle-details-button:hover {
   background-color: #0056b3;
 }
-
 
 .delete-button {
   margin-left: 1rem;

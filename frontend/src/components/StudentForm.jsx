@@ -25,11 +25,11 @@ const StudentForm = ({ createStudent }) => {
   }
 
   return (
-    <div>
+    <div className="student-form">
       <h2>Create a new Student</h2>
 
       <form onSubmit={addStudent}>
-        <div>
+        <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input
             id="name"
@@ -39,9 +39,10 @@ const StudentForm = ({ createStudent }) => {
             onChange={handleInputChange}
             required
             placeholder="Student's Name"
+            className="form-input"
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="passport">Passport Number:</label>
           <input
             id="passport"
@@ -51,9 +52,10 @@ const StudentForm = ({ createStudent }) => {
             onChange={handleInputChange}
             required
             placeholder="Student's Passport Number"
+            className="form-input"
           />
         </div>
-        <button type="submit">Save</button>
+        <button type="submit" className="submit-button">Save</button>
       </form>
     </div>
   )
