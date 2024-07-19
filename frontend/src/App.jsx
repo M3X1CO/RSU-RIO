@@ -108,7 +108,8 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {!user && loginForm()}
-      {user && <div>
+      {user && 
+      <div>
         <p>{user.name} logged in</p>
         <Togglable buttonLabel='New Student' ref={studentFormRef}>
           <StudentForm createStudent={addStudent} />
@@ -118,11 +119,8 @@ const App = () => {
         {students.map(student => (
           <Student 
             key={student.id}
-            id={student.id}
-            name={student.name}
-            passport={student.passport}
-            user={student.user}
-            deleteStudent={deleteStudent}
+            student={student}
+            handleDelete={deleteStudent}
           />
         ))}
       </ul>
