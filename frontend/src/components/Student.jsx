@@ -10,9 +10,9 @@ const Student = ({ name, passport, user, deleteStudent, id }) => {
   return (
     <li className='student'>
       <p>
-        <strong>Student's Name:</strong> 
-        <span style={{ color: 'blue' }}>{name}</span> 
-        <strong>Student's Passport Number:</strong> 
+        <strong>Student's Name: </strong> 
+        <span style={{ color: 'blue' }}>{name}<br/></span> 
+        <strong>Student's Passport Number: </strong> 
         <span style={{ color: 'green' }}>{passport}</span>
       </p>
       <button onClick={toggleDetails}>
