@@ -29,7 +29,7 @@ h1 {
   right: 1rem;
   background-color: #007bff;
   color: white;
-  padding: 0.1rem 0.5rem; /* Adjusted for better spacing */
+  padding: 1rem 0.5rem; /* Adjusted for better spacing */
   border-radius: 5px;
   font-size: 28px; /* Reduced size for better fit */
   font-weight: bold;
