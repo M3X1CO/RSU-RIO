@@ -26,22 +26,29 @@ const LoginForm = ({ handleSubmit }) => {
 
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
-          username
+          <label htmlFor="username">Username:</label>
           <input
+            id="username"
+            type="text"
             value={username}
             onChange={handleUsernameChange}
+            className="form-input"
+            placeholder="Enter username"
           />
         </div>
         <div className="form-group">
-          password
+          <label htmlFor="password">Password:</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}
+            className="form-input"
+            placeholder="Enter password"
           />
         </div>
         <div className="centered-button-container">
-          <button type="submit" className="login-button">login</button>
+          <button type="submit" className="login-button">Login</button>
         </div>
       </form>
     </div>

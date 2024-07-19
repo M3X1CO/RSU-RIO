@@ -131,6 +131,16 @@ h1 {
   background-color: #f9f9f9;
 }
 
+.login-form {
+  max-width: 600px;       /* Set a maximum width for the form */
+  margin: 0 auto;         /* Center the form horizontally */
+  padding: 20px;          /* Add padding inside the form container */
+  border: 1px solid #ddd; /* Add a border around the form */
+  border-radius: 8px;     /* Add rounded corners to the form */
+  background-color: #fff; /* Set a white background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+}
+
 /* Student Form */
 .student-form {
   max-width: 600px;
@@ -162,4 +172,9 @@ h1 {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 16px;
+}
+
+.centered-button-container {
+  display: flex;
+  justify-content: center; /* Center button horizontally */
 }
