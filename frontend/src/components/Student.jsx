@@ -8,8 +8,8 @@ const Student = ({ name, passport, user, deleteStudent, id }) => {
   }
 
   return (
-    <div>
-      <p>{name} {passport}</p>
+    <li className='student'>
+      <p>Student's Name: {name} Student's Passport Number: {passport}</p>
       <button onClick={toggleDetails}>
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
@@ -20,7 +20,7 @@ const Student = ({ name, passport, user, deleteStudent, id }) => {
         </div>
       )}
       <button onClick={() => deleteStudent(id)}>Delete</button>
-    </div>
+    </li>
   )
 }
 

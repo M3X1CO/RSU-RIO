@@ -1,2 +1,1 @@
-# FSO-Backend
-Test environment
+# rsu-rio-database

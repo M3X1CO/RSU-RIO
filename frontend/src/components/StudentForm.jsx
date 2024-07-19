@@ -30,23 +30,27 @@ const StudentForm = ({ createStudent }) => {
 
       <form onSubmit={addStudent}>
         <div>
-          <label>Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
+            id="name"
             type="text"
             name="name"
             value={newStudent.name}
             onChange={handleInputChange}
             required
+            placeholder="Student's Name"
           />
         </div>
         <div>
-          <label>Passport Number:</label>
+          <label htmlFor="passport">Passport Number:</label>
           <input
+            id="passport"
             type="text"
             name="passport"
             value={newStudent.passport}
             onChange={handleInputChange}
             required
+            placeholder="Student's Passport Number"
           />
         </div>
         <button type="submit">Save</button>
