@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Student = ({ student, user, handleDelete }) => {
+const Student = ({ name, passport, user, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const toggleDetails = () => {
@@ -8,8 +8,8 @@ const Student = ({ student, user, handleDelete }) => {
   }
 
   const confirmDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${student.name}?`)) {
-      handleDelete(student.id)
+    if (window.confirm(`Are you sure you want to delete ${name}?`)) {
+      handleDelete(id)
     }
   }
 
@@ -17,9 +17,9 @@ const Student = ({ student, user, handleDelete }) => {
     <li className='student'>
       <p>
         <strong>Student's Name: </strong> 
-        <span style={{ color: 'green' }}>{student.name}<br/></span> 
+        <span style={{ color: 'green' }}>{name}<br/></span> 
         <strong>Student's Passport Number: </strong> 
-        <span style={{ color: 'green' }}>{student.passport}</span>
+        <span style={{ color: 'green' }}>{passport}</span>
       </p>
       <button onClick={toggleDetails}>
         {showDetails ? 'Hide Details' : 'Show Details'}
