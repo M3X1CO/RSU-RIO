@@ -25,13 +25,14 @@ h1 {
   right: 1rem;        /* Adjust right margin as needed */
   background-color: #007bff; /* Match button color */
   color: white;       /* Text color for contrast */
-  padding: 0.5rem 1rem; /* Padding for visual spacing */
+  padding: 0.25rem .75rem; /* Padding for visual spacing */
   border-radius: 5px; /* Rounded corners */
   font-size: 28px;   /* Font size for readability */
   font-weight: bold;
   display: flex;
   align-items: center; /* Center text vertically */
   white-space: nowrap;
+  line-height: 1.2;
 }
 
 .user-info .icon {
