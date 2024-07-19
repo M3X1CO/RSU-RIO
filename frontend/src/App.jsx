@@ -115,7 +115,7 @@ const App = () => {
           <StudentForm createStudent={addStudent} />
         </Togglable>
       </div>}
-      <ul>
+      <ul className="student-list">
         {students.map(student => (
           <Student 
             key={student.id}
