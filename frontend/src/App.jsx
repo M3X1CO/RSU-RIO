@@ -7,6 +7,7 @@ import loginService from './services/login'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
 import StudentForm from './components/StudentForm'
+import UserInfo from './components/UserInfo'
 
 const App = () => {
   const [students, setStudents] = useState([])
@@ -110,7 +111,8 @@ const App = () => {
       {!user && loginForm()}
       {user && 
       <div>
-        <p>{user.name} logged in</p>
+        <UserInfo user={user} />
+
         <Togglable buttonLabel='New Student' ref={studentFormRef}>
           <StudentForm createStudent={addStudent} />
         </Togglable>

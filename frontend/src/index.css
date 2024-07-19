@@ -19,6 +19,29 @@ h1 {
   margin-bottom: 10px;
 }
 
+.user-info {
+  position: absolute; /* Position relative to the nearest positioned ancestor */
+  top: 1rem;          /* Adjust top margin as needed */
+  right: 1rem;        /* Adjust right margin as needed */
+  background-color: blue; /* Match button color */
+  color: white;       /* Text color for contrast */
+  padding: 0.5rem 1rem; /* Padding for visual spacing */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;    /* Font size for readability */
+  display: flex;
+  align-items: center; /* Center text vertically */
+}
+
+.user-info .icon {
+  margin-right: 0.5rem; /* Space between icon and text (if using an icon) */
+}
+
+/* Optional: Add hover effect if needed */
+.user-info:hover {
+  background-color: #0056b3; /* Darker blue for hover effect */
+}
+
+
 .student-form {
   max-width: 600px;       /* Set a maximum width for the form */
   margin: 0 auto;         /* Center the form horizontally */
