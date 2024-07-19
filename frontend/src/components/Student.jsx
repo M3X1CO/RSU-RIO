@@ -19,7 +19,7 @@ const Student = ({ student, handleDelete }) => {
         <strong>Student's Passport Number: </strong> 
         <span style={{ color: 'green' }}>{student.passport}</span>
       </p>
-      <button onClick={toggleDetails}>
+      <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
       {showDetails && (
