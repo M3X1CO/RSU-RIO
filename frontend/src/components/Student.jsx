@@ -9,7 +9,7 @@ const Student = ({ name, passport, user, deleteStudent, id }) => {
 
   return (
     <li className='student'>
-      <p>Student's Name: {name} Student's Passport Number: {passport}</p>
+      <p><STRONG>Student's Name:</STRONG> {name} <STRONG>Student's Passport Number:</STRONG> {passport}</p>
       <button onClick={toggleDetails}>
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
