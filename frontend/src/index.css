@@ -67,6 +67,21 @@ h1 {
   background-color: #0056b3;
 }
 
+.cancel-button {
+  background-color: red;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 1rem; /* Space above cancel button */
+}
+
+.cancel-button:hover {
+  background-color: #cc0000; /* Darker red for hover effect */
+}
+
 .toggle-details-button {
   margin-left: 1rem;
   background-color: #007bff; 
