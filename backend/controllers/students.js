@@ -56,7 +56,7 @@ studentRouter.post('/', async (request, response) => {
 })
 
 studentRouter.get('/:id', async (request, response) => {
-  const student = await Student.findById(request.params.id)
+  const student = await Student.findById(request.params.id).populate('user', { username: 1, name: 1 })
   if (student) {
     response.json(student)
   } else {
