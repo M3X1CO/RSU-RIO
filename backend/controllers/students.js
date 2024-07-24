@@ -56,16 +56,11 @@ studentRouter.post('/', async (request, response) => {
 })
 
 studentRouter.get('/:id', async (request, response) => {
-  const student = await Student.findById(request.params.id).populate('student', { name: 1, passport: 1 })
+  const student = await Student.findById(request.params.id).populate('user', { username: 1, name: 1 })
   if (student) {
     response.json(student)
   } else {
-    const user = await User.findById(request.params.id).populate('user', { username: 1, name: 1 })
-    if (user) {
-      response.json(user)
-    } else {
-      response.status(404).end()
-    }
+    response.status(404).end()
   }
 })
 
