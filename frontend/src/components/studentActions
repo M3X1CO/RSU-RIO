@@ -1,0 +1,14 @@
+
+const generateId = () =>
+    Number((Math.random() * 1000000).toFixed(0))
+
+const addStudent = (name, passport) => {
+    return {
+        type: 'NEW_STUDENT',
+        payload: {
+            name,
+            passport,
+            id: generateId()
+        }
+    }
+}

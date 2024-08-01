@@ -1,23 +1,36 @@
-import { useState } from 'react'
+import { addStudent } from './reducers/studentReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const dispatch = useDispatch()
+  const student = useSelector(state => state)
 
-  return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  const addStudent = (event) => {
+    event.preventDefault()
+    const name = event.target.name.value
+    const passport = event.target.passport.value
+    event.target.name.value = ''
+    event.target.passport.value = ''
+    dispatch(createStudent(name, passport))
+  }
+
+  return(
+    <div>
+      <form onSubmit={addStudent}>
+        <input name="name" placeholder="Name" /><br />
+        <input name="passport" placeholder="Passport" />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {student.map(student=>
+          <li 
+            key={student.id}
+          >
+            {student.name} <br /> {student.passport}
+          </li>
+        )}
+        </ul>
+    </div>
   )
 }
 

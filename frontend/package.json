@@ -9,21 +9,29 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "json-server -p3001 --watch db.json",
-    "deploy:full": "npm update && (cd ../ && git add . && git commit -m frontendBuild && git push)"
+    "deploy:full": "npm update && (cd ../ && git add . && git commit -m frontendBuild && git push)",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^1.7.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "deep-freeze": "^0.0.1",
     "eslint": "^8.57.0",
+    "eslint-plugin-jest": "^28.6.0",
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "jest": "^29.7.0",
     "json-server": "^1.0.0-beta.1",
     "vite": "^5.3.4"
   }
