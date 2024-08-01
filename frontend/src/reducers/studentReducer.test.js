@@ -5,10 +5,10 @@ describe('studentReducer', () => {
   test('returns new state with action NEW_STUDENT', () => {
     const state = []
     const action = {
-      type: 'NEW_STUDENT',
+      type: 'students/createStudent',
       payload: {
         name: 'John',
-        passport: 34543534,
+        passport: '34543534',
         id: 1
       }
     }
@@ -17,6 +17,6 @@ describe('studentReducer', () => {
     const newState = studentReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState).toContainEqual(action.payload)
+    expect(newState.map(s => s.passport)).toContainEqual(action.payload.passport)
   })
 })

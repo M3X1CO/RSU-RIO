@@ -1,3 +1,5 @@
+import { createSlice, current } from '@reduxjs/toolkit'
+
 const initialState = [
   {
     name: 'John Henry',
@@ -11,29 +13,30 @@ const initialState = [
   },
 ]
 
+const generateId = () => Number((Math.random() * 1000000).toFixed(0))
 
-const studentReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'NEW_STUDENT':
-      return [...state, action.payload]
-    default:
-      return state
-  }
-}
+const studentSlice = createSlice({
+  name: 'students',
+  initialState,
+  reducers: {
+    createStudent: {
+      reducer(state, action) {
+        state.push(action.payload)
+        // console.log(current(state))
+      },
+      prepare(name, passport) {
+        return {
+          payload: {
+            name,
+            passport,
+            id: generateId(),
+          },
+        }
+      },
+    },
+  },
+})
 
+export const { createStudent } = studentSlice.actions
 
-const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
-
-export const createStudent = (name, passport) => {
-  return {
-      type: 'NEW_STUDENT',
-      payload: {
-          name,
-          passport,
-          id: generateId()
-      }
-  }
-}
-
-export default studentReducer
+export default studentSlice.reducer
