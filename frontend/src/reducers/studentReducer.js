@@ -11,7 +11,7 @@ const studentReducer = (state = [], action) => {
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
 
-export const addStudent = (name, passport) => {
+export const createStudent = (name, passport) => {
   return {
       type: 'NEW_STUDENT',
       payload: {

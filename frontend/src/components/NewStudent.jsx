@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { addStudent } from '../reducers/studentReducer'
+import { createStudent } from '../reducers/studentReducer'
 
 const NewStudent = () => {
     const dispatch = useDispatch()
