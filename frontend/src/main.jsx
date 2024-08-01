@@ -5,11 +5,13 @@ import App from './App.jsx'
 
 import studentReducer from './reducers/studentReducer'
 import filterReducer from './reducers/filterReducer'
+import notificationReducer from './reducers/notificationReducer'
 
 const store = configureStore({
   reducer: {
     students: studentReducer,
-    filter: filterReducer
+    filter: filterReducer,
+    notification: notificationReducer,
   }
 })
 
