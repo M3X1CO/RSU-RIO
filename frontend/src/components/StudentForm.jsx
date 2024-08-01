@@ -16,7 +16,7 @@ const NewStudent = () => {
     return (
         <form onSubmit={addStudent}>
             <input name="name" placeholder="Name" /><br />
-            <input name="passport" placeholder="Passport" />
+            <input name="passport" placeholder="Passport" /><br />
             <button type="submit">Add</button>
         </form>
     )

@@ -1,4 +1,18 @@
-const studentReducer = (state = [], action) => {
+const initialState = [
+  {
+    name: 'John Henry',
+    passport: '23423423',
+    id: 1,
+  },
+  {
+    name: 'Tabasco Sauce',
+    passport: 'A5150',
+    id: 2,
+  },
+]
+
+
+const studentReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'NEW_STUDENT':
       return [...state, action.payload]
