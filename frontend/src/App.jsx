@@ -1,26 +1,35 @@
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { initializeStudents } from './reducers/studentReducer'
-import NewStudent from './components/StudentForm'
-import Students from './components/StudentList'
-import VisibilityFilter from './components/VisibilityFilter'
+import React, { useRef } from 'react'
 import Notification from './components/Notification'
+import Footer from './components/Footer'
+import LoginFormWrapper from './components/LoginFormWrapper'
+import MainContent from './components/MainContent'
+import useStudents from './hooks/useStudents'
+import useAuth from './hooks/useAuth'
 
 const App = () => {
-  const dispatch = useDispatch()
+  const { user, errorMessage: authError, login, logout } = useAuth()
+  const { students, errorMessage: studentError, addStudent, deleteStudent } = useStudents(user)
+  const studentFormRef = useRef()
 
-  useEffect(() => {
-    dispatch(initializeStudents())
-  }, [dispatch])
+  const errorMessage = authError || studentError
 
   return (
     <div>
-      <h2>Add a Student</h2>
-      <Notification />
-      <NewStudent />
-      <VisibilityFilter />
-      <h2>Current Students</h2>
-      <Students />
+      <h1>Students</h1>
+
+      <Notification message={errorMessage} />
+
+      {!user && <LoginFormWrapper handleLogin={login} />}
+      {user && 
+        <MainContent 
+          user={user}
+          studentFormRef={studentFormRef}
+          addStudent={addStudent}
+          students={students}
+          deleteStudent={deleteStudent}
+        />
+      }
+      <Footer />
     </div>
   )
 }

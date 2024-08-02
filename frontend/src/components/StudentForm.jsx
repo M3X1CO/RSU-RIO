@@ -1,25 +1,64 @@
-import { useDispatch } from 'react-redux'
-import { createStudent } from '../reducers/studentReducer'
+import { useState } from 'react'
 
-const NewStudent = () => {
-    const dispatch = useDispatch()
+const StudentForm = ({ createStudent }) => {
+  const [newStudent, setNewStudent] = useState({
+    name: '',
+    passport: ''
+  })
 
-    const addStudent = (event) => {
-        event.preventDefault()
-        const name = event.target.name.value
-        const passport = event.target.passport.value
-        event.target.name.value = ''
-        event.target.passport.value = ''
-        dispatch(createStudent(name, passport))
-    }
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setNewStudent({
+      ...newStudent,
+      [name]: value
+    })
+  }
 
-    return (
-        <form onSubmit={addStudent}>
-            <input name="name" placeholder="Name" /><br />
-            <input name="passport" placeholder="Passport" /><br />
-            <button type="submit">Add</button>
-        </form>
-    )
+  const addStudent = (event) => {
+    event.preventDefault()
+    createStudent(newStudent)
+
+    setNewStudent({
+      name: '',
+      passport: ''
+    })
+  }
+
+  return (
+    <div className="student-form">
+      <h2>Create a new Student</h2>
+
+      <form onSubmit={addStudent}>
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value={newStudent.name}
+            onChange={handleInputChange}
+            required
+            placeholder="Student's Name"
+            className="form-input"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="passport">Passport Number:</label>
+          <input
+            id="passport"
+            type="text"
+            name="passport"
+            value={newStudent.passport}
+            onChange={handleInputChange}
+            required
+            placeholder="Student's Passport Number"
+            className="form-input"
+          />
+        </div>
+        <button type="submit" className="submit-button">Save</button>
+      </form>
+    </div>
+  )
 }
 
-export default NewStudent
+export default StudentForm

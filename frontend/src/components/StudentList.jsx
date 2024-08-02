@@ -1,22 +1,18 @@
-import { useSelector } from 'react-redux';
+import React from 'react'
+import Student from './Student'
 
-const Students = () => {
-  const students = useSelector((state) => state.students)
-  const filter = useSelector((state) => state.filter)
-
-  const filteredStudents = students.filter((student) =>
-    student.passport.toLowerCase().includes(filter.toLowerCase())
-  )
-
+const StudentList = ({ students, handleDelete }) => {
   return (
-    <ul>
-      {filteredStudents.map((student) => (
-        <li key={student.id}>
-          Name: {student.name} <br /> Passport: {student.passport}
-        </li>
+    <ul className="student-list">
+      {students.map(student => (
+        <Student 
+          key={student.id}
+          student={student}
+          handleDelete={handleDelete}
+        />
       ))}
     </ul>
-  );
-};
+  )
+}
 
-export default Students;
+export default StudentList
