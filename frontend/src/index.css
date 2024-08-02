@@ -9,11 +9,11 @@
   }
   
   .student-details tr:nth-child(even) {
-    background-color: #0c0e0e;
+    background-color: #979694;
   }
   
   .student-details tr:hover {
-    background-color: #979694;
+    background-color: #33332d;
   }
 
   :root {
