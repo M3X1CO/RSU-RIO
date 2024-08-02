@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { initialStudentState } from './initialStudentState'
+import StudentFields from './StudentFields'
 
 const StudentForm = ({ createStudent }) => {
-  const [newStudent, setNewStudent] = useState({
-    name: '',
-    passport: ''
-  })
+  const [newStudent, setNewStudent] = useState(initialStudentState)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
@@ -17,11 +16,7 @@ const StudentForm = ({ createStudent }) => {
   const addStudent = (event) => {
     event.preventDefault()
     createStudent(newStudent)
-
-    setNewStudent({
-      name: '',
-      passport: ''
-    })
+    setNewStudent(initialStudentState)
   }
 
   return (
@@ -29,32 +24,11 @@ const StudentForm = ({ createStudent }) => {
       <h2>Create a new Student</h2>
 
       <form onSubmit={addStudent}>
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={newStudent.name}
-            onChange={handleInputChange}
-            required
-            placeholder="Student's Name"
-            className="form-input"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="passport">Passport Number:</label>
-          <input
-            id="passport"
-            type="text"
-            name="passport"
-            value={newStudent.passport}
-            onChange={handleInputChange}
-            required
-            placeholder="Student's Passport Number"
-            className="form-input"
-          />
-        </div>
+        <StudentFields 
+          student={newStudent} 
+          handleInputChange={handleInputChange} 
+          isEditable={true}
+        />
         <button type="submit" className="submit-button">Save</button>
       </form>
     </div>

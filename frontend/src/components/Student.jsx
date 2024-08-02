@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import StudentFields from './StudentFields'
 
 const Student = ({ student, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
@@ -17,15 +18,15 @@ const Student = ({ student, handleDelete }) => {
         <strong>Student's Name: </strong> 
         <span style={{ color: 'green' }}>{student.name}<br/></span> 
         <strong>Student's Passport Number: </strong> 
-        <span style={{ color: 'green' }}>{student.passport}</span>
+        <span style={{ color: 'green' }}>{student.originalPassportNumber}</span>
       </p>
       <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
       {showDetails && (
-        <div>
-          <p>Additional details about the student</p>
-          <p>Created by: {student.user.name}</p>
+        <div className="student-details">
+          <h3>Student Details</h3>
+          <StudentFields student={student} />
         </div>
       )}
       <button onClick={confirmDelete} className="delete-button">Delete</button>

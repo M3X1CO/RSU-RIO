@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const studentRouter = require('express').Router()
 const Student = require('../models/student')
 const User = require('../models/user')
+const studentFields = require('../utils/studentFields')
 
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
@@ -19,10 +20,12 @@ studentRouter.get('/', async (request, response) => {
 studentRouter.put('/:id', async (request, response, next) => {
   const body = request.body
 
-  const student = {
-    name: body.name,
-    passport: body.passport
-  }
+  const student = {}
+  Object.keys(studentFields).forEach(field => {
+    if (body[field] !== undefined) {
+      student[field] = body[field]
+    }
+  })
 
   Student.findByIdAndUpdate(request.params.id, student, { new: true })
     .then(updatedStudent => {
@@ -32,7 +35,7 @@ studentRouter.put('/:id', async (request, response, next) => {
 })
 
 studentRouter.post('/', async (request, response) => {
-  const { name, passport } = request.body
+  const body = request.body
   const token = getTokenFrom(request)
   const decodedToken = jwt.verify(token, process.env.SECRET)
 
@@ -43,8 +46,12 @@ studentRouter.post('/', async (request, response) => {
   const user = await User.findById(decodedToken.id)
 
   const student = new Student({
-    name,
-    passport,
+    ...Object.keys(studentFields).reduce((acc, field) => {
+      if (body[field] !== undefined) {
+        acc[field] = body[field]
+      }
+      return acc
+    }, {}),
     user: user._id
   })
 

@@ -30,13 +30,13 @@ usersRouter.post('/', async (request, response) => {
 
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('students', { name: 1, passport: 1 })
+    .find({}).populate('students', { firstName: 1, originalPassportNumber: 1 })
 
   response.json(users)
 })
 
 usersRouter.get('/:id', async (request, response) => {
-  const users = await User.findById(request.params.id).populate('students', { name: 1, passport: 1 })
+  const users = await User.findById(request.params.id).populate('students', { firstName: 1, originalPassportNumber: 1 })
 
   response.json(users)
 })

@@ -1,0 +1,32 @@
+const studentFields = {
+    submissionDate: Date,
+    role: String,
+    firstName: String,
+    middleName: String,
+    lastName: String,
+    submissionId: String,
+    name: String, 
+    dateOfBirth: Date,
+    originalPassportNumber: String,
+    newPassportNumber: String,
+    contactAddress: String,
+    programApplied: String,
+    facultyCollege: String,
+    semesterIntake: String,
+    academicYearIntake: String,
+    depositAmount: Number,
+    lessPaymentAmount: Number,
+    programDuration: String,
+    modeOfStudy: String,
+    classStartDate: Date,
+    classEndDate: Date,
+    visaSubmissionPlace1: String,
+    visaSubmissionPlace2: String,
+    issueNumber: String,
+    dateOfIssueAcceptanceLetter: Date,
+    firstMoneyTransfer: Number,
+    secondMoneyTransfer: Number,
+    notes: String
+  }
+  
+  module.exports = studentFields
