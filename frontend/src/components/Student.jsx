@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import StudentFields from './StudentFields'
+import '../index.css'
 
 const Student = ({ student, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
@@ -15,10 +16,10 @@ const Student = ({ student, handleDelete }) => {
   return (
     <li className='student'>
       <p>
-        <strong>Student's Name: </strong> 
-        <span style={{ color: 'green' }}>{student.name}<br/></span> 
-        <strong>Student's Passport Number: </strong> 
-        <span style={{ color: 'green' }}>{student.originalPassportNumber}</span>
+        <span className='label'>Student's Name: </span>
+        <span className='student-name'>{student.name}<br/></span>
+        <span className='label'>Student's Passport Number: </span>
+        <span className='student-passport'>{student.originalPassportNumber}</span>
       </p>
       <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}

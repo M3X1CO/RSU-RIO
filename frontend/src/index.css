@@ -52,5 +52,34 @@
   button:hover {
     opacity: 0.8; 
   }
+
+/* Work todo */
+
+.student {
+  /* Add any styles specific to the student list item */
+}
+
+.label {
+  font-weight: bold; /* Replaces the strong element's functionality */
+  color: #212121
+}
+
+.student-name,
+.student-passport {
+  color: #212121
+}
+
+.toggle-details-button {
+  /* Add any styles for the toggle details button */
+}
+
+.student-details {
+  /* Add any styles for the student details section */
+}
+
+.delete-button {
+  /* Add any styles for the delete button */
+}
+
   
   
