@@ -5,7 +5,7 @@
   
   .student-details td {
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #a0a0a0;
   }
   
   .student-details tr:nth-child(even) {
@@ -61,12 +61,12 @@
 
 .label {
   font-weight: bold; /* Replaces the strong element's functionality */
-  color: #212121
+  color: #a0a0a0
 }
 
 .student-name,
 .student-passport {
-  color: #212121
+  color: #a0a0a0
 }
 
 .toggle-details-button {
