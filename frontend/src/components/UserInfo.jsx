@@ -5,7 +5,7 @@ const UserInfo = ({ user }) => {
   return (
     <div className="user-info">
       <span className="icon">👤{user.name}</span>
-      <p>Logged In</p>
+      Logged In
     </div>
   )
 }
