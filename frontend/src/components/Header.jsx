@@ -1,6 +1,6 @@
 const Header = () => {
     const headerStyle = {
-      color: 'green',
+      color: '#979694',
       fontStyle: 'italic',
       fontSize: 24
     }
