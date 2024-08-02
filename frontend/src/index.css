@@ -15,3 +15,11 @@
   .student-details tr:hover {
     background-color: #ddd;
   }
+
+  :root {
+    --color-background: #33332d;
+  }
+  
+  body {
+    background-color: var(--color-background);
+  }
