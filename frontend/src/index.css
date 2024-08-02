@@ -27,3 +27,16 @@
   body {
     background-color: var(--color-background);
   }
+
+  .user-info {
+    display: flex;
+    justify-content: flex-end;
+    color: #979684;
+    padding: 10px; 
+  }
+  
+  .icon {
+    font-size: 18px; 
+    font-weight: bold;
+  }
+  
