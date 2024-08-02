@@ -39,4 +39,18 @@
     font-size: 18px; 
     font-weight: bold;
   }
+
+  button {
+    background-color: #33332d; 
+    color: #a0a0a0; 
+    border: none; 
+    padding: 10px 20px;
+    font-size: 16px; 
+    cursor: pointer; 
+  }
+  
+  button:hover {
+    opacity: 0.8; 
+  }
+  
   

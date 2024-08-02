@@ -10,7 +10,6 @@ const StudentForm = ({ createStudent }) => {
     setNewStudent(prevState => {
       const updatedState = { ...prevState, [name]: value }
       
-      // Combine name fields whenever first, middle, or last name changes
       if (['firstName', 'middleName', 'lastName'].includes(name)) {
         updatedState.name = [
           updatedState.firstName,
