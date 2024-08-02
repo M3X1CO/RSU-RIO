@@ -7,9 +7,19 @@ const StudentForm = ({ createStudent }) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
-    setNewStudent({
-      ...newStudent,
-      [name]: value
+    setNewStudent(prevState => {
+      const updatedState = { ...prevState, [name]: value }
+      
+      // Combine name fields whenever first, middle, or last name changes
+      if (['firstName', 'middleName', 'lastName'].includes(name)) {
+        updatedState.name = [
+          updatedState.firstName,
+          updatedState.middleName,
+          updatedState.lastName
+        ].filter(Boolean).join(' ')
+      }
+      
+      return updatedState
     })
   }
 

@@ -5,6 +5,7 @@ export const initialStudentState = {
     middleName: '',
     lastName: '',
     submissionId: '',
+    name: '',
     dateOfBirth: '',
     originalPassportNumber: '',
     newPassportNumber: '',
