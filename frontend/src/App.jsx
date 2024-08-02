@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Students</h1>
+      <strong><h1>Student Management App</h1></strong>
 
       <Notification message={errorMessage} />
 
