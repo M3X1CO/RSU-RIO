@@ -14,8 +14,8 @@ const studentFields = {
     facultyCollege: String,
     semesterIntake: String,
     academicYearIntake: String,
-    depositAmount: Number,
-    lessPaymentAmount: Number,
+    depositAmount: String,
+    lessPaymentAmount: String,
     programDuration: String,
     modeOfStudy: String,
     classStartDate: Date,
@@ -24,8 +24,8 @@ const studentFields = {
     visaSubmissionPlace2: String,
     issueNumber: String,
     dateOfIssueAcceptanceLetter: Date,
-    firstMoneyTransfer: Number,
-    secondMoneyTransfer: Number,
+    firstMoneyTransfer: String,
+    secondMoneyTransfer: String,
     notes: String
   }
   
