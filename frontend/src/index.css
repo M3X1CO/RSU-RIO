@@ -11,6 +11,10 @@
   .student-details tr:nth-child(even) {
     background-color: #979694;
   }
+
+  .student-details tr:nth-child(odd) {
+    background-color: #a0a0a0;
+  }
   
   .student-details tr:hover {
     background-color: #33332d;
