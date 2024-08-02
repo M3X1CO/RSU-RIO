@@ -5,7 +5,7 @@
   
   .student-fields td {
     padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffefd5;
   }
 
   .student-fields tr:nth-child(even) {
