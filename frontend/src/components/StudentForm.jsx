@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { initialStudentState } from './initialStudentState'
-import StudentFields from './StudentFields'
+import StudentDetails from './StudentDetails'
 
 const StudentForm = ({ createStudent }) => {
   const [newStudent, setNewStudent] = useState(initialStudentState)
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
+  const handleInputChange = (key, value) => {
     setNewStudent(prevState => {
-      const updatedState = { ...prevState, [name]: value }
+      const updatedState = { ...prevState, [key]: value }
       
-      if (['firstName', 'middleName', 'lastName'].includes(name)) {
+      if (['firstName', 'middleName', 'lastName'].includes(key)) {
         updatedState.name = [
           updatedState.firstName,
           updatedState.middleName,
@@ -33,7 +32,7 @@ const StudentForm = ({ createStudent }) => {
       <h2>Create a new Student</h2>
 
       <form onSubmit={addStudent}>
-        <StudentFields 
+        <StudentDetails 
           student={newStudent} 
           handleInputChange={handleInputChange} 
           isEditable={true}

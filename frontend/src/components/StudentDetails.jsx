@@ -1,8 +1,9 @@
+// StudentDetails.jsx
 import React, { useState } from 'react';
 
 const ITEMS_PER_PAGE = 15;
 
-const StudentDetails = ({ student }) => {
+const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const studentEntries = Object.entries(student).filter(([key, value]) => 
@@ -18,28 +19,40 @@ const StudentDetails = ({ student }) => {
 
   return (
     <div className="student-details">
-      <h3>Student Details</h3>
+      {!isEditable && <h3>Student Details</h3>}
       <table className="student-fields">
         <tbody>
           {currentFields.map(([key, value]) => (
             <tr key={key}>
               <td>{key}:</td>
-              <td>{String(value)}</td>
+              <td>
+                {isEditable ? (
+                  <input
+                    type="text"
+                    value={value}
+                    onChange={(e) => handleInputChange(key, e.target.value)}
+                  />
+                ) : (
+                  String(value)
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
       {pageCount > 1 && (
-        <div className="pagination">
-          {Array.from({ length: pageCount }, (_, i) => i + 1).map(page => (
-            <button
-              key={page}
-              onClick={() => setCurrentPage(page)}
-              className={currentPage === page ? 'active' : ''}
-            >
-              {page}
-            </button>
-          ))}
+        <div className="pagination-container">
+          <div className="pagination">
+            {Array.from({ length: pageCount }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={currentPage === page ? 'active' : ''}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
