@@ -1,4 +1,3 @@
-// StudentDetails.jsx
 import React, { useState } from 'react';
 
 const ITEMS_PER_PAGE = 15;
@@ -20,7 +19,7 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const currentFields = studentEntries.slice(start, end);
 
   const handlePageChange = (e, page) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault(); 
     console.log(`Setting current page to ${page}`);
     setCurrentPage(page);
   };
