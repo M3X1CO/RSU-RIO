@@ -7,6 +7,10 @@ const Student = ({ student, handleDelete }) => {
 
   const toggleDetails = () => setShowDetails(!showDetails)
 
+  const confirmDelete = () => {
+      handleDelete(student.id)
+  }
+
   return (
     <li className='student'>
       <p>
