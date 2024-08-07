@@ -28,7 +28,7 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   return (
     <div className="student-details">
       {!isEditable && <h3>Student Details</h3>}
-      <form onSubmit={(e) => e.preventDefault()}> {/* Wrap in a form and prevent default submission */}
+      <form onSubmit={(e) => e.preventDefault()}>
         <table className="student-fields">
           <tbody>
             {currentFields.map(([key, value]) => (
