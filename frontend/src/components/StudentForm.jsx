@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { initialStudentState } from './initialStudentState'
+import { initialStudentState } from './InitialStudentState'
 import StudentDetails from './StudentDetails'
 
 const StudentForm = ({ createStudent }) => {
