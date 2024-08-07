@@ -52,9 +52,9 @@ const CSVImport = ({ addStudent }) => {
         ref={fileInputRef}
         style={{ display: 'none' }}
       />
-      <button onClick={() => fileInputRef.current.click()} disabled={importing}>
-        {importing ? 'Importing...' : 'Import Students from CSV'}
-      </button>
+        <button onClick={() => fileInputRef.current.click()} disabled={importing}>
+          {importing ? 'Importing...' : 'Import Students from CSV'}
+        </button>
       {importStatus && <p>{importStatus}</p>}
     </div>
   );
