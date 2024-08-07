@@ -1,15 +1,11 @@
-import React, { useState } from 'react'
-import StudentDetails from './StudentDetails'
-import '../index.css'
+import React from 'react';
+import StudentDetails from './StudentDetails';
+import '../index.css';
 
-const Student = ({ student, handleDelete }) => {
-  const [showDetails, setShowDetails] = useState(false)
-
-  const toggleDetails = () => setShowDetails(!showDetails)
-
+const Student = ({ student, handleDelete, showDetails, toggleDetails }) => {
   const confirmDelete = () => {
-      handleDelete(student.id)
-  }
+    handleDelete(student.id);
+  };
 
   return (
     <li className='student'>
@@ -25,7 +21,7 @@ const Student = ({ student, handleDelete }) => {
       {showDetails && <StudentDetails student={student} />}
       <button onClick={confirmDelete} className="delete-button">Delete</button>
     </li>
-  )
-}
+  );
+};
 
-export default Student
+export default Student;
