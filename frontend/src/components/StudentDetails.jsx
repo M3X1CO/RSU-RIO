@@ -1,22 +1,12 @@
 // StudentDetails.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 const ITEMS_PER_PAGE = 15;
 
-const StudentDetails = ({ student, handleInputChange, isEditable = false, currentPage, setCurrentPage }) => {
-  // Add console logs for debugging
-  console.log('StudentDetails props:', { student, handleInputChange, isEditable, currentPage, setCurrentPage });
+const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Check if required props are functions
-  if (typeof handleInputChange !== 'function') {
-    console.error('handleInputChange is not a function');
-    return <div>Error: handleInputChange is not properly defined</div>;
-  }
-
-  if (typeof setCurrentPage !== 'function') {
-    console.error('setCurrentPage is not a function');
-    return <div>Error: setCurrentPage is not properly defined</div>;
-  }
+  console.log('StudentDetails props:', { student, handleInputChange, isEditable });
 
   const studentEntries = Object.entries(student).filter(([key, value]) => 
     typeof value !== 'object' && typeof value !== 'function'
@@ -29,13 +19,9 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false, curren
   const end = start + ITEMS_PER_PAGE;
   const currentFields = studentEntries.slice(start, end);
 
-  // Wrap the setCurrentPage call in a try-catch block
   const handlePageChange = (page) => {
-    try {
-      setCurrentPage(page);
-    } catch (error) {
-      console.error('Error setting current page:', error);
-    }
+    console.log(`Setting current page to ${page}`);
+    setCurrentPage(page);
   };
 
   return (
