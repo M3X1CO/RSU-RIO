@@ -1,14 +1,15 @@
 :root {
   --color-background: #33332d;
-  --color-text-primary: #ffefd5;
+  --color-text-primary: papayawhip;
   --color-text-secondary: #a0a0a0;
   --color-row-even: #979694;
   --color-row-odd: #a0a0a0;
   --color-hover: #33332d;
   --color-button: #212121;
   --color-button-text: #a0a0a0;
-  --color-border: #ffefd5;
+  --color-border: papayawhip;
   --color-active: #979684;
+  --color-footer-background: papayawhip;
 }
 
 body {
@@ -46,35 +47,29 @@ button:hover {
   color: var(--color-text-secondary);
 }
 
-.student-name,
-.student-passport {
+.student-name, .student-passport {
   color: var(--color-text-primary);
 }
 
-.student-details table,
-.student-fields {
+.student-details table, .student-fields {
   width: 100%;
   border-collapse: collapse;
 }
 
-.student-details td,
-.student-fields td {
+.student-details td, .student-fields td {
   padding: 8px;
   border-bottom: 1px solid var(--color-border);
 }
 
-.student-details tr:nth-child(even),
-.student-fields tr:nth-child(even) {
+.student-details tr:nth-child(even), .student-fields tr:nth-child(even) {
   background-color: var(--color-row-even);
 }
 
-.student-details tr:nth-child(odd),
-.student-fields tr:nth-child(odd) {
+.student-details tr:nth-child(odd), .student-fields tr:nth-child(odd) {
   background-color: var(--color-row-odd);
 }
 
-.student-details tr:hover,
-.student-fields tr:hover {
+.student-details tr:hover, .student-fields tr:hover {
   background-color: var(--color-hover);
 }
 
@@ -108,4 +103,26 @@ button:hover {
 .pagination button.active {
   background-color: var(--color-active);
   color: var(--color-text-primary);
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--color-footer-background);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.copyright {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.csv-import-button {
+
+  margin-bottom: 10px;
 }
