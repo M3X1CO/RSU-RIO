@@ -18,14 +18,21 @@ const ExcelImporter = ({ addStudent }) => {
         const worksheet = workbook.worksheets[0];
         const jsonData = [];
 
+        // Get headers from the first row
+        const headers = worksheet.getRow(1).values.slice(1);  // slice to remove the first empty cell
+
         worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          if (rowNumber > 1) { // Assuming first row is headers
+          if (rowNumber > 1) { // Skip the header row
             const rowData = {};
             row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-              const header = worksheet.getRow(1).getCell(colNumber).value;
-              rowData[header] = cell.value;
+              const header = headers[colNumber - 1];
+              if (header) {
+                rowData[header] = cell.value || '';
+              }
             });
-            jsonData.push(rowData);
+            if (Object.keys(rowData).length > 0) {
+              jsonData.push(rowData);
+            }
           }
         });
 
@@ -45,20 +52,32 @@ const ExcelImporter = ({ addStudent }) => {
     let failCount = 0;
 
     for (const row of data) {
-      const student = {};
-      for (const [key, value] of Object.entries(row)) {
-        if (key !== 'name') {
-          student[key] = value !== undefined ? String(value) : '';
+      const student = { ...row };
+      
+      // Combine firstName, middleName, and lastName into name
+      student.name = [student.firstName, student.middleName, student.lastName].filter(Boolean).join(' ');
+      
+      // Remove individual name fields if you don't want to keep them
+      delete student.firstName;
+      delete student.middleName;
+      delete student.lastName;
+
+      // Remove any fields with '[object Object]' or 'null' values
+      for (const [key, value] of Object.entries(student)) {
+        if (value === '[object Object]' || value === 'null') {
+          delete student[key];
         }
       }
-      student.name = [row.firstName, row.middleName, row.lastName].filter(Boolean).join(' ');
 
-      try {
-        await addStudent(student);
-        successCount++;
-      } catch (error) {
-        console.error('Error adding student:', error);
-        failCount++;
+      // Only add student if there's actual data
+      if (Object.keys(student).length > 1) {  // > 1 because we always have 'name'
+        try {
+          await addStudent(student);
+          successCount++;
+        } catch (error) {
+          console.error('Error adding student:', error);
+          failCount++;
+        }
       }
     }
 
