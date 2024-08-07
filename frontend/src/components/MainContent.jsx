@@ -9,7 +9,7 @@ const MainContent = ({ user, studentFormRef, addStudent, students, deleteStudent
     <div>
       <UserInfo user={user} />
       <Togglable buttonLabel='New Student' ref={studentFormRef}>
-        <StudentForm createStudent={addStudent} studentFormRef={studentFormRef} />
+        <StudentForm addStudent={addStudent} studentFormRef={studentFormRef} />
       </Togglable>
       <StudentList students={students} handleDelete={deleteStudent} />
     </div>

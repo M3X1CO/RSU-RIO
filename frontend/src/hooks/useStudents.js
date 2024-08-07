@@ -23,10 +23,11 @@ const useStudents = (user) => {
 
   const addStudent = (studentObject) => {
     console.log('addStudent called with:', studentObject)
-    studentsService
+    return studentsService  // Make sure to return the Promise
       .create(studentObject)
       .then(returnedStudent => {
-        setStudents([...students, returnedStudent])
+        setStudents(students => [...students, returnedStudent])
+        return returnedStudent  // Return the created student
       })
       .catch(error => {
         console.error('Error adding student:', error)
@@ -34,6 +35,7 @@ const useStudents = (user) => {
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
+        throw error  // Re-throw the error to be caught in StudentForm
       })
   }
 
