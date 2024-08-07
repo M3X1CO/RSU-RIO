@@ -1,15 +1,10 @@
-// StudentDetails.jsx
-import React from 'react';
+import React, { useState } from 'react';
 
 const ITEMS_PER_PAGE = 15;
 
-const StudentDetails = ({ 
-  student, 
-  handleInputChange, 
-  isEditable = false, 
-  currentPage, 
-  setCurrentPage 
-}) => {
+const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const studentEntries = Object.entries(student).filter(([key, value]) => 
     typeof value !== 'object' && typeof value !== 'function'
   );
@@ -33,7 +28,7 @@ const StudentDetails = ({
                 {isEditable ? (
                   <input
                     type="text"
-                    value={value || ''}
+                    value={value}
                     onChange={(e) => handleInputChange(key, e.target.value)}
                   />
                 ) : (

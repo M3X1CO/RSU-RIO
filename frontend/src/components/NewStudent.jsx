@@ -1,8 +1,22 @@
 import React, { useState } from 'react';
 import StudentDetails from './StudentDetails';
 
+const generateInitialStudentData = () => {
+  return {
+    name: '',
+    originalPassportNumber: '',
+    dateOfBirth: '',
+    nationality: '',
+    gender: '',
+    course: '',
+    startDate: '',
+    endDate: '',
+    // Add all other fields you need for a student, initialized to empty strings
+  };
+};
+
 const NewStudent = () => {
-  const [studentData, setStudentData] = useState({});
+  const [studentData, setStudentData] = useState(generateInitialStudentData());
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleInputChange = (key, value) => {
