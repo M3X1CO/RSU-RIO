@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import StudentFields from './StudentFields'
+import StudentDetails from './StudentDetails'
 import '../index.css'
 
 const Student = ({ student, handleDelete }) => {
@@ -24,12 +24,7 @@ const Student = ({ student, handleDelete }) => {
       <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
-      {showDetails && (
-        <div className="student-details">
-          <h3>Student Details</h3>
-          <StudentFields student={student} />
-        </div>
-      )}
+      {showDetails && <StudentDetails student={student} />}
       <button onClick={confirmDelete} className="delete-button">Delete</button>
     </li>
   )
