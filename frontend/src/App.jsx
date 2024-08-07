@@ -30,7 +30,7 @@ const App = () => {
           deleteStudent={deleteStudent}
         />
       }
-      <Footer />
+      <Footer addStudent={addStudent} />
     </div>
   )
 }
