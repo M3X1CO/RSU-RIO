@@ -1,5 +1,5 @@
 // NewStudent.jsx
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import StudentDetails from './StudentDetails';
 import { initialStudentState } from './InitialStudentState';
 
@@ -7,17 +7,26 @@ const NewStudent = () => {
   const [student, setStudent] = useState(initialStudentState);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleInputChange = (key, value) => {
+  // Use useCallback to memoize these functions
+  const handleInputChange = useCallback((key, value) => {
+    console.log(`Updating ${key} to ${value}`);
     setStudent(prevStudent => ({
       ...prevStudent,
       [key]: value
     }));
-  };
+  }, []);
 
-  const handleSave = () => {
-    // Implement your save logic here
+  const handleSetCurrentPage = useCallback((page) => {
+    console.log(`Setting current page to ${page}`);
+    setCurrentPage(page);
+  }, []);
+
+  const handleSave = useCallback(() => {
     console.log('Saving student:', student);
-  };
+    // Implement your save logic here
+  }, [student]);
+
+  console.log('Rendering NewStudent component', { student, currentPage });
 
   return (
     <div>
@@ -27,7 +36,7 @@ const NewStudent = () => {
         handleInputChange={handleInputChange}
         isEditable={true}
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        setCurrentPage={handleSetCurrentPage}
       />
       <button onClick={handleSave}>Save Student</button>
     </div>
