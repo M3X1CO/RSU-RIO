@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { initialStudentState } from './InitialStudentState'
 import StudentDetails from './StudentDetails'
 
-const StudentForm = ({ addStudent, studentFormRef }) => {
+const StudentForm = ({ createStudent, studentFormRef }) => {
   const [newStudent, setNewStudent] = useState(initialStudentState)
 
   const handleInputChange = (key, value) => {
@@ -21,9 +21,9 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
     })
   }
 
-  const handleSubmit = (event) => {
+  const addStudent = (event) => {
     event.preventDefault()
-    addStudent(newStudent)
+    createStudent(newStudent)
     setNewStudent(initialStudentState)
     studentFormRef.current.toggleVisibility()
   }
@@ -32,7 +32,7 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
     <div className="student-form">
       <h2>Create a new Student</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addStudent}>
         <StudentDetails 
           student={newStudent} 
           handleInputChange={handleInputChange} 

@@ -5,8 +5,6 @@ const ITEMS_PER_PAGE = 15;
 const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log('StudentDetails props:', { student, handleInputChange, isEditable });
-
   const studentEntries = Object.entries(student).filter(([key, value]) => 
     typeof value !== 'object' && typeof value !== 'function'
   );
@@ -20,7 +18,6 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
 
   const handlePageChange = (e, page) => {
     e.preventDefault(); 
-    console.log(`Setting current page to ${page}`);
     setCurrentPage(page);
   };
 
