@@ -8,7 +8,6 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   // Filter out non-primitive values
   const studentEntries = Object.entries(student).filter(([key, value]) => {
     const isValid = typeof value !== 'object' && typeof value !== 'function';
-    console.log(`Filtering entry: ${key} with value: ${value}, isValid: ${isValid}`);
     return isValid;
   });
 
