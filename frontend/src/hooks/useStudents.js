@@ -8,34 +8,25 @@ const useStudents = (user) => {
   useEffect(() => {
     if (user) {
       studentsService.getAll()
-        .then(initialStudents => {
-          setStudents(initialStudents)
-        })
+        .then(initialStudents => setStudents(initialStudents))
         .catch(error => {
-          console.error('Error fetching students:', error)
           setErrorMessage('Failed to fetch students')
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 5000)
+          setTimeout(() => setErrorMessage(null), 5000)
         })
     }
   }, [user])
 
   const addStudent = (studentObject) => {
-    console.log('addStudent called with:', studentObject)
-    return studentsService  // Make sure to return the Promise
+    return studentsService
       .create(studentObject)
       .then(returnedStudent => {
         setStudents(students => [...students, returnedStudent])
-        return returnedStudent  // Return the created student
+        return returnedStudent
       })
       .catch(error => {
-        console.error('Error adding student:', error)
         setErrorMessage('Failed to add student')
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
-        throw error  // Re-throw the error to be caught in StudentForm
+        setTimeout(() => setErrorMessage(null), 5000)
+        throw error
       })
   }
 
@@ -45,11 +36,8 @@ const useStudents = (user) => {
         await studentsService.remove(id)
         setStudents(students.filter(student => student.id !== id))
       } catch (error) {
-        console.error('Error deleting student:', error)
         setErrorMessage('Failed to delete student')
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
+        setTimeout(() => setErrorMessage(null), 5000)
       }
     }
   }
