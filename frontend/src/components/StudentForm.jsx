@@ -25,6 +25,7 @@ const StudentForm = ({ createStudent }) => {
     event.preventDefault()
     createStudent(newStudent)
     setNewStudent(initialStudentState)
+    studentFormRef.current.toggleVisibility()
   }
 
   return (
