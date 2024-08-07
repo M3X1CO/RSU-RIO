@@ -7,12 +7,6 @@ const Student = ({ student, handleDelete }) => {
 
   const toggleDetails = () => setShowDetails(!showDetails)
 
-  const confirmDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${student.name}?`)) {
-      handleDelete(student.id)
-    }
-  }
-
   return (
     <li className='student'>
       <p>
