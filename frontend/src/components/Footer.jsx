@@ -1,10 +1,10 @@
 import React from 'react';
-import CSVImporter from './CSVImporter';
+import XLSXImporter from './XLSXImporter';
 
 const Footer = ({ addStudent }) => {
   return (
     <footer className="footer">
-      <CSVImporter addStudent={addStudent} />
+      <XLSXImporter addStudent={addStudent} />
       <div className="copyright">
         <em>Student Management App, Department of Computer Science, Rangsit University 2024</em>
       </div>
