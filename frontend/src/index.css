@@ -1,85 +1,111 @@
-.student-details table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .student-details td {
-    padding: 8px;
-    border-bottom: 1px solid #a0a0a0;
-  }
-  
-  .student-details tr:nth-child(even) {
-    background-color: #979694;
-  }
+:root {
+  --color-background: #33332d;
+  --color-text-primary: #ffefd5;
+  --color-text-secondary: #a0a0a0;
+  --color-row-even: #979694;
+  --color-row-odd: #a0a0a0;
+  --color-hover: #33332d;
+  --color-button: #212121;
+  --color-button-text: #a0a0a0;
+  --color-border: #ffefd5;
+  --color-active: #007bff;
+}
 
-  .student-details tr:nth-child(odd) {
-    background-color: #a0a0a0;
-  }
-  
-  .student-details tr:hover {
-    background-color: #33332d;
-  }
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
 
-  :root {
-    --color-background: #33332d;
-  }
-  
-  body {
-    background-color: var(--color-background);
-  }
+.user-info {
+  display: flex;
+  justify-content: flex-end;
+  color: #979684;
+  padding: 10px;
+}
 
-  .user-info {
-    display: flex;
-    justify-content: flex-end;
-    color: #979684;
-    padding: 10px; 
-  }
-  
-  .icon {
-    font-size: 18px; 
-    font-weight: bold;
-  }
+.icon {
+  font-size: 18px;
+  font-weight: bold;
+}
 
-  button {
-    background-color: #212121; 
-    color: #a0a0a0; 
-    border: none; 
-    padding: 10px 20px;
-    font-size: 16px; 
-    cursor: pointer; 
-  }
-  
-  button:hover {
-    opacity: 0.8; 
-  }
+button {
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-/* Work todo */
-
-.student {
-  /* Add any styles specific to the student list item */
+button:hover {
+  opacity: 0.8;
 }
 
 .label {
-  font-weight: bold; /* Replaces the strong element's functionality */
-  color: #a0a0a0
+  font-weight: bold;
+  color: var(--color-text-secondary);
 }
 
 .student-name,
 .student-passport {
-  color: #ffefd5
+  color: var(--color-text-primary);
 }
 
-.toggle-details-button {
-  /* Add any styles for the toggle details button */
+.student-details table,
+.student-fields {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.student-details {
-  /* Add any styles for the student details section */
+.student-details td,
+.student-fields td {
+  padding: 8px;
+  border-bottom: 1px solid var(--color-border);
 }
 
-.delete-button {
-  /* Add any styles for the delete button */
+.student-details tr:nth-child(even),
+.student-fields tr:nth-child(even) {
+  background-color: var(--color-row-even);
 }
 
-  
-  
+.student-details tr:nth-child(odd),
+.student-fields tr:nth-child(odd) {
+  background-color: var(--color-row-odd);
+}
+
+.student-details tr:hover,
+.student-fields tr:hover {
+  background-color: var(--color-hover);
+}
+
+.student-fields input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.pagination button.active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
