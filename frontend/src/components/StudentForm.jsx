@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { initialStudentState } from './InitialStudentState'
 import StudentDetails from './StudentDetails'
 
-const StudentForm = ({ createStudent }) => {
+const StudentForm = ({ createStudent, studentFormRef }) => {
   const [newStudent, setNewStudent] = useState(initialStudentState)
 
   const handleInputChange = (key, value) => {
