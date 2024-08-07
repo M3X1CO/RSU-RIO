@@ -1,41 +1,29 @@
+// NewStudent.jsx
 import React, { useState } from 'react';
 import StudentDetails from './StudentDetails';
-
-const generateInitialStudentData = () => {
-  return {
-    name: '',
-    originalPassportNumber: '',
-    dateOfBirth: '',
-    nationality: '',
-    gender: '',
-    course: '',
-    startDate: '',
-    endDate: '',
-    // Add all other fields you need for a student, initialized to empty strings
-  };
-};
+import { initialStudentState } from './InitialStudentState';
 
 const NewStudent = () => {
-  const [studentData, setStudentData] = useState(generateInitialStudentData());
+  const [student, setStudent] = useState(initialStudentState);
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleInputChange = (key, value) => {
-    setStudentData(prevData => ({
-      ...prevData,
+    setStudent(prevStudent => ({
+      ...prevStudent,
       [key]: value
     }));
   };
 
   const handleSave = () => {
     // Implement your save logic here
-    console.log('Saving student data:', studentData);
+    console.log('Saving student:', student);
   };
 
   return (
     <div>
       <h2>Create New Student</h2>
       <StudentDetails 
-        student={studentData}
+        student={student}
         handleInputChange={handleInputChange}
         isEditable={true}
         currentPage={currentPage}
