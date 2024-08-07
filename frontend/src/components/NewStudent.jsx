@@ -14,20 +14,25 @@ const NewStudent = () => {
     }));
   }, []);
 
-  const handleSave = useCallback(() => {
+  const handleSave = useCallback((e) => {
+    e.preventDefault(); // Prevent form submission
     console.log('Saving student:', student);
     // Implement your save logic here
+    // For example:
+    // postStudentData(student);
   }, [student]);
 
   return (
     <div>
       <h2>Create New Student</h2>
-      <StudentDetails 
-        student={student}
-        handleInputChange={handleInputChange}
-        isEditable={true}
-      />
-      <button onClick={handleSave}>Save Student</button>
+      <form onSubmit={handleSave}>
+        <StudentDetails 
+          student={student}
+          handleInputChange={handleInputChange}
+          isEditable={true}
+        />
+        <button type="submit">Save Student</button>
+      </form>
     </div>
   );
 };
