@@ -4,6 +4,7 @@ import StudentDetails from './StudentDetails'
 
 const StudentForm = ({ addStudent, studentFormRef }) => {
   const [newStudent, setNewStudent] = useState(initialStudentState)
+  const [error, setError] = useState(null)
 
   const handleInputChange = (key, value) => {
     setNewStudent(prevState => {
@@ -21,16 +22,26 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    addStudent(newStudent)
-    setNewStudent(initialStudentState)
-    studentFormRef.current.toggleVisibility()
+    try {
+      await addStudent(newStudent)
+      setNewStudent(initialStudentState)
+      if (studentFormRef.current) {
+        studentFormRef.current.toggleVisibility()
+      }
+    } catch (err) {
+      console.error('Error adding student:', err)
+      setError('Failed to add student. Please try again.')
+      setTimeout(() => setError(null), 5000)
+    }
   }
 
   return (
     <div className="student-form">
       <h2>Create a new Student</h2>
+
+      {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
         <StudentDetails 
