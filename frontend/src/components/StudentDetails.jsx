@@ -5,7 +5,6 @@ const ITEMS_PER_PAGE = 15;
 const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter out non-primitive values
   const studentEntries = Object.entries(student).filter(([key, value]) => {
     const isValid = typeof value !== 'object' && typeof value !== 'function';
     return isValid;
@@ -18,7 +17,6 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const currentFields = studentEntries.slice(start, end);
 
   const handlePageChange = (e, page) => {
-    console.log(`handlePageChange called with e: ${e} and page: ${page}`);
     e.preventDefault();
     setCurrentPage(page);
   };

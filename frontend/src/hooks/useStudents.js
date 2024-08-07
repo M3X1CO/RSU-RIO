@@ -22,6 +22,7 @@ const useStudents = (user) => {
   }, [user])
 
   const addStudent = (studentObject) => {
+    console.log('addStudent called with:', studentObject)
     studentsService
       .create(studentObject)
       .then(returnedStudent => {

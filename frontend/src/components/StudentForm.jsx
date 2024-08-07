@@ -7,6 +7,7 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
   const [error, setError] = useState(null)
 
   const handleInputChange = (key, value) => {
+    console.log('handleInputChange called with key:', key, 'and value:', value)
     setNewStudent(prevState => {
       const updatedState = { ...prevState, [key]: value }
       
@@ -23,8 +24,10 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
   }
 
   const handleSubmit = async (event) => {
+    console.log('handleSubmit called with event:', event)
     event.preventDefault()
     try {
+      console.log('Calling addStudent with newStudent:', newStudent)
       await addStudent(newStudent)
       setNewStudent(initialStudentState)
       if (studentFormRef.current) {
