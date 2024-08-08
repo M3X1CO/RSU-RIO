@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      <Header user={user} logout={logout} />
 
       <Notification message={errorMessage} />
 
