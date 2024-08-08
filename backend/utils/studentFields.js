@@ -104,6 +104,7 @@ const studentFields = {
   facultyOrCollege: String,
   semesterIntake: String,
   academicYearIntake: String,
+  hiddenField: String,
   depositAmount: String,
   lessPaymentAmount: String,
   programDuration: String,
