@@ -241,6 +241,22 @@ input[type="file"] {
   color: #CD5C5C
 }
 
+/* Responsive search */
+
+@media (max-width: 1000px) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    margin: 10px 0; 
+    width: 100%; 
+  }
+}
+
+/* Responsive buttons */
+
 @media (max-width: 1000px) {
   .student-content {
     flex-direction: column;
