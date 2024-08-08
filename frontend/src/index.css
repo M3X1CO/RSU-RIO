@@ -274,6 +274,19 @@ input[type="file"] {
   }
 }
 
+/* Responsive footer */
+
+@media (max-width: 1000px) {
+  .footer {
+    padding: 15px;
+  }
+
+  .copyright {
+    font-size: 12px; /* Slightly smaller text for better fit */
+    margin-top: 8px;
+  }
+}
+
 .pastelPinks {
   color: #F08080; /* Light Coral */
   color: #FA8072; /* Salmon */
