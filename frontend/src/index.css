@@ -68,14 +68,13 @@ button:hover {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--color-footer-background);
-  padding: 20px 0;
+  position: relative; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: papayawhip;
   text-align: center;
-  z-index: 2;
 }
 
 .copyright {
@@ -93,7 +92,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: #ffffff; 
+  background-color: papayawhip;
   padding: 5px; 
   border-radius: 5px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
