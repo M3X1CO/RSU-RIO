@@ -58,7 +58,7 @@ const XLSXImporter = ({ user }) => {
     const currentStudent = students[currentStudentIndex];
     try {
       const savedStudent = await addStudent(currentStudent);
-      console.log('Student saved successfully:', savedStudent);
+      window.location.reload()
 
       if (currentStudentIndex < students.length - 1) {
         setCurrentStudentIndex(prevIndex => prevIndex + 1);
