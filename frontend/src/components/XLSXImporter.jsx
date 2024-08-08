@@ -21,6 +21,11 @@ const XLSXImporter = ({ user }) => {
     const studentFields = Object.keys(initialStudentState);
   
     worksheet.eachRow((row, rowNumber) => {
+      // Check if the row is hidden
+      if (row.hidden) {
+        return; // Skip hidden rows
+      }
+  
       if (rowNumber > 1) { // Skip header row
         const studentData = {};
         studentFields.forEach((field, index) => {
@@ -63,7 +68,7 @@ const XLSXImporter = ({ user }) => {
     });
   
     setStudents(studentsData);
-  };
+  };  
 
   const handleInputChange = (key, value) => {
     setStudents(prevStudents => {
@@ -80,21 +85,22 @@ const XLSXImporter = ({ user }) => {
     const currentStudent = students[currentStudentIndex];
     try {
       const savedStudent = await addStudent(currentStudent);
-      window.location.reload()
-
+      
       if (currentStudentIndex < students.length - 1) {
         setCurrentStudentIndex(prevIndex => prevIndex + 1);
       } else {
         console.log('All students processed');
+        setStudents([]); 
       }
     } catch (error) {
       console.error('Failed to save student:', error);
     }
   };
-
   const handleCancel = () => {
-    window.location.reload()
+    setStudents([]);
+    setCurrentStudentIndex(0);
   };
+  
 
   return (
     <div>
