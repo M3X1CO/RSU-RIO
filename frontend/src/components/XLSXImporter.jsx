@@ -6,101 +6,100 @@ import useStudents from '../hooks/useStudents'
 import '../index.css'
 
 const XLSXImporter = ({ user }) => {
-  const [students, setStudents] = useState([]);
-  const [currentStudentIndex, setCurrentStudentIndex] = useState(0);
-  const { addStudent, errorMessage } = useStudents(user);
+  const [students, setStudents] = useState([])
+  const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
+  const { addStudent, errorMessage } = useStudents(user)
 
   const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    const workbook = new XLSX.Workbook();
-    await workbook.xlsx.load(file);
-  
-    const worksheet = workbook.getWorksheet(1);
-    const studentsData = [];
-  
-    const studentFields = Object.keys(initialStudentState);
-  
+    const file = event.target.files[0]
+    const workbook = new XLSX.Workbook()
+    await workbook.xlsx.load(file)
+
+    const worksheet = workbook.getWorksheet(1)
+    const studentsData = []
+
+    const studentFields = Object.keys(initialStudentState)
+
     worksheet.eachRow((row, rowNumber) => {
-      // Check if the row is hidden
       if (row.hidden) {
-        return; // Skip hidden rows
+        return
       }
-  
-      if (rowNumber > 1) { // Skip header row
-        const studentData = {};
+
+      if (rowNumber > 1) {
+        const studentData = {}
         studentFields.forEach((field, index) => {
           if (field === 'newPassportNumber') {
-            studentData[field] = ''; // Set newPassportNumber to an empty string
-            return; // Skip the rest of the loop iteration
+            studentData[field] = ''
+            return
           }
-  
-          const cell = row.getCell(index + 1);
-          let value = '';
-  
+
+          const cell = row.getCell(index + 1)
+          let value = ''
+
           if (cell && cell.value !== null && cell.value !== undefined) {
             switch (cell.type) {
               case XLSX.ValueType.String:
-                value = cell.text || '';
-                break;
+                value = cell.text || ''
+                break
               case XLSX.ValueType.Number:
-                value = cell.value !== null && cell.value !== undefined ? String(cell.value).trim() : '';
-                break;
+                value = cell.value !== null && cell.value !== undefined ? String(cell.value).trim() : ''
+                break
               case XLSX.ValueType.Date:
-                value = cell.text || ''; // Use cell.text for date formatting
-                break;
+                value = cell.text || ''
+                break
               case XLSX.ValueType.Boolean:
-                value = cell.value ? 'TRUE' : 'FALSE';
-                break;
+                value = cell.value ? 'TRUE' : 'FALSE'
+                break
               case XLSX.ValueType.Formula:
-                value = cell.result || ''; // Formula results
-                break;
+                value = cell.result || ''
+                break
               default:
-                value = ''; // Default case for unsupported types
-                break;
+                value = ''
+                break
             }
           }
-  
-          studentData[field] = value;
-        });
-  
-        studentsData.push(studentData);
+
+          studentData[field] = value
+        })
+
+        studentsData.push(studentData)
       }
-    });
-  
-    setStudents(studentsData);
-  };  
+    })
+
+    setStudents(studentsData)
+  }
 
   const handleInputChange = (key, value) => {
     setStudents(prevStudents => {
-      const updatedStudents = [...prevStudents];
+      const updatedStudents = [...prevStudents]
       updatedStudents[currentStudentIndex] = {
         ...updatedStudents[currentStudentIndex],
         [key]: value
-      };
-      return updatedStudents;
-    });
-  };
+      }
+      return updatedStudents
+    })
+  }
 
   const handleSaveStudent = async () => {
-    const currentStudent = students[currentStudentIndex];
+    const currentStudent = students[currentStudentIndex]
     try {
-      const savedStudent = await addStudent(currentStudent);
-      
+      await addStudent(currentStudent)
+
       if (currentStudentIndex < students.length - 1) {
-        setCurrentStudentIndex(prevIndex => prevIndex + 1);
+        setCurrentStudentIndex(prevIndex => prevIndex + 1)
       } else {
-        console.log('All students processed');
-        setStudents([]); 
+        console.log('All students processed')
+        setStudents([])
       }
     } catch (error) {
-      console.error('Failed to save student:', error);
+      console.error('Failed to save student:', error)
     }
-  };
+  }
+
   const handleCancel = () => {
-    setStudents([]);
-    setCurrentStudentIndex(0);
-  };
-  
+    setStudents([])
+    setCurrentStudentIndex(0)
+  }
 
   return (
     <div>
@@ -124,7 +123,7 @@ const XLSXImporter = ({ user }) => {
       )}
       {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
-  );
-};
+  )
+}
 
-export default XLSXImporter;
+export default XLSXImporter
