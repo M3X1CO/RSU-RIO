@@ -15,12 +15,15 @@
 html, body {
   height: 100%;
   margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 
 .main-content {
@@ -32,10 +35,9 @@ html, body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: papayawhip;
+  background-color: var(--color-footer-background);
   text-align: center;
 }
-
 
 .header-container {
   position: relative;
@@ -87,16 +89,6 @@ button:hover {
   color: var(--color-text-primary);
 }
 
-.footer {
-  position: relative; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: papayawhip;
-  text-align: center;
-}
-
 .copyright {
   color: var(--color-text-secondary);
   font-style: italic;
@@ -112,14 +104,12 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: papayawhip;
-  padding: 5px; 
-  border-radius: 5px; 
+  background-color: var(--color-footer-background);
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .user-info {
-  display: flex;
-  align-items: center;
   color: var(--color-text-secondary);
   margin-bottom: 5px;
 }
@@ -134,7 +124,7 @@ button:hover {
 }
 
 .student-details-wrapper {
-  padding-bottom: 60px; 
+  padding-bottom: 60px;
   margin-bottom: 20px;
   background-color: var(--color-background);
 }
@@ -189,21 +179,6 @@ input[type="file"] {
   color: var(--color-text-primary);
 }
 
-.user-info-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.user-info {
-  color: var(--color-text-secondary);
-  margin-bottom: 5px;
-}
-
 .search-container {
   display: flex;
   justify-content: center;
@@ -224,7 +199,7 @@ input[type="file"] {
 .search-input:focus {
   outline: none;
   border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0,123,255,.25);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
 }
 
 .student {
@@ -244,7 +219,7 @@ input[type="file"] {
 
 .button-container {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .student-details {
@@ -252,11 +227,10 @@ input[type="file"] {
 }
 
 .delete-button {
-  color: #CD5C5C
+  color: #CD5C5C;
 }
 
 /* Responsive search */
-
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;
@@ -264,13 +238,12 @@ input[type="file"] {
   }
 
   .search-input {
-    margin: 10px 0; 
-    width: 100%; 
+    margin: 10px 0;
+    width: 100%;
   }
 }
 
 /* Responsive buttons */
-
 @media (max-width: 1000px) {
   .student-content {
     flex-direction: column;
@@ -286,32 +259,4 @@ input[type="file"] {
   .button-container button {
     width: 100%;
   }
-}
-
-.pastelPinks {
-  color: #F08080; /* Light Coral */
-  color: #FA8072; /* Salmon */
-  color: #FF6347; /* Tomato */
-  color: #FFE4E1; /* Misty Rose */
-  color: #CD5C5C; /* Indian Red (Light) */
-  color: #FFA07A; /* Light Salmon */
-  color: #FF6961; /* Pastel Red */
-  color: #DB7093; /* Pale Violet Red */
-  color: #BC8F8F; /* Rosy Brown */
-  color: #E9967A; /* Dark Salmon */
-  color: #DC143C; /* Crimson */
-  color: #FFB6C1; /* Light Pink */
-  color: #FFC0CB; /* Pink */
-  color: #FF1493; /* Deep Pink */
-  color: #FF69B4; /* Hot Pink */
-  color: #FF9980; /* Vivid Tangerine */
-  color: #FF6961; /* Light Red */
-  color: #DE5D83; /* Blush */
-  color: #EFBBCC; /* Cameo Pink */
-  color: #FC6C85; /* Watermelon */
-  color: #F88379; /* Congo Pink */
-  color: #E18E96; /* Ruddy Pink */
-  color: #EF98AA; /* Mauvelous */
-  color: #E63E62; /* Paradise Pink */
-  color: #E97451; /* Burnt Sienna (Light) */
 }
