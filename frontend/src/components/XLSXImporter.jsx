@@ -32,14 +32,11 @@ const XLSXImporter = ({ user }) => {
       if (rowNumber > 1) { // Skip header row
         const studentData = {}
         studentFields.forEach((field, index) => {
-          if (field === 'newPassportNumber') {
-            studentData[field] = '' // Set newPassportNumber to an empty string
-            return // Skip the rest of the loop iteration
-          }
-
           const cellIndex = index + 1
+
+          // Skip hidden columns
           if (hiddenColumns.has(cellIndex)) {
-            return // Skip processing for hidden columns
+            return
           }
 
           const cell = row.getCell(cellIndex)
@@ -69,6 +66,13 @@ const XLSXImporter = ({ user }) => {
           }
 
           studentData[field] = value
+        })
+
+        // Fill in missing fields with default values
+        studentFields.forEach(field => {
+          if (!(field in studentData)) {
+            studentData[field] = initialStudentState[field] || ''
+          }
         })
 
         studentsData.push(studentData)
