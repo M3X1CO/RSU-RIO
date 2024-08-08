@@ -52,7 +52,7 @@ const Student = ({ student, handleDelete, handleUpdate }) => {
             {showDetails ? 'Hide Details' : 'Show Details'}
           </button>
           <button onClick={startEditing}>Edit</button>
-          <button onClick={confirmDelete}>Delete</button>
+          <button onClick={confirmDelete} className="delete-button">Delete</button>
         </div>
       </div>
       {showDetails && <StudentDetails student={student} />}

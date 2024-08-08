@@ -236,3 +236,35 @@ input[type="file"] {
 .student-details {
   margin-top: 10px;
 }
+
+.delete-button {
+  color: #CD5C5C
+}
+
+.pastelPinks {
+  color: #F08080; /* Light Coral */
+  color: #FA8072; /* Salmon */
+  color: #FF6347; /* Tomato */
+  color: #FFE4E1; /* Misty Rose */
+  color: #CD5C5C; /* Indian Red (Light) */
+  color: #FFA07A; /* Light Salmon */
+  color: #FF6961; /* Pastel Red */
+  color: #DB7093; /* Pale Violet Red */
+  color: #BC8F8F; /* Rosy Brown */
+  color: #E9967A; /* Dark Salmon */
+  color: #DC143C; /* Crimson */
+  color: #FFB6C1; /* Light Pink */
+  color: #FFC0CB; /* Pink */
+  color: #FF1493; /* Deep Pink */
+  color: #FF69B4; /* Hot Pink */
+  color: #FF9980; /* Vivid Tangerine */
+  color: #FF6961; /* Light Red */
+  color: #DE5D83; /* Blush */
+  color: #EFBBCC; /* Cameo Pink */
+  color: #FC6C85; /* Watermelon */
+  color: #F88379; /* Congo Pink */
+  color: #E18E96; /* Ruddy Pink */
+  color: #EF98AA; /* Mauvelous */
+  color: #E63E62; /* Paradise Pink */
+  color: #E97451; /* Burnt Sienna (Light) */
+}
