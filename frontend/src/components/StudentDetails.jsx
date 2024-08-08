@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import '../index.css'
 
 const ITEMS_PER_PAGE = 15
 

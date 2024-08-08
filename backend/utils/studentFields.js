@@ -12,7 +12,7 @@ const studentFields = {
   placeOfBirth: String,
   thaiIdNumber: String,
   status: String,
-  originalPassportOrThaiId: String,
+  oldPassportNumber: String,
   newPassportNumber: String,
   issueDate: String,
   expirationDateOld: String,
