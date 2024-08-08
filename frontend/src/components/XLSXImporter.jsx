@@ -21,16 +21,12 @@ const XLSXImporter = ({ user }) => {
     const studentFields = Object.keys(initialStudentState)
 
     worksheet.eachRow((row, rowNumber) => {
-      if (row.hidden) {
-        return
-      }
-
-      if (rowNumber > 1) {
+      if (rowNumber > 1) { // Skip header row
         const studentData = {}
         studentFields.forEach((field, index) => {
           if (field === 'newPassportNumber') {
-            studentData[field] = ''
-            return
+            studentData[field] = '' // Set newPassportNumber to an empty string
+            return // Skip the rest of the loop iteration
           }
 
           const cell = row.getCell(index + 1)
@@ -45,21 +41,23 @@ const XLSXImporter = ({ user }) => {
                 value = cell.value !== null && cell.value !== undefined ? String(cell.value).trim() : ''
                 break
               case XLSX.ValueType.Date:
-                value = cell.text || ''
+                value = cell.text || '' // Use cell.text for date formatting
                 break
               case XLSX.ValueType.Boolean:
                 value = cell.value ? 'TRUE' : 'FALSE'
                 break
               case XLSX.ValueType.Formula:
-                value = cell.result || ''
+                value = cell.result || '' // Formula results
                 break
               default:
-                value = ''
+                value = '' // Default case for unsupported types
                 break
             }
           }
 
-          studentData[field] = value
+          if (!row.hidden || cell.col.hidden) { // Skip hidden cells but not the entire row
+            studentData[field] = value
+          }
         })
 
         studentsData.push(studentData)
