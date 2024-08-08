@@ -88,10 +88,8 @@ const XLSXImporter = ({ user }) => {
             handleInputChange={handleInputChange}
             isEditable={true}
           />
-          <div>
-            <button onClick={handleSaveStudent}>Save Student</button>
-            <button onClick={handleCancel}>Cancel</button>
-          </div>
+
+          <button onClick={handleSaveStudent}>Save Student</button>
         </div>
       )}
       {errorMessage && <div className="error">{errorMessage}</div>}
