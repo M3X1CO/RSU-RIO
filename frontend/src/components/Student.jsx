@@ -49,12 +49,12 @@ const Student = ({ student, handleDelete, handleUpdate }) => {
         <span className='label'>Student's New Passport Number: </span>
         <span className='student-render'>{student.newPassportNumber}</span>
       </p>
-      <button onClick={toggleDetails} className="toggle-details-button">
+      <button onClick={toggleDetails} className="button-spacing">
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
       {showDetails && <StudentDetails student={student} />}
-      <button onClick={startEditing} className="edit-button">Edit</button>
-      <button onClick={confirmDelete} className="delete-button">Delete</button>
+      <button onClick={startEditing} className="button-spacing">Edit</button>
+      <button onClick={confirmDelete} className="button-spacing">Delete</button>
     </li>
   )
 }
