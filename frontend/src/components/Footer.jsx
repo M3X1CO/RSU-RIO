@@ -6,8 +6,8 @@ const Footer = ({ addStudent }) => {
     <footer className="footer">
       <XLSXImporter addStudent={addStudent} />
       <div className="copyright">
-        <em>Student Management App</em>
-        <em>Department of Computer Science</em>
+        <em>Student Management App<br/></em>
+        <em>Department of Computer Science<br/></em>
         <em>Rangsit University 2024</em>
       </div>
     </footer>
