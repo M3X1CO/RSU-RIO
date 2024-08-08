@@ -102,6 +102,14 @@ button:hover {
   margin-top: 10px;
 }
 
+.label {
+  color: var(--color-text-primary);
+}
+
+.student {
+  color: var(--color-text-primary);
+}
+
 .student-fields input {
   width: 100%;
   padding: 5px;
