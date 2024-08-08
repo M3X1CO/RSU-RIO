@@ -17,6 +17,8 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
           updatedState.lastName
         ].filter(Boolean).join(' ')
       }
+
+      updatedState.newPassportNumber = ''
       
       return updatedState
     })
