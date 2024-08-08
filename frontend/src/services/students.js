@@ -30,10 +30,4 @@ const remove = id => {
   return request.then(response => response.data)
 }
 
-const search = ({ oldPassportNumber, newPassportNumber }) => {
-  return axios.get(`${baseUrl}/search`, {
-    params: { oldPassportNumber, newPassportNumber }
-  }).then(response => response.data)
-}
-
 export default { getAll, create, update, remove, setToken, search }
