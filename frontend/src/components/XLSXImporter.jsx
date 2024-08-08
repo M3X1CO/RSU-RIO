@@ -70,6 +70,10 @@ const XLSXImporter = ({ user }) => {
     }
   };
 
+  const handleCancel = () => {
+    window.location.reload()
+  };
+
   return (
     <div>
       <label htmlFor="file-upload" className="custom-file-upload">
@@ -84,7 +88,10 @@ const XLSXImporter = ({ user }) => {
             handleInputChange={handleInputChange}
             isEditable={true}
           />
-          <button onClick={handleSaveStudent}>Save Student</button>
+          <div>
+            <button onClick={handleSaveStudent}>Save Student</button>
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
         </div>
       )}
       {errorMessage && <div className="error">{errorMessage}</div>}
