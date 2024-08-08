@@ -4,7 +4,6 @@ export const initialStudentState = {
   firstName: '',
   middleName: '',
   lastName: '',
-  name: '',
   sex: '',
   dateOfBirth: '',
   oldNationality: '',
@@ -118,5 +117,6 @@ export const initialStudentState = {
   acceptanceLetterIssueDate: '',
   firstPaymentTransfer: '',
   secondPaymentTransfer: '',
-  remarks2: ''
+  remarks2: '',
+  name: ''
 }

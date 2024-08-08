@@ -1,104 +1,85 @@
-import React, { useRef, useState } from 'react';
-import * as ExcelJS from 'exceljs';
+import React, { useState } from 'react'
+import * as XLSX from 'exceljs'
+import StudentDetails from './StudentDetails'
+import { initialStudentState } from './InitialStudentState'
+import useStudents from '../hooks/useStudents'  // Changed to default import
 
-const ExcelImporter = ({ addStudent }) => {
-  const fileInputRef = useRef(null);
-  const [importing, setImporting] = useState(false);
-  const [importStatus, setImportStatus] = useState('');
+const XLSXImporter = ({ user }) => {
+  const [students, setStudents] = useState([]);
+  const [currentStudentIndex, setCurrentStudentIndex] = useState(0);
+  const { addStudent, errorMessage } = useStudents(user);
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (file && (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || file.type === 'application/vnd.ms-excel')) {
-      setImporting(true);
-      setImportStatus('Importing...');
-      
-      const workbook = new ExcelJS.Workbook();
-      try {
-        await workbook.xlsx.load(file);
-        const worksheet = workbook.worksheets[0];
-        const jsonData = [];
+    const workbook = new XLSX.Workbook();
+    await workbook.xlsx.load(file);
 
-        // Get headers from the first row
-        const headers = worksheet.getRow(1).values.slice(1);  // slice to remove the first empty cell
+    const worksheet = workbook.getWorksheet(1);
+    const studentsData = [];
 
-        worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-          if (rowNumber > 1) { // Skip the header row
-            const rowData = {};
-            row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
-              const header = headers[colNumber - 1];
-              if (header) {
-                rowData[header] = cell.value || '';
-              }
-            });
-            if (Object.keys(rowData).length > 0) {
-              jsonData.push(rowData);
-            }
+    const studentFields = Object.keys(initialStudentState);
+
+    worksheet.eachRow((row, rowNumber) => {
+      if (rowNumber > 1) { // Skip the header row
+        const studentData = {};
+        row.eachCell((cell, colNumber) => {
+          if (colNumber <= studentFields.length) {
+            const field = studentFields[colNumber - 1];
+            studentData[field] = cell.value;
           }
         });
-
-        await handleParseComplete(jsonData);
-      } catch (error) {
-        console.error('Error parsing Excel file:', error);
-        setImportStatus('Error parsing Excel file. Please try again.');
+        studentsData.push(studentData);
       }
-    } else {
-      setImportStatus('Please upload an Excel file (.xlsx or .xls).');
-    }
-    setImporting(false);
+    });
+
+    setStudents(studentsData);
   };
 
-  const handleParseComplete = async (data) => {
-    let successCount = 0;
-    let failCount = 0;
+  const handleInputChange = (key, value) => {
+    setStudents(prevStudents => {
+      const updatedStudents = [...prevStudents];
+      updatedStudents[currentStudentIndex] = {
+        ...updatedStudents[currentStudentIndex],
+        [key]: value
+      };
+      return updatedStudents;
+    });
+  };
 
-    for (const row of data) {
-      const student = { ...row };
-      
-      // Combine firstName, middleName, and lastName into name
-      student.name = [student.firstName, student.middleName, student.lastName].filter(Boolean).join(' ');
-      
-      // Remove individual name fields if you don't want to keep them
-      delete student.firstName;
-      delete student.middleName;
-      delete student.lastName;
+  const handleSaveStudent = async () => {
+    const currentStudent = students[currentStudentIndex];
+    try {
+      const savedStudent = await addStudent(currentStudent);
+      console.log('Student saved successfully:', savedStudent);
 
-      // Remove any fields with '[object Object]' or 'null' values
-      for (const [key, value] of Object.entries(student)) {
-        if (value === '[object Object]' || value === 'null') {
-          delete student[key];
-        }
+      // Move to the next student
+      if (currentStudentIndex < students.length - 1) {
+        setCurrentStudentIndex(prevIndex => prevIndex + 1);
+      } else {
+        console.log('All students processed');
       }
-
-      // Only add student if there's actual data
-      if (Object.keys(student).length > 1) {  // > 1 because we always have 'name'
-        try {
-          await addStudent(student);
-          successCount++;
-        } catch (error) {
-          console.error('Error adding student:', error);
-          failCount++;
-        }
-      }
+    } catch (error) {
+      console.error('Failed to save student:', error);
     }
-
-    setImportStatus(`Import complete. ${successCount} students added, ${failCount} failed.`);
   };
 
   return (
     <div>
-      <input
-        type="file"
-        accept=".xlsx, .xls"
-        onChange={handleFileUpload}
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-      />
-      <button onClick={() => fileInputRef.current.click()} disabled={importing}>
-        {importing ? 'Importing...' : 'Import Students from Excel'}
-      </button>
-      {importStatus && <p>{importStatus}</p>}
+      <input type="file" onChange={handleFileUpload} accept=".xlsx" />
+      {students.length > 0 && (
+        <div>
+          <h2>Student {currentStudentIndex + 1} of {students.length}</h2>
+          <StudentDetails
+            student={students[currentStudentIndex]}
+            handleInputChange={handleInputChange}
+            isEditable={true}
+          />
+          <button onClick={handleSaveStudent}>Save Student</button>
+        </div>
+      )}
+      {errorMessage && <div className="error">{errorMessage}</div>}
     </div>
   );
 };
 
-export default ExcelImporter;
+export default XLSXImporter;
