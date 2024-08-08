@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = ({ user, logout }) => {
+const Header = () => {
   return (
     <div className="header-container">
       <div className="header-title">

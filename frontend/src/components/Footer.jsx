@@ -1,7 +1,7 @@
 import React from 'react';
 import XLSXImporter from './XLSXImporter';
 
-const Footer = ({ user, addStudent }) => {
+const Footer = ({ user, logout, addStudent }) => {
   return (
     <footer className="footer">
       <XLSXImporter addStudent={addStudent} />

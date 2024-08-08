@@ -47,7 +47,7 @@ const App = () => {
           setNewPassportSearch={setNewPassportSearch}
         />
       }
-      <Footer addStudent={ addStudent} user={user} logout={logout} />
+      <Footer addStudent={addStudent} user={user} logout={logout} />
     </div>
   )
 }
