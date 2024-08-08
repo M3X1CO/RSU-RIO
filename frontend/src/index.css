@@ -17,16 +17,21 @@ body {
   background-color: var(--color-background);
 }
 
+/* Header and User Info */
 .user-info {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   color: #979684;
   padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .icon {
   font-size: 18px;
   font-weight: bold;
+  margin-right: 8px;
 }
 
 button {
@@ -42,12 +47,85 @@ button:hover {
   opacity: 0.8;
 }
 
-.label {
-  font-weight: bold;
-  color: var(--color-text-secondary);
+.logout-button {
+  background-color: #f44336; /* Example color, change as needed */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-.student-name, .student-passport {
+.logout-button:hover {
+  background-color: #c62828; /* Darker shade for hover effect */
+}
+
+/* Header Styling */
+.header {
+  color: #979694;
+  font-style: italic;
+  font-size: 24px;
+  text-align: center;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+/* Pagination */
+.pagination-container {
+  position: sticky;
+  bottom: 20px;
+  background-color: var(--color-background);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.pagination button.active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
+
+/* Footer */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--color-footer-background);
+  padding: 20px 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.copyright {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Form Inputs and Tables */
+.student-fields input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
   color: var(--color-text-primary);
 }
 
@@ -83,64 +161,10 @@ button:hover {
   background-color: var(--color-hover);
 }
 
-.student-fields input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-}
-
-.pagination-container {
-  position: sticky;
-  bottom: 20px;
-  background-color: var(--color-background);
-  padding: 10px 0;
-  z-index: 1;
-}
-
-.pagination {
-  display: flex;
-  gap: 5px;
-}
-
-.pagination button {
-  padding: 5px 10px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-button);
-  color: var(--color-button-text);
-}
-
-.pagination button.active {
-  background-color: var(--color-active);
-  color: var(--color-text-primary);
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: var(--color-footer-background);
-  padding: 20px 0;
-  text-align: center;
-  z-index: 2;
-}
-
-.copyright {
-  color: var(--color-text-secondary);
-  font-style: italic;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-/* Hide the file input */
 input[type="file"] {
   display: none;
 }
 
-/* Style the label as a button */
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
@@ -152,28 +176,42 @@ input[type="file"] {
   text-align: center;
 }
 
-/* Add hover effect */
 .custom-file-upload:hover {
   opacity: 0.8;
 }
 
-/* Optionally, add an active state */
 .custom-file-upload:active {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
 
-/* Add or update styles for user-info */
-.user-info {
+/* Header Styling */
+.header-container {
+  position: relative;
+  padding: 10px;
+}
+
+.header-title {
+  color: #979694;
+  font-style: italic;
+  font-size: 24px;
+  text-align: center;
+}
+
+.user-info-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: right;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.icon {
-  margin-right: 8px;
+.user-info {
+  margin-bottom: 5px;
 }
 
-/* Add or update styles for logout-button */
 .logout-button {
   background-color: #f44336; /* Example color, change as needed */
   color: white;
@@ -187,5 +225,4 @@ input[type="file"] {
 .logout-button:hover {
   background-color: #c62828; /* Darker shade for hover effect */
 }
-
 
