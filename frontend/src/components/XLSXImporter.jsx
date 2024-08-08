@@ -30,6 +30,14 @@ const XLSXImporter = ({ user }) => {
 
     worksheet.eachRow((row, rowNumber) => {
       if (rowNumber > 1) { // Skip header row
+        const firstColumnCell = row.getCell(1)
+        const firstColumnValue = firstColumnCell ? firstColumnCell.text : ''
+        
+        // Skip rows where the first column is empty
+        if (!firstColumnValue.trim()) {
+          return
+        }
+
         const studentData = {}
         studentFields.forEach((field, index) => {
           const cellIndex = index + 1
