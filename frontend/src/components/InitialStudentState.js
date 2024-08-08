@@ -97,7 +97,7 @@ export const initialStudentState = {
   termsAndConditions: '',
   submissionId: '',
   name: '',
-  dateOfBirth: '',
+  DOB: '',
   passportNumber: '',
   contactAddress: '',
   programApplied: '',

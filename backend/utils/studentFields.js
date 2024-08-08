@@ -97,7 +97,7 @@ const studentFields = {
   termsAndConditions: String,
   submissionId: String,
   name: String,
-  dateOfBirth: String,
+  DOB: String,
   passportNumber: String,
   contactAddress: String,
   programApplied: String,
