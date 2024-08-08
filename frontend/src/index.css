@@ -163,28 +163,29 @@ input[type="file"] {
   color: var(--color-text-primary);
 }
 
-.header-user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-left: auto;
-}
-
+/* Add or update styles for user-info */
 .user-info {
-  margin-bottom: 10px; 
+  display: flex;
+  align-items: center;
 }
 
+.icon {
+  margin-right: 8px;
+}
+
+/* Add or update styles for logout-button */
 .logout-button {
-  background-color: #ff6f61;
+  background-color: #f44336; /* Example color, change as needed */
   color: white;
   border: none;
+  border-radius: 4px;
   padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .logout-button:hover {
-  background-color: #ff4a40;
+  background-color: #c62828; /* Darker shade for hover effect */
 }
+
 
