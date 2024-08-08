@@ -53,6 +53,7 @@ button:hover {
 .student-details-wrapper {
   padding-bottom: 60px; 
   margin-bottom: 20px;
+  background-color: var(--color-background);
 }
 
 .student-details {
