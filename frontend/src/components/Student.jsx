@@ -41,19 +41,21 @@ const Student = ({ student, handleDelete, handleUpdate }) => {
 
   return (
     <li className='student'>
-      <div className='student-info'>
-        <div><strong>Student's Name:</strong> {student.name}</div>
-        <div><strong>Student's Original Passport Number:</strong> {student.oldPassportNumber}</div>
-        <div><strong>Student's New Passport Number:</strong> {student.newPassportNumber}</div>
+      <div className='student-content'>
+        <div className='student-info'>
+          <div><strong>Student's Name:</strong> {student.name}</div>
+          <div><strong>Student's Original Passport Number:</strong> {student.oldPassportNumber}</div>
+          <div><strong>Student's New Passport Number:</strong> {student.newPassportNumber}</div>
+        </div>
+        <div className='button-container'>
+          <button onClick={toggleDetails}>
+            {showDetails ? 'Hide Details' : 'Show Details'}
+          </button>
+          <button onClick={startEditing}>Edit</button>
+          <button onClick={confirmDelete}>Delete</button>
+        </div>
       </div>
-      <div className='button-container'>
-        <button onClick={toggleDetails}>
-          {showDetails ? 'Hide Details' : 'Show Details'}
-        </button>
-        {showDetails && <StudentDetails student={student} />}
-        <button onClick={startEditing}>Edit</button>
-        <button onClick={confirmDelete}>Delete</button>
-      </div>
+      {showDetails && <StudentDetails student={student} />}
     </li>
   )
 }

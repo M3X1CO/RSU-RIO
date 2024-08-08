@@ -213,6 +213,17 @@ input[type="file"] {
   box-shadow: 0 0 0 2px rgba(0,123,255,.25);
 }
 
+.student {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
 .student-info {
   color: var(--color-text-secondary);
 }
@@ -220,5 +231,8 @@ input[type="file"] {
 .button-container {
   display: flex;
   gap: 10px; 
+}
+
+.student-details {
   margin-top: 10px;
 }
