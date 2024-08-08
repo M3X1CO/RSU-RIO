@@ -41,20 +41,19 @@ const Student = ({ student, handleDelete, handleUpdate }) => {
 
   return (
     <li className='student'>
-      <p>
-        <span className='label'>Student's Name: </span>
-        <span className='student-render'>{student.name}<br/></span>
-        <span className='label'>Student's Original Passport Number: </span>
-        <span className='student-render'>{student.oldPassportNumber}<br/></span>
-        <span className='label'>Student's New Passport Number: </span>
-        <span className='student-render'>{student.newPassportNumber}</span>
-      </p>
-      <button onClick={toggleDetails} className="button-spacing">
-        {showDetails ? 'Hide Details' : 'Show Details'}
-      </button>
-      {showDetails && <StudentDetails student={student} />}
-      <button onClick={startEditing} className="button-spacing">Edit</button>
-      <button onClick={confirmDelete} className="button-spacing">Delete</button>
+      <div className='student-info'>
+        <div><strong>Student's Name:</strong> {student.name}</div>
+        <div><strong>Student's Original Passport Number:</strong> {student.oldPassportNumber}</div>
+        <div><strong>Student's New Passport Number:</strong> {student.newPassportNumber}</div>
+      </div>
+      <div className='button-container'>
+        <button onClick={toggleDetails}>
+          {showDetails ? 'Hide Details' : 'Show Details'}
+        </button>
+        {showDetails && <StudentDetails student={student} />}
+        <button onClick={startEditing}>Edit</button>
+        <button onClick={confirmDelete}>Delete</button>
+      </div>
     </li>
   )
 }
