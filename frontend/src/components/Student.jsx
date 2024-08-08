@@ -43,9 +43,9 @@ const Student = ({ student, handleDelete, handleUpdate }) => {
     <li className='student'>
       <div className='student-content'>
         <div className='student-info'>
-          <div><strong>Student's Name:</strong> {student.name}</div>
-          <div><strong>Student's Original Passport Number:</strong> {student.oldPassportNumber}</div>
-          <div><strong>Student's New Passport Number:</strong> {student.newPassportNumber}</div>
+          <div><strong>Name:</strong> {student.name}</div>
+          <div><strong>Old Passport Number:</strong> {student.oldPassportNumber}</div>
+          <div><strong>New Passport Number:</strong> {student.newPassportNumber}</div>
         </div>
         <div className='button-container'>
           <button onClick={toggleDetails}>
