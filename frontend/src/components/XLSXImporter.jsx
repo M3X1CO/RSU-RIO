@@ -21,31 +21,22 @@ const XLSXImporter = ({ user }) => {
     const studentFields = Object.keys(initialStudentState)
     const hiddenColumns = new Set()
 
-    // Determine hidden columns
     worksheet.columns.forEach((col, index) => {
-      if (col.hidden) {
-        hiddenColumns.add(index + 1) // Excel columns are 1-based index
-      }
+      if (col.hidden) hiddenColumns.add(index + 1)
     })
 
     worksheet.eachRow((row, rowNumber) => {
-      if (rowNumber > 1) { // Skip header row
+      if (rowNumber > 1) {
         const firstColumnCell = row.getCell(1)
         const firstColumnValue = firstColumnCell ? firstColumnCell.text : ''
-        
-        // Skip rows where the first column is empty
-        if (!firstColumnValue.trim()) {
-          return
-        }
+
+        if (!firstColumnValue.trim()) return
 
         const studentData = {}
         studentFields.forEach((field, index) => {
           const cellIndex = index + 1
 
-          // Skip hidden columns
-          if (hiddenColumns.has(cellIndex)) {
-            return
-          }
+          if (hiddenColumns.has(cellIndex)) return
 
           const cell = row.getCell(cellIndex)
           let value = ''
@@ -59,28 +50,24 @@ const XLSXImporter = ({ user }) => {
                 value = cell.value !== null && cell.value !== undefined ? String(cell.value).trim() : ''
                 break
               case XLSX.ValueType.Date:
-                value = cell.text || '' // Use cell.text for date formatting
+                value = cell.text || ''
                 break
               case XLSX.ValueType.Boolean:
                 value = cell.value ? 'TRUE' : 'FALSE'
                 break
               case XLSX.ValueType.Formula:
-                value = cell.result || '' // Formula results
+                value = cell.result || ''
                 break
               default:
-                value = '' // Default case for unsupported types
-                break
+                value = ''
             }
           }
 
           studentData[field] = value
         })
 
-        // Fill in missing fields with default values
         studentFields.forEach(field => {
-          if (!(field in studentData)) {
-            studentData[field] = initialStudentState[field] || ''
-          }
+          if (!(field in studentData)) studentData[field] = initialStudentState[field] || ''
         })
 
         studentsData.push(studentData)
@@ -134,7 +121,7 @@ const XLSXImporter = ({ user }) => {
           <StudentDetails
             student={students[currentStudentIndex]}
             handleInputChange={handleInputChange}
-            isEditable={true}
+            isEditable
           />
           <div>
             <button onClick={handleSaveStudent}>Save Student</button>
