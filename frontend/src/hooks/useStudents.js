@@ -42,7 +42,21 @@ const useStudents = (user) => {
     }
   }
 
-  return { students, errorMessage, addStudent, deleteStudent }
+  const updateStudent = async (updatedStudent) => {
+    try {
+      const returnedStudent = await studentsService.update(updatedStudent.id, updatedStudent)
+      setStudents(students.map(student => 
+        student.id !== updatedStudent.id ? student : returnedStudent
+      ))
+      return returnedStudent
+    } catch (error) {
+      setErrorMessage('Failed to update student')
+      setTimeout(() => setErrorMessage(null), 5000)
+      throw error
+    }
+  }
+
+  return { students, errorMessage, addStudent, deleteStudent, updateStudent }
 }
 
 export default useStudents

@@ -9,14 +9,20 @@ import useAuth from './hooks/useAuth'
 
 const App = () => {
   const { user, errorMessage: authError, login, logout } = useAuth()
-  const { students, errorMessage: studentError, addStudent, deleteStudent } = useStudents(user)
+  const { 
+    students, 
+    errorMessage: studentError, 
+    addStudent, 
+    deleteStudent, 
+    updateStudent 
+  } = useStudents(user)
   const studentFormRef = useRef()
   const [oldPassportSearch, setOldPassportSearch] = useState('')
   const [newPassportSearch, setNewPassportSearch] = useState('')
 
   const errorMessage = authError || studentError
 
-  const filteredStudents = students.filter(student => 
+  const filteredStudents = students.filter(student =>
     student.oldPassportNumber.toLowerCase().includes(oldPassportSearch.toLowerCase()) &&
     student.newPassportNumber.toLowerCase().includes(newPassportSearch.toLowerCase())
   )
@@ -24,7 +30,6 @@ const App = () => {
   return (
     <div>
       <Header user={user} logout={logout} />
-
       <Notification message={errorMessage} />
 
       {!user && <LoginFormWrapper handleLogin={login} />}
@@ -35,6 +40,7 @@ const App = () => {
           addStudent={addStudent}
           students={filteredStudents}
           deleteStudent={deleteStudent}
+          updateStudent={updateStudent}
           oldPassportSearch={oldPassportSearch}
           newPassportSearch={newPassportSearch}
           setOldPassportSearch={setOldPassportSearch}

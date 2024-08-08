@@ -1,13 +1,42 @@
 import React, { useState } from 'react'
 import StudentDetails from './StudentDetails'
+import EditStudent from './EditStudent'
 
-const Student = ({ student, handleDelete }) => {
+const Student = ({ student, handleDelete, handleUpdate }) => {
   const [showDetails, setShowDetails] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
 
   const toggleDetails = () => setShowDetails(!showDetails)
 
   const confirmDelete = () => {
-      handleDelete(student.id)
+    handleDelete(student.id)
+  }
+
+  const startEditing = () => {
+    setIsEditing(true)
+  }
+
+  const cancelEditing = () => {
+    setIsEditing(false)
+  }
+
+  const handleStudentUpdate = async (updatedStudent) => {
+    try {
+      await handleUpdate(updatedStudent)
+      setIsEditing(false)
+    } catch (error) {
+      console.error('Error updating student:', error)
+    }
+  }
+
+  if (isEditing) {
+    return (
+      <EditStudent 
+        student={student} 
+        handleUpdate={handleStudentUpdate} 
+        handleCancel={cancelEditing} 
+      />
+    )
   }
 
   return (
@@ -24,6 +53,7 @@ const Student = ({ student, handleDelete }) => {
         {showDetails ? 'Hide Details' : 'Show Details'}
       </button>
       {showDetails && <StudentDetails student={student} />}
+      <button onClick={startEditing} className="edit-button">Edit</button>
       <button onClick={confirmDelete} className="delete-button">Delete</button>
     </li>
   )

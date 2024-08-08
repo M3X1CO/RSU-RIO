@@ -4,12 +4,13 @@ import StudentForm from './StudentForm'
 import StudentList from './StudentList'
 import Search from './Search'
 
-const MainContent = ({ 
-  user, 
-  studentFormRef, 
-  addStudent, 
-  students, 
+const MainContent = ({
+  user,
+  studentFormRef,
+  addStudent,
+  students,
   deleteStudent,
+  updateStudent,
   oldPassportSearch,
   newPassportSearch,
   setOldPassportSearch,
@@ -18,15 +19,19 @@ const MainContent = ({
   return (
     <div>
       <Search 
-        oldPassportSearch={oldPassportSearch}
-        newPassportSearch={newPassportSearch}
-        setOldPassportSearch={setOldPassportSearch}
-        setNewPassportSearch={setNewPassportSearch}
+        oldPassportSearch={oldPassportSearch} 
+        newPassportSearch={newPassportSearch} 
+        setOldPassportSearch={setOldPassportSearch} 
+        setNewPassportSearch={setNewPassportSearch} 
       />
       <Togglable buttonLabel='New Student' ref={studentFormRef}>
         <StudentForm addStudent={addStudent} studentFormRef={studentFormRef} />
       </Togglable>
-      <StudentList students={students} handleDelete={deleteStudent} />
+      <StudentList 
+        students={students} 
+        handleDelete={deleteStudent} 
+        handleUpdate={updateStudent}
+      />
     </div>
   )
 }
