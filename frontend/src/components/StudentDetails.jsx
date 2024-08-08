@@ -23,52 +23,54 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   }
 
   return (
-    <div className="student-details">
-      {!isEditable && <h3>Student Details</h3>}
-      <form onSubmit={(e) => e.preventDefault()}>
-        <table className="student-fields">
-          <tbody>
-            {currentFields.map(([key, value]) => (
-              <tr key={key}>
-                <td>{key}:</td>
-                <td>
-                  {isEditable ? (
-                    <input
-                      type="text"
-                      value={value || ''}
-                      onChange={(e) => {
-                        try {
-                          handleInputChange(key, e.target.value)
-                        } catch (error) {
-                          console.error('Error handling input change:', error)
-                        }
-                      }}
-                    />
-                  ) : (
-                    String(value || '')
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {pageCount > 1 && (
-          <div className="pagination-container">
-            <div className="pagination">
-              {Array.from({ length: pageCount }, (_, i) => i + 1).map(page => (
-                <button
-                  key={page}
-                  onClick={(e) => handlePageChange(e, page)}
-                  className={currentPage === page ? 'active' : ''}
-                  type="button"
-                >
-                  {page}
-                </button>
+    <div className="student-details-wrapper">
+      <div className="student-details">
+        {!isEditable && <h3>Student Details</h3>}
+        <form onSubmit={(e) => e.preventDefault()}>
+          <table className="student-fields">
+            <tbody>
+              {currentFields.map(([key, value]) => (
+                <tr key={key}>
+                  <td>{key}:</td>
+                  <td>
+                    {isEditable ? (
+                      <input
+                        type="text"
+                        value={value || ''}
+                        onChange={(e) => {
+                          try {
+                            handleInputChange(key, e.target.value)
+                          } catch (error) {
+                            console.error('Error handling input change:', error)
+                          }
+                        }}
+                      />
+                    ) : (
+                      String(value || '')
+                    )}
+                  </td>
+                </tr>
               ))}
-            </div>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      {pageCount > 1 && (
+        <div className="pagination-container">
+          <div className="pagination">
+            {Array.from({ length: pageCount }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                onClick={(e) => handlePageChange(e, page)}
+                className={currentPage === page ? 'active' : ''}
+                type="button"
+              >
+                {page}
+              </button>
+            ))}
           </div>
-        )}
-      </form>
+        </div>
+      )}
     </div>
   )
 }

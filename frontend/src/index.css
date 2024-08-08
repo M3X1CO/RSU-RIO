@@ -13,8 +13,7 @@
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+  padding-bottom: 100px; 
 }
 
 .user-info {
@@ -83,9 +82,11 @@ button:hover {
 }
 
 .pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  position: sticky;
+  bottom: 20px;
+  background-color: var(--color-background);
+  padding: 10px 0;
+  z-index: 1;
 }
 
 .pagination {
@@ -113,6 +114,7 @@ button:hover {
   background-color: var(--color-footer-background);
   padding: 20px 0;
   text-align: center;
+  z-index: 2;
 }
 
 .copyright {
