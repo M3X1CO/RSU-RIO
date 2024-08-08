@@ -118,8 +118,7 @@ const studentFields = {
   acceptanceLetterIssueDate: String,
   firstPaymentTransfer: String,
   secondPaymentTransfer: String,
-  remarks2: String,
-  name: String
+  remarks2: String
 }
 
 module.exports = studentFields;

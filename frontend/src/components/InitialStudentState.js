@@ -118,5 +118,4 @@ export const initialStudentState = {
   firstPaymentTransfer: '',
   secondPaymentTransfer: '',
   remarks2: '',
-  name: ''
 }
