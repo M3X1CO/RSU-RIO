@@ -1,13 +1,11 @@
 import React from 'react'
 import Togglable from './Togglable'
 import StudentForm from './StudentForm'
-import UserInfo from './UserInfo'
 import StudentList from './StudentList'
 
 const MainContent = ({ user, studentFormRef, addStudent, students, deleteStudent }) => {
   return (
     <div>
-      <UserInfo user={user} />
       <Togglable buttonLabel='New Student' ref={studentFormRef}>
         <StudentForm addStudent={addStudent} studentFormRef={studentFormRef} />
       </Togglable>

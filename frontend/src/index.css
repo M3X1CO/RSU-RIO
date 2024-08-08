@@ -17,7 +17,6 @@ body {
   background-color: var(--color-background);
 }
 
-/* Header Styling */
 .header-container {
   position: relative;
   padding: 10px;
@@ -54,7 +53,7 @@ body {
 }
 
 .logout-button {
-  background-color: #f44336; /* Example color, change as needed */
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 4px;
@@ -64,10 +63,9 @@ body {
 }
 
 .logout-button:hover {
-  background-color: #c62828; /* Darker shade for hover effect */
+  background-color: #c62828;
 }
 
-/* Button Styles */
 button {
   background-color: var(--color-button);
   color: var(--color-button-text);
@@ -81,7 +79,6 @@ button:hover {
   opacity: 0.8;
 }
 
-/* Pagination */
 .pagination-container {
   position: sticky;
   bottom: 20px;
@@ -107,7 +104,6 @@ button:hover {
   color: var(--color-text-primary);
 }
 
-/* Footer */
 .footer {
   position: fixed;
   left: 0;
@@ -126,7 +122,6 @@ button:hover {
   margin-top: 10px;
 }
 
-/* Form Inputs and Tables */
 .student-fields input {
   width: 100%;
   padding: 5px;

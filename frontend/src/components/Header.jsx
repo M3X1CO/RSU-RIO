@@ -1,5 +1,4 @@
 import React from 'react'
-import UserInfo from './UserInfo'
 
 const Header = ({ user, logout }) => {
   return (
