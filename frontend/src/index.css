@@ -121,3 +121,31 @@ button:hover {
   font-size: 16px;
   margin-top: 10px;
 }
+
+/* Hide the file input */
+input[type="file"] {
+  display: none;
+}
+
+/* Style the label as a button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Add hover effect */
+.custom-file-upload:hover {
+  opacity: 0.8;
+}
+
+/* Optionally, add an active state */
+.custom-file-upload:active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
