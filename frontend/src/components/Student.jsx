@@ -16,7 +16,7 @@ const Student = ({ student, handleDelete }) => {
         <span className='label'>Student's Name: </span>
         <span className='student-name'>{student.name}<br/></span>
         <span className='label'>Student's Original Passport Number: </span>
-        <span className='student-passport'>{student.oldPassportNumber}</span>
+        <span className='student-passport'>{student.oldPassportNumber}<br/></span>
         <span className='label'>Student's New Passport Number: </span>
         <span className='student-passport'>{student.newPassportNumber}</span>
       </p>
