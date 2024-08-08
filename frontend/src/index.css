@@ -241,6 +241,23 @@ input[type="file"] {
   color: #CD5C5C
 }
 
+@media (max-width: 1000px) {
+  .student-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-container {
+    margin-top: 10px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .button-container button {
+    width: 100%;
+  }
+}
+
 .pastelPinks {
   color: #F08080; /* Light Coral */
   color: #FA8072; /* Salmon */
