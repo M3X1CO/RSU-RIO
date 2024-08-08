@@ -50,6 +50,15 @@ button:hover {
   color: var(--color-text-primary);
 }
 
+.student-details-wrapper {
+  padding-bottom: 60px; 
+  margin-bottom: 20px;
+}
+
+.student-details {
+  margin-bottom: 20px;
+}
+
 .student-details table, .student-fields {
   width: 100%;
   border-collapse: collapse;
