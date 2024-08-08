@@ -6,14 +6,6 @@ const Header = ({ user, logout }) => {
       <div className="header-title">
         <strong><h1>Student Management App</h1></strong>
       </div>
-      {user && (
-        <div className="user-info-container">
-          <div className="user-info">
-            <span>{user.username}</span>
-          </div>
-          <button onClick={logout}>Logout</button>
-        </div>
-      )}
     </div>
   )
 }

@@ -29,7 +29,7 @@ const App = () => {
 
   return (
     <div>
-      <Header user={user} logout={logout} />
+      <Header />
       <Notification message={errorMessage} />
 
       {!user && <LoginFormWrapper handleLogin={login} />}
@@ -47,7 +47,7 @@ const App = () => {
           setNewPassportSearch={setNewPassportSearch}
         />
       }
-      <Footer addStudent={addStudent} />
+      <Footer addStudent={ addStudent} user={user} logout={logout} />
     </div>
   )
 }
