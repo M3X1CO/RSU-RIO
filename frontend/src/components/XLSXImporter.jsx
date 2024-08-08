@@ -19,6 +19,14 @@ const XLSXImporter = ({ user }) => {
     const studentsData = []
 
     const studentFields = Object.keys(initialStudentState)
+    const hiddenColumns = new Set()
+
+    // Determine hidden columns
+    worksheet.columns.forEach((col, index) => {
+      if (col.hidden) {
+        hiddenColumns.add(index + 1) // Excel columns are 1-based index
+      }
+    })
 
     worksheet.eachRow((row, rowNumber) => {
       if (rowNumber > 1) { // Skip header row
@@ -29,7 +37,12 @@ const XLSXImporter = ({ user }) => {
             return // Skip the rest of the loop iteration
           }
 
-          const cell = row.getCell(index + 1)
+          const cellIndex = index + 1
+          if (hiddenColumns.has(cellIndex)) {
+            return // Skip processing for hidden columns
+          }
+
+          const cell = row.getCell(cellIndex)
           let value = ''
 
           if (cell && cell.value !== null && cell.value !== undefined) {
@@ -55,9 +68,7 @@ const XLSXImporter = ({ user }) => {
             }
           }
 
-          if (!row.hidden || cell.col.hidden) { // Skip hidden cells but not the entire row
-            studentData[field] = value
-          }
+          studentData[field] = value
         })
 
         studentsData.push(studentData)
