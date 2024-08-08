@@ -37,6 +37,7 @@ html, body {
   padding: 20px;
   background-color: var(--color-footer-background);
   text-align: center;
+  position: relative; /* Ensure correct positioning for absolute elements */
 }
 
 .header-container {
@@ -93,13 +94,11 @@ button:hover {
   color: var(--color-text-secondary);
   font-style: italic;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 20px; /* Added margin-top for spacing */
 }
 
 .user-info-container {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  position: relative; /* Changed from absolute to relative */
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -107,6 +106,7 @@ button:hover {
   background-color: var(--color-footer-background);
   padding: 5px;
   border-radius: 5px;
+  margin-top: 20px; /* Added margin-top for spacing */
 }
 
 .user-info {
