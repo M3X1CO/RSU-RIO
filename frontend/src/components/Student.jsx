@@ -14,11 +14,11 @@ const Student = ({ student, handleDelete }) => {
     <li className='student'>
       <p>
         <span className='label'>Student's Name: </span>
-        <span className='student'>{student.name}<br/></span>
+        <span className='student-render'>{student.name}<br/></span>
         <span className='label'>Student's Original Passport Number: </span>
-        <span className='student'>{student.oldPassportNumber}<br/></span>
+        <span className='student-render'>{student.oldPassportNumber}<br/></span>
         <span className='label'>Student's New Passport Number: </span>
-        <span className='student'>{student.newPassportNumber}</span>
+        <span className='student-render'>{student.newPassportNumber}</span>
       </p>
       <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}
