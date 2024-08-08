@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as XLSX from 'exceljs'
 import StudentDetails from './StudentDetails'
 import { initialStudentState } from './InitialStudentState'
-import useStudents from '../hooks/useStudents'  // Changed to default import
+import useStudents from '../hooks/useStudents'
 
 const XLSXImporter = ({ user }) => {
   const [students, setStudents] = useState([]);
@@ -22,11 +22,21 @@ const XLSXImporter = ({ user }) => {
     worksheet.eachRow((row, rowNumber) => {
       if (rowNumber > 1) { // Skip the header row
         const studentData = {};
-        row.eachCell((cell, colNumber) => {
-          if (colNumber <= studentFields.length) {
-            const field = studentFields[colNumber - 1];
-            studentData[field] = cell.value;
+        studentFields.forEach((field, index) => {
+          const cell = row.getCell(index + 1);
+          let value = '';
+
+          if (cell && cell.value !== null && cell.value !== undefined) {
+            if (cell.type === XLSX.ValueType.Date) {
+              // Format date as string
+              value = cell.text || '';
+            } else {
+              // Convert all other types to string
+              value = String(cell.value).trim();
+            }
           }
+
+          studentData[field] = value;
         });
         studentsData.push(studentData);
       }
