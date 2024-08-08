@@ -6,19 +6,21 @@ const ITEMS_PER_PAGE = 15
 const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
   const [currentPage, setCurrentPage] = useState(1)
 
+  // Filter and prepare student entries for rendering
   const studentEntries = Object.entries(student).filter(([key, value]) => {
     const isValid = typeof value !== 'object' && typeof value !== 'function'
     return isValid
   })
 
+  // Calculate pagination details
   const totalItems = studentEntries.length
   const pageCount = Math.ceil(totalItems / ITEMS_PER_PAGE)
   const start = (currentPage - 1) * ITEMS_PER_PAGE
   const end = start + ITEMS_PER_PAGE
   const currentFields = studentEntries.slice(start, end)
 
-  const handlePageChange = (e, page) => {
-    e.preventDefault()
+  // Handle page changes
+  const handlePageChange = (page) => {
     setCurrentPage(page)
   }
 
@@ -36,7 +38,7 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
                     {isEditable ? (
                       <input
                         type="text"
-                        value={value || ''}
+                        value={String(value || '')}
                         onChange={(e) => {
                           try {
                             handleInputChange(key, e.target.value)
@@ -61,7 +63,7 @@ const StudentDetails = ({ student, handleInputChange, isEditable = false }) => {
             {Array.from({ length: pageCount }, (_, i) => i + 1).map(page => (
               <button
                 key={page}
-                onClick={(e) => handlePageChange(e, page)}
+                onClick={() => handlePageChange(page)}
                 className={currentPage === page ? 'active' : ''}
                 type="button"
               >
