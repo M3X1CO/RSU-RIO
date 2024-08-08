@@ -9,7 +9,6 @@ const Header = ({ user, logout }) => {
       {user && (
         <div className="user-info-container">
           <div className="user-info">
-            <span className="icon">👤</span>
             <span>{user.username}</span>
           </div>
           <button onClick={logout}>Logout</button>
