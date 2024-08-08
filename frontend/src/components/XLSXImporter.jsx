@@ -14,32 +14,54 @@ const XLSXImporter = ({ user }) => {
     const file = event.target.files[0];
     const workbook = new XLSX.Workbook();
     await workbook.xlsx.load(file);
-
+  
     const worksheet = workbook.getWorksheet(1);
     const studentsData = [];
-
+  
     const studentFields = Object.keys(initialStudentState);
-
+  
     worksheet.eachRow((row, rowNumber) => {
-      if (rowNumber > 1) {
+      if (rowNumber > 1) { // Skip header row
         const studentData = {};
         studentFields.forEach((field, index) => {
+          if (field === 'newPassportNumber') {
+            studentData[field] = ''; // Set newPassportNumber to an empty string
+            return; // Skip the rest of the loop iteration
+          }
+  
           const cell = row.getCell(index + 1);
           let value = '';
-
+  
           if (cell && cell.value !== null && cell.value !== undefined) {
-            if (cell.type === XLSX.ValueType.Date) {
-              value = cell.text || '';
-            } else {
-              value = String(cell.value).trim();
+            switch (cell.type) {
+              case XLSX.ValueType.String:
+                value = cell.text || '';
+                break;
+              case XLSX.ValueType.Number:
+                value = cell.value !== null && cell.value !== undefined ? String(cell.value).trim() : '';
+                break;
+              case XLSX.ValueType.Date:
+                value = cell.text || ''; // Use cell.text for date formatting
+                break;
+              case XLSX.ValueType.Boolean:
+                value = cell.value ? 'TRUE' : 'FALSE';
+                break;
+              case XLSX.ValueType.Formula:
+                value = cell.result || ''; // Formula results
+                break;
+              default:
+                value = ''; // Default case for unsupported types
+                break;
             }
           }
+  
           studentData[field] = value;
         });
+  
         studentsData.push(studentData);
       }
     });
-
+  
     setStudents(studentsData);
   };
 
