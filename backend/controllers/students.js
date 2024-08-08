@@ -76,4 +76,24 @@ studentRouter.delete('/:id', async (request, response) => {
   response.status(204).end()
 })
 
+studentRouter.get('/search', async (request, response) => {
+  const { oldPassportNumber, newPassportNumber } = request.query
+  const query = {}
+
+  if (oldPassportNumber) {
+    query.oldPassportNumber = oldPassportNumber
+  }
+
+  if (newPassportNumber) {
+    query.newPassportNumber = newPassportNumber
+  }
+
+  try {
+    const students = await Student.find(query).populate('user', { username: 1, name: 1 })
+    response.json(students)
+  } catch (error) {
+    response.status(500).json({ error: 'Error searching students' })
+  }
+})
+
 module.exports = studentRouter

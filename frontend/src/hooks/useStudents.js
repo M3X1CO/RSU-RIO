@@ -42,7 +42,17 @@ const useStudents = (user) => {
     }
   }
 
-  return { students, errorMessage, addStudent, deleteStudent }
+  const searchStudents = async ({ oldPassportNumber, newPassportNumber }) => {
+    try {
+      const result = await studentsService.search({ oldPassportNumber, newPassportNumber })
+      setStudents(result)
+    } catch (error) {
+      setErrorMessage('Failed to search students')
+      setTimeout(() => setErrorMessage(null), 5000)
+    }
+  }
+
+  return { students, errorMessage, addStudent, deleteStudent, searchStudents }
 }
 
 export default useStudents
