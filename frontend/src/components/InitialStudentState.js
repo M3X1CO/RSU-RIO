@@ -11,7 +11,7 @@ export const initialStudentState = {
   placeOfBirth: '',
   thaiIdNumber: '',
   status: '',
-  originalPassportOrThaiId: '',
+  oldPassportNumber: '',
   newPassportNumber: '',
   issueDate: '',
   expirationDateOld: '',

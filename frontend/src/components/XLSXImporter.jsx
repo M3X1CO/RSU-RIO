@@ -21,7 +21,7 @@ const XLSXImporter = ({ user }) => {
     const studentFields = Object.keys(initialStudentState);
 
     worksheet.eachRow((row, rowNumber) => {
-      if (rowNumber > 1) { // Skip the header row
+      if (rowNumber > 1) {
         const studentData = {};
         studentFields.forEach((field, index) => {
           const cell = row.getCell(index + 1);
@@ -29,14 +29,11 @@ const XLSXImporter = ({ user }) => {
 
           if (cell && cell.value !== null && cell.value !== undefined) {
             if (cell.type === XLSX.ValueType.Date) {
-              // Format date as string
               value = cell.text || '';
             } else {
-              // Convert all other types to string
               value = String(cell.value).trim();
             }
           }
-
           studentData[field] = value;
         });
         studentsData.push(studentData);
@@ -63,7 +60,6 @@ const XLSXImporter = ({ user }) => {
       const savedStudent = await addStudent(currentStudent);
       console.log('Student saved successfully:', savedStudent);
 
-      // Move to the next student
       if (currentStudentIndex < students.length - 1) {
         setCurrentStudentIndex(prevIndex => prevIndex + 1);
       } else {
