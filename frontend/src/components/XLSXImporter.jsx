@@ -24,10 +24,6 @@ const XLSXImporter = ({ user }) => {
       if (rowNumber > 1) {
         const studentData = {};
         studentFields.forEach((field, index) => {
-          if (field === 'newPassportNumber') {
-            studentData[field] = ''
-          }
-
           const cell = row.getCell(index + 1);
           let value = '';
 

@@ -12,7 +12,6 @@ const studentFields = {
   thaiIdNumber: String,
   status: String,
   oldPassportNumber: String,
-  newPassportNumber: String,
   issueDate: String,
   expirationDateOld: String,
   expirationDate: String,
@@ -118,7 +117,8 @@ const studentFields = {
   acceptanceLetterIssueDate: String,
   firstPaymentTransfer: String,
   secondPaymentTransfer: String,
-  remarks2: String
+  remarks2: String,
+  newPassportNumber: String
 }
 
 module.exports = studentFields;

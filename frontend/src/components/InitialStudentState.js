@@ -12,7 +12,6 @@ export const initialStudentState = {
   thaiIdNumber: '',
   status: '',
   oldPassportNumber: '',
-  newPassportNumber: '',
   issueDate: '',
   expirationDateOld: '',
   expirationDate: '',
@@ -118,4 +117,5 @@ export const initialStudentState = {
   firstPaymentTransfer: '',
   secondPaymentTransfer: '',
   remarks2: '',
+  newPassportNumber: ''
 }
