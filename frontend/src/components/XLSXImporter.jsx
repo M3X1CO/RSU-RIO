@@ -3,7 +3,6 @@ import * as XLSX from 'exceljs'
 import StudentDetails from './StudentDetails'
 import { initialStudentState } from './InitialStudentState'
 import useStudents from '../hooks/useStudents'
-import '../index.css'
 
 const XLSXImporter = ({ user }) => {
   const [students, setStudents] = useState([])

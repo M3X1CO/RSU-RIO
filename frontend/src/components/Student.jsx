@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import StudentDetails from './StudentDetails'
-import '../index.css'
 
 const Student = ({ student, handleDelete }) => {
   const [showDetails, setShowDetails] = useState(false)
