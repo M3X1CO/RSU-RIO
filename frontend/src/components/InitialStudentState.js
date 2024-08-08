@@ -104,7 +104,7 @@ export const initialStudentState = {
   facultyOrCollege: '',
   semesterIntake: '',
   academicYearIntake: '',
-  DEPOSIT: '',
+  depositAmount: '',
   lessPaymentAmount: '',
   programDuration: '',
   modeOfStudy: '',
