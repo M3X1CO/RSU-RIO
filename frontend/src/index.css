@@ -12,10 +12,30 @@
   --color-footer-background: papayawhip;
 }
 
-body {
-  padding-bottom: 100px;
-  background-color: var(--color-background);
+html, body {
+  height: 100%;
+  margin: 0;
 }
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: papayawhip;
+  text-align: center;
+}
+
 
 .header-container {
   position: relative;
@@ -95,7 +115,6 @@ button:hover {
   background-color: papayawhip;
   padding: 5px; 
   border-radius: 5px; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .user-info {
