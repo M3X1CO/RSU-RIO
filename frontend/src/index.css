@@ -162,3 +162,29 @@ input[type="file"] {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
+
+.header-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
+.user-info {
+  margin-bottom: 10px; 
+}
+
+.logout-button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.logout-button:hover {
+  background-color: #ff4a40;
+}
+
