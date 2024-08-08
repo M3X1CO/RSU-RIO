@@ -37,7 +37,7 @@ html, body {
   padding: 20px;
   background-color: var(--color-footer-background);
   text-align: center;
-  position: relative; /* Ensure correct positioning for absolute elements */
+  position: relative;
 }
 
 .header-container {
@@ -94,24 +94,28 @@ button:hover {
   color: var(--color-text-secondary);
   font-style: italic;
   font-size: 16px;
-  margin-top: 20px; /* Added margin-top for spacing */
+  margin-top: 20px;
 }
 
 .user-info-container {
-  position: relative; /* Changed from absolute to relative */
-  text-align: right;
+  position: relative;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   background-color: var(--color-footer-background);
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
-  margin-top: 20px; /* Added margin-top for spacing */
+  margin-top: 20px;
 }
 
 .user-info {
   color: var(--color-text-secondary);
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.user-info-container button {
+  margin-top: 10px;
 }
 
 .student-fields input {
@@ -230,7 +234,6 @@ input[type="file"] {
   color: #CD5C5C;
 }
 
-/* Responsive search */
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;
@@ -243,7 +246,6 @@ input[type="file"] {
   }
 }
 
-/* Responsive buttons */
 @media (max-width: 1000px) {
   .student-content {
     flex-direction: column;
