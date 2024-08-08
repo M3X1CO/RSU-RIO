@@ -15,8 +15,10 @@ const Student = ({ student, handleDelete }) => {
       <p>
         <span className='label'>Student's Name: </span>
         <span className='student-name'>{student.name}<br/></span>
-        <span className='label'>Student's Passport Number: </span>
+        <span className='label'>Student's Original Passport Number: </span>
         <span className='student-passport'>{student.oldPassportNumber}</span>
+        <span className='label'>Student's New Passport Number: </span>
+        <span className='student-passport'>{student.newPassportNumber}</span>
       </p>
       <button onClick={toggleDetails} className="toggle-details-button">
         {showDetails ? 'Hide Details' : 'Show Details'}
