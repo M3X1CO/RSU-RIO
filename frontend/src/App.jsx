@@ -11,7 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
-  const { user, errorMessage: authError, login, logout, register, isAdmin, loading } = useAuth()
+  const { user, errorMessage: authError, login, logout, register, isAdmin, loading, status } = useAuth()
   const {
     students,
     errorMessage: studentError,
@@ -37,7 +37,7 @@ const App = () => {
     }
 
     console.log(user.status)
-    
+
     if (user.status !== 'approved') {
       return <RestrictedAccess status={user.status} logout={logout} />
     }

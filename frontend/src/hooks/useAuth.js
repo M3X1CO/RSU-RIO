@@ -50,6 +50,7 @@ const useAuth = () => {
       setAuthToken(user.token)
       setUser(user)
       setIsAdmin(user.isAdmin || false)
+      setStatus(user.status)
       return user
     } catch (error) {
       console.error('Login error:', error)
@@ -87,6 +88,7 @@ const useAuth = () => {
       setAuthToken(newUser.token)
       setUser(newUser)
       setIsAdmin(newUser.isAdmin || false)
+      setStatus(user.status)
       return newUser
     } catch (error) {
       console.error('Registration error:', error)
