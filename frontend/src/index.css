@@ -91,12 +91,11 @@ button:hover {
 }
 
 .pagination-container-2 {
-  position: fixed; 
-  bottom: 0;
-  width: 100%; 
+  position: relative; 
+  margin-top: 20px; 
   background-color: var(--color-background);
   padding: 10px 0;
-  z-index: 1000; 
+  z-index: 1; 
   display: flex;
   justify-content: center; 
 }
@@ -117,6 +116,7 @@ button:hover {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
+
 
 .copyright {
   color: var(--color-text-secondary);
