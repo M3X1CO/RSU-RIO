@@ -6,9 +6,13 @@ const StudentList = ({ students, handleDelete, handleUpdate }) => {
     return <p>No students found.</p>
   }
 
+  const sortedStudents = students.sort(
+    (a, b) => new Date(b.submissionDate) - new Date(a.submissionDate)
+  )
+
   return (
     <ul className="student-list">
-      {students.map(student => (
+      {sortedStudents.map(student => (
         <Student 
           key={student.id}
           student={student}
