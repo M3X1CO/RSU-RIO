@@ -1,7 +1,7 @@
 import React from 'react'
 import XLSXImporter from './XLSXImporter'
 
-const Footer = ({ user, logout, addStudent, setView }) => {
+const Footer = ({ user, logout, addStudent, setView, isAdmin }) => {
   console.log('user', user)
 
   return (
@@ -17,7 +17,7 @@ const Footer = ({ user, logout, addStudent, setView }) => {
           <div className="user-info">
             <span>{user.username}</span>
           </div>
-          {user.isAdmin && (
+          {isAdmin && (
             <button onClick={() => setView('admin')} className="admin-button">Admin</button>
           )}
           <button onClick={logout} className="logout-button">Logout</button>
