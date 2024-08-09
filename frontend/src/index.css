@@ -360,18 +360,6 @@ button:hover, .custom-file-upload:hover {
   margin-top: 20px;
 }
 
-.home-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.home-button:hover {
-  background-color: #45a049;
-}
-
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;

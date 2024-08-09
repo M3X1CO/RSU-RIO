@@ -131,7 +131,7 @@ const AdminPage = ({ user, setView }) => {
       <h2>Register New User</h2>
       <RegisterUser handleRegister={handleRegister} />
       <div className="nav-buttons">
-        <button onClick={() => setView('main')} className="home-button">Back to Main</button>
+        <button onClick={() => setView('main')} className="home-button">Home</button>
       </div>
     </div>
   );
