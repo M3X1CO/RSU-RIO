@@ -30,16 +30,6 @@ html, body {
   flex: 1;
 }
 
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: var(--color-footer-background);
-  text-align: center;
-  position: relative;
-}
-
 .header-container {
   position: relative;
   padding: 10px;
@@ -282,12 +272,23 @@ input[type="file"] {
   color: #CD5C5C;
 }
 
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--color-footer-background);
+  text-align: center;
+  position: relative;
+  filter: brightness(90%);
+}
+
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;
     align-items: stretch;
   }
-
+  
   .search-input {
     margin: 10px 0;
     width: 100%;
