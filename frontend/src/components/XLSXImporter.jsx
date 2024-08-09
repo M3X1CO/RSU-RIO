@@ -109,7 +109,7 @@ const XLSXImporter = ({ user }) => {
   }
 
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <label htmlFor="file-upload" className="custom-file-upload">
         Upload File
       </label>
