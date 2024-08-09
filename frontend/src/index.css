@@ -130,7 +130,7 @@ html, body {
 
 .cancel-button {
   background-color: transparent;
-  color: var(--color-text-secondary);
+  color: #CD5C5C;
   margin-top: 1rem;
   border: 1px solid var(--color-border);
 }
