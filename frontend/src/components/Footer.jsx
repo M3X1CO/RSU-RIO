@@ -2,7 +2,6 @@ import React from 'react'
 import XLSXImporter from './XLSXImporter'
 
 const Footer = ({ user, logout, addStudent, setView, isAdmin }) => {
-  console.log('user', isAdmin)
 
   return (
     <footer className="footer">

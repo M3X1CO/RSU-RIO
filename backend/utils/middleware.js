@@ -11,11 +11,15 @@ const requestLogger = (request, response, next) => {
 }
 
 const auth = (req, res, next) => {
+  logger.info('Auth middleware called')
   const authHeader = req.get('authorization')
+  logger.info('Auth header:', authHeader)
+
   if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
     const token = authHeader.substring(7)
     try {
-      const decodedToken = jwt.verify(token, config.SECRET)
+      const decodedToken = jwt.verify(token, config.JWT_SECRET)
+      logger.info('Decoded token:', decodedToken)
       req.user = decodedToken
       next()
     } catch (error) {
@@ -23,14 +27,19 @@ const auth = (req, res, next) => {
       return res.status(401).json({ error: 'token invalid' })
     }
   } else {
+    logger.error('Token missing')
     return res.status(401).json({ error: 'token missing' })
   }
 }
 
 const isAdmin = (req, res, next) => {
+  logger.info('isAdmin middleware called')
+  logger.info('User:', req.user)
   if (req.user && req.user.isAdmin) {
+    logger.info('User is admin')
     next()
   } else {
+    logger.error('Access denied: User is not admin')
     res.status(403).json({ error: 'Access denied' })
   }
 }
@@ -40,6 +49,8 @@ const unknownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
+  logger.error('Error:', error.message)
+
   if (error.name === 'CastError') {
     logger.error('Error: Malformatted id:', error.message)
     return response.status(400).send({ error: 'Malformatted id' })

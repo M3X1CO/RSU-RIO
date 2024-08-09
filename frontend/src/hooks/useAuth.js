@@ -7,16 +7,27 @@ const useAuth = () => {
   const [user, setUser] = useState(null)
   const [isAdmin, setIsAdmin] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      setIsAdmin(user.isAdmin || false)
-      setAuthToken(user.token)
+    const fetchUser = async () => {
+      const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
+      if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON)
+        setUser(user)
+        setIsAdmin(user.isAdmin || false)
+        setAuthToken(user.token)
+        
+        try {
+          await studentsService.verifyToken()
+        } catch (error) {
+          console.error('Token verification failed:', error)
+          await logout()
+        }
+      }
+      setLoading(false)
     }
-    console.log('useAuth useEffect - user:', user, 'isAdmin:', isAdmin)
+    fetchUser()
   }, [])
 
   const setAuthToken = (token) => {
@@ -31,26 +42,37 @@ const useAuth = () => {
 
   const login = async (username, password) => {
     try {
+      setLoading(true)
       const user = await loginService.login({ username, password })
       window.localStorage.setItem('loggedStudentappUser', JSON.stringify(user))
       setAuthToken(user.token)
       setUser(user)
       setIsAdmin(user.isAdmin || false)
-      console.log('useAuth login - user:', user, 'isAdmin:', user.isAdmin)
+      return user
     } catch (error) {
-      setErrorMessage('Wrong credentials')
+      console.error('Login error:', error)
+      setErrorMessage(error.response?.data?.error || 'Wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
+      throw error
+    } finally {
+      setLoading(false)
     }
   }
 
-  const logout = () => {
-    window.localStorage.removeItem('loggedStudentappUser')
-    setUser(null)
-    setIsAdmin(false)
-    setAuthToken(null)
-    console.log('useAuth logout - user:', null, 'isAdmin:', false)
+  const logout = async () => {
+    try {
+      setLoading(true)
+      window.localStorage.removeItem('loggedStudentappUser')
+      setUser(null)
+      setIsAdmin(false)
+      setAuthToken(null)
+    } catch (error) {
+      console.error('Logout error:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return {
@@ -58,7 +80,8 @@ const useAuth = () => {
     errorMessage,
     login,
     logout,
-    isAdmin
+    isAdmin,
+    loading
   }
 }
 
