@@ -75,11 +75,35 @@ const useAuth = () => {
     }
   }
 
+  const register = async (username, password, name) => {
+    try {
+      setLoading(true)
+      const response = await axios.post('/api/users', { username, password, name })
+      const newUser = response.data
+      
+      window.localStorage.setItem('loggedStudentappUser', JSON.stringify(newUser))
+      setAuthToken(newUser.token)
+      setUser(newUser)
+      setIsAdmin(newUser.isAdmin || false)
+      return newUser
+    } catch (error) {
+      console.error('Registration error:', error)
+      setErrorMessage(error.response?.data?.error || 'Registration failed')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      throw error
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return {
     user,
     errorMessage,
     login,
     logout,
+    register,
     isAdmin,
     loading
   }
