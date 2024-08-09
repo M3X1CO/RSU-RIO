@@ -2,13 +2,15 @@ const adminRouter = require('express').Router();
 const User = require('../models/user');
 const middleware = require('../utils/middleware');
 
-// Get all pending users
+adminRouter.use(middleware.auth)
+
+// Get admin panel (including pending users)
 adminRouter.get('/', middleware.auth, middleware.isAdmin, async (req, res) => {
   try {
     const pendingUsers = await User.find({ status: 'pending' });
-    res.json(pendingUsers);
+    res.json({ message: 'Welcome to the admin panel', pendingUsers });
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching pending users' });
+    res.status(500).json({ message: 'Error fetching pending users', error: error.message });
   }
 });
 
@@ -17,11 +19,11 @@ adminRouter.put('/approve/:id', middleware.auth, middleware.isAdmin, async (req,
   try {
     const user = await User.findByIdAndUpdate(req.params.id, { status: 'approved' }, { new: true });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json(user);
+    res.json({ message: 'User approved successfully', user });
   } catch (error) {
-    res.status(500).json({ error: 'Error approving user' });
+    res.status(500).json({ message: 'Error approving user', error: error.message });
   }
 });
 
@@ -30,11 +32,11 @@ adminRouter.put('/deny/:id', middleware.auth, middleware.isAdmin, async (req, re
   try {
     const user = await User.findByIdAndUpdate(req.params.id, { status: 'denied' }, { new: true });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.json(user);
+    res.json({ message: 'User denied successfully', user });
   } catch (error) {
-    res.status(500).json({ error: 'Error denying user' });
+    res.status(500).json({ message: 'Error denying user', error: error.message });
   }
 });
 

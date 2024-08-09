@@ -4,10 +4,19 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    minlength: 3,
+    trim: true
   },
-  name: String,
-  passwordHash: String,
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  passwordHash: {
+    type: String,
+    required: true
+  },
   isAdmin: {
     type: Boolean,
     default: false
@@ -15,7 +24,7 @@ const userSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ['pending', 'approved', 'denied'],
-    default: 'denied'
+    default: 'pending'
   },
   students: [
     {
