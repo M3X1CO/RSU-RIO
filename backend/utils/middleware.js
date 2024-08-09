@@ -10,7 +10,7 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
-const authenticateToken = (req, res, next) => {
+const auth = (req, res, next) => {
   const authHeader = req.get('authorization')
   if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
     const token = authHeader.substring(7)
@@ -63,7 +63,7 @@ const errorHandler = (error, request, response, next) => {
 
 module.exports = {
   requestLogger,
-  authenticateToken,
+  auth,
   isAdmin,
   unknownEndpoint,
   errorHandler

@@ -4,12 +4,13 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
 import MainContent from './components/MainContent'
-import AdminPage from './components/Admin'
+import AdminPage from './components/AdminPanel'
+import AdminPanel from './components/AdminPanel'
 import useStudents from './hooks/useStudents'
 import useAuth from './hooks/useAuth'
 
 const App = () => {
-  const { user, errorMessage: authError, login, logout } = useAuth()
+  const { user, errorMessage: authError, login, logout, isAdmin } = useAuth()
   const {
     students,
     errorMessage: studentError,
@@ -50,16 +51,18 @@ const App = () => {
             setNewPassportSearch={setNewPassportSearch}
           />
         )}
-        {user && user.isAdmin && view === 'admin' && (
-          <AdminPage />
+        {user && isAdmin && view === 'admin' && (
+          <AdminPage user={user} />
         )}
+        {isAdmin && <AdminPanel />}
       </main>
 
-      <Footer 
-        addStudent={addStudent} 
-        user={user} 
-        logout={logout} 
+      <Footer
+        addStudent={addStudent}
+        user={user}
+        logout={logout}
         setView={setView}
+        isAdmin={isAdmin}
       />
     </div>
   );

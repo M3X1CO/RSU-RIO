@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import loginService from '../services/login'
 import studentsService from '../services/students'
 
@@ -11,15 +12,25 @@ const useAuth = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      studentsService.setToken(user.token)
+      setAuthToken(user.token)
     }
   }, [])
+
+  const setAuthToken = (token) => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      studentsService.setToken(token)
+    } else {
+      delete axios.defaults.headers.common['Authorization']
+      studentsService.setToken(null)
+    }
+  }
 
   const login = async (username, password) => {
     try {
       const user = await loginService.login({ username, password })
       window.localStorage.setItem('loggedStudentappUser', JSON.stringify(user))
-      studentsService.setToken(user.token)
+      setAuthToken(user.token)
       setUser(user)
     } catch (error) {
       setErrorMessage('Wrong credentials')
@@ -32,10 +43,16 @@ const useAuth = () => {
   const logout = () => {
     window.localStorage.removeItem('loggedStudentappUser')
     setUser(null)
-    studentsService.setToken(null)
+    setAuthToken(null)
   }
 
-  return { user, errorMessage, login, logout }
+  return { 
+    user, 
+    errorMessage, 
+    login, 
+    logout,
+    isAdmin: user ? user.isAdmin : false
+  }
 }
 
 export default useAuth
