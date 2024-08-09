@@ -140,6 +140,18 @@ html, body {
   color: var(--color-text-primary);
 }
 
+.register-button {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin-top: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.register-button:hover {
+  background-color: var(--color-hover);
+  color: var(--color-text-primary);
+}
+
 .button-group {
   display: flex;
   flex-direction: column;
