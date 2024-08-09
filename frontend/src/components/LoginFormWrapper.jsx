@@ -15,7 +15,7 @@ const LoginFormWrapper = ({ handleLogin }) => {
       <div style={showWhenVisible} className="togglableContent">
         <LoginForm handleSubmit={handleLogin} />
         <div className="centered-button-container">
-          <button onClick={() => setLoginVisible(false)} className="cancel-button">Cancel</button>
+          <button onClick={() => setLoginVisible(false)}>Cancel</button>
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ const LoginForm = ({ handleSubmit }) => {
           />
         </div>
         <div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit">Login</button>
         </div>
       </form>
     </div>
