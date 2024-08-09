@@ -30,8 +30,7 @@ const App = () => {
     student.oldPassportNumber.toLowerCase().includes(oldPassportSearch.toLowerCase()) &&
     student.newPassportNumber.toLowerCase().includes(newPassportSearch.toLowerCase())
   )
-
-  // Check if the user's status is pending or denied
+  
   const isRestrictedUser = user && (user.status === 'pending' || user.status === 'denied')
 
   return (
