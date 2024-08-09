@@ -8,15 +8,16 @@ const useAuth = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [status, setStatus] = useState(null)
 
   useEffect(() => {
     const fetchUser = async () => {
       const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
       if (loggedUserJSON) {
         const user = JSON.parse(loggedUserJSON)
-        // console.log(user)
         setUser(user)
         setIsAdmin(user.isAdmin || false)
+        setStatus(user.status)
         setAuthToken(user.token)
         
         try {
@@ -106,7 +107,8 @@ const useAuth = () => {
     logout,
     register,
     isAdmin,
-    loading
+    loading,
+    status
   }
 }
 
