@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const RegisterUser = ({ handleRegister, setView }) => {
+const RegisterUser = ({ user, handleRegister, setView }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');

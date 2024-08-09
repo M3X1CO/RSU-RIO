@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LoginForm from './LoginForm'
 import RegisterUser from './RegisterUser'
 
-const LoginFormWrapper = ({ handleLogin, handleRegister }) => {
+const LoginFormWrapper = ({ user, handleLogin, handleRegister }) => {
   const [loginVisible, setLoginVisible] = useState(false)
   const [registerVisible, setRegisterVisible] = useState(false)
 
@@ -35,7 +35,7 @@ const LoginFormWrapper = ({ handleLogin, handleRegister }) => {
         </div>
       ) : (
         <div className="register-form-wrapper">
-          <RegisterUser handleRegister={handleRegister} setView={hideForm} />
+          <RegisterUser handleRegister={handleRegister} setView={hideForm} user={user} />
           <button onClick={hideForm} className="button cancel-button">Cancel</button>
         </div>
       )}

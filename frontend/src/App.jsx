@@ -39,7 +39,7 @@ const App = () => {
         {loading && <LoadingSpinner />}
         {errorMessage && <ErrorMessage message={errorMessage} />}
         
-        {!user && <LoginFormWrapper handleLogin={login} handleRegister={register} />}
+        {!user && <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />}
         {user && view === 'main' && (
           <MainContent
             user={user}
