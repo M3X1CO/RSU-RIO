@@ -115,7 +115,7 @@ const XLSXImporter = ({ user }) => {
       </label>
       <input id="file-upload" type="file" onChange={handleFileUpload} accept=".xlsx" />
       {students.length > 0 && (
-        <div>
+        <div className="student-details-container">
           <h2>Student {currentStudentIndex + 1} of {students.length}</h2>
           <StudentDetails
             student={students[currentStudentIndex]}

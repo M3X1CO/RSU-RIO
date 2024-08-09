@@ -161,6 +161,12 @@ button:hover {
   color: var(--color-text-primary);
 }
 
+.student-details-container {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
 .student-details-wrapper {
   padding-bottom: 60px;
   margin-bottom: 20px;
@@ -280,7 +286,7 @@ input[type="file"] {
   background-color: var(--color-footer-background);
   text-align: center;
   position: relative;
-  filter: brightness(90%);
+  filter: brightness(80%);
 }
 
 @media (max-width: 1000px) {
@@ -309,5 +315,12 @@ input[type="file"] {
 
   .button-container button {
     width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .student-details-container {
+    width: 100%;
+    margin: 0;
   }
 }
