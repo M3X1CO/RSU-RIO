@@ -49,40 +49,74 @@ html, body {
   background-color: var(--color-background);
 }
 
-.login-form {
-  background-color: papayawhip;
+.login-form-wrapper {
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 300px;
-  filter: brightness(80%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 320px;
 }
 
 .login-form h2 {
   text-align: center;
-  color: #606770;
+  color: #333;
   margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #606770;
+  color: #555;
+  font-size: 0.9rem;
 }
 
 .form-input {
   width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #606770;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
-.centered-button-container {
-  text-align: center;
+.form-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #357abd;
+}
+
+.cancel-button {
+  background-color: #f0f0f0;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.cancel-button:hover {
+  background-color: #e0e0e0;
+}
+
+.login-button {
+  width: 100%;
 }
 
 .pagination-container, .pagination-container-2 {

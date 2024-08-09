@@ -23,37 +23,34 @@ const LoginForm = ({ handleSubmit }) => {
   return (
     <div className="login-form">
       <h2>Login</h2>
-
       <form onSubmit={handleFormSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Username</label>
           <input
             id="username"
             type="text"
             value={username}
             onChange={handleUsernameChange}
             className="form-input"
-            placeholder="Enter username"
+            placeholder="Enter your username"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
             id="password"
             type="password"
             value={password}
             onChange={handlePasswordChange}
             className="form-input"
-            placeholder="Enter password"
+            placeholder="Enter your password"
           />
         </div>
-        <div>
-          <button type="submit">Login</button>
-        </div>
+        <button type="submit" className="button">Login</button>
       </form>
     </div>
   );
-};
+}
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
