@@ -10,7 +10,7 @@ import useStudents from './hooks/useStudents'
 import useAuth from './hooks/useAuth'
 
 const App = () => {
-  const { user, errorMessage: authError, login, logout, isAdmin } = useAuth()
+  const { user, errorMessage: authError, login, logout, isAdmin, loading } = useAuth()
   const {
     students,
     errorMessage: studentError,
@@ -54,6 +54,8 @@ const App = () => {
         {user && isAdmin && view === 'admin' && (
           <AdminPage user={user} />
         )}
+        {loading && <LoadingSpinner />}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
         {isAdmin && <AdminPanel />}
       </main>
 
