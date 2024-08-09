@@ -97,7 +97,7 @@ const AdminPage = ({ setView }) => {
             <span>{user.username} - {user.name}</span>
             <div className="button-group">
               <button onClick={() => handleApprove(user)}>Approve</button>
-              <button onClick={() => handleDeny(user.id)}>Deny</button>
+              <button onClick={() => handleDeny(user.id)} className="admin-no-button">Deny</button>
             </div>
           </li>
         ))}
@@ -110,7 +110,7 @@ const AdminPage = ({ setView }) => {
             <span>{user.username} - {user.name}</span>
             <div className="button-group">
               {!user.isAdmin && <button onClick={() => handleMakeAdmin(user.id)}>Make Admin</button>}
-              <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+              <button onClick={() => handleDeleteUser(user.id)} className="admin-no-button">Delete</button>
             </div>
           </li>
         ))}
@@ -122,7 +122,7 @@ const AdminPage = ({ setView }) => {
           <li key={admin.id} className="user-item">
             <span>{admin.username} - {admin.name}</span>
             <div className="button-group">
-              <button onClick={() => handleRemoveAdmin(admin.id)}>Remove Admin</button>
+              <button onClick={() => handleRemoveAdmin(admin.id)} className="admin-no-button">Remove Admin</button>
             </div>
           </li>
         ))}

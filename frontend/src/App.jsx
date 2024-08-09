@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
 import MainContent from './components/MainContent'
 import AdminPage from './components/AdminPanel'
+import RestrictedAccess from './components/RestrictedAccess'
 import useStudents from './hooks/useStudents'
 import useAuth from './hooks/useAuth'
 import LoadingSpinner from './components/LoadingSpinner'
@@ -30,6 +31,9 @@ const App = () => {
     student.newPassportNumber.toLowerCase().includes(newPassportSearch.toLowerCase())
   )
 
+  // Check if the user's status is pending or denied
+  const isRestrictedUser = user && (user.status === 'pending' || user.status === 'denied')
+
   return (
     <div className="app-container">
       <Header />
@@ -39,7 +43,8 @@ const App = () => {
         {errorMessage && <ErrorMessage message={errorMessage} />}
         
         {!user && <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />}
-        {user && view === 'main' && (
+        {isRestrictedUser && <RestrictedAccess status={user.status} />}
+        {user && !isRestrictedUser && view === 'main' && (
           <MainContent
             user={user}
             studentFormRef={studentFormRef}
@@ -53,12 +58,12 @@ const App = () => {
             setNewPassportSearch={setNewPassportSearch}
           />
         )}
-        {user && isAdmin && view === 'admin' && (
+        {user && !isRestrictedUser && isAdmin && view === 'admin' && (
           <AdminPage setView={setView} />
         )}
       </main>
 
-      {user && (
+      {user && !isRestrictedUser && (
         <Footer
           addStudent={addStudent}
           user={user}

@@ -375,6 +375,10 @@ button:hover, .custom-file-upload:hover {
   padding: 20px;
 }
 
+.admin-no-button {
+  color: #CD5C5C;
+}
+
 .user-list {
   list-style-type: none;
   padding: 0;
