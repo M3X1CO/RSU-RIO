@@ -165,7 +165,7 @@ button:hover {
   width: calc(100% - 40px);
   margin: 0 auto;
   box-sizing: border-box;
-  color: yellow;
+  background-color: yellow;
 }
 
 .student-details-wrapper {
