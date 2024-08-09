@@ -66,13 +66,11 @@ button:hover {
 }
 
 .pagination-container {
-  position: fixed;
-  bottom: 10px;
+  position: sticky;
+  bottom: 20px;
   background-color: var(--color-background);
   padding: 10px 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
+  z-index: 1;
 }
 
 .pagination {
@@ -88,6 +86,34 @@ button:hover {
 }
 
 .pagination button.active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
+
+.pagination-container-2 {
+  position: fixed; 
+  bottom: 0;
+  width: 100%; 
+  background-color: var(--color-background);
+  padding: 10px 0;
+  z-index: 1000; 
+  display: flex;
+  justify-content: center; 
+}
+
+.pagination-2 {
+  display: flex;
+  gap: 5px;
+}
+
+.pagination-2 button {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+}
+
+.pagination-2 button.active {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
@@ -127,12 +153,12 @@ button:hover {
 }
 
 .student-list li {
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* Space between each student */
   transition: background-color 0.3s ease;
 }
 
 .student-list li:hover {
-  background-color: #4a4845;
+  background-color: #4a4845; /* Darken the background on hover */
 }
 
 

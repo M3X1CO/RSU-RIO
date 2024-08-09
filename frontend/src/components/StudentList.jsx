@@ -35,8 +35,8 @@ const StudentList = ({ students, handleDelete, handleUpdate }) => {
         ))}
       </ul>
       
-      <div className="pagination-container2">
-        <div className="pagination2">
+      <div className="pagination-container-2">
+        <div className="pagination-2">
           {[...Array(totalPages)].map((_, index) => (
             <button
               key={index}
@@ -53,4 +53,3 @@ const StudentList = ({ students, handleDelete, handleUpdate }) => {
 }
 
 export default StudentList
-
