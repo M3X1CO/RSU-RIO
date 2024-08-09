@@ -36,6 +36,8 @@ const App = () => {
       return <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />
     }
 
+    console.log(user.status)
+    
     if (user.status !== 'approved') {
       return <RestrictedAccess status={user.status} logout={logout} />
     }
