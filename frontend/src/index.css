@@ -143,7 +143,7 @@ button:hover, .custom-file-upload:hover {
   width: 100%;
   box-sizing: border-box;
   margin: 20px 0;
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
