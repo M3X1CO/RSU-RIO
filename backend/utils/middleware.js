@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken')
+const config = require('./config')
 const logger = require('./logger')
 
 const requestLogger = (request, response, next) => {
@@ -6,6 +8,23 @@ const requestLogger = (request, response, next) => {
   logger.info('Body:  ', request.body)
   logger.info('---')
   next()
+}
+
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.get('authorization')
+  if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
+    const token = authHeader.substring(7)
+    try {
+      const decodedToken = jwt.verify(token, config.SECRET)
+      req.user = decodedToken
+      next()
+    } catch (error) {
+      logger.error('Token verification failed:', error.message)
+      return res.status(401).json({ error: 'token invalid' })
+    }
+  } else {
+    return res.status(401).json({ error: 'token missing' })
+  }
 }
 
 const isAdmin = (req, res, next) => {
@@ -44,7 +63,8 @@ const errorHandler = (error, request, response, next) => {
 
 module.exports = {
   requestLogger,
+  authenticateToken,
+  isAdmin,
   unknownEndpoint,
-  errorHandler,
-  isAdmin
+  errorHandler
 }
