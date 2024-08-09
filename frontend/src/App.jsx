@@ -55,7 +55,7 @@ const App = () => {
           />
         )}
         {user && isAdmin && view === 'admin' && (
-          <AdminPage user={user} setView={setView} />
+          <AdminPage setView={setView} />
         )}
       </main>
 

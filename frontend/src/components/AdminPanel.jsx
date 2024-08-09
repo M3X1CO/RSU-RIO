@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RegisterUser from './RegisterUser';
 
-const AdminPage = ({ user, setView }) => {
+const AdminPage = ({ setView }) => {
   const [users, setUsers] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [pendingUsers, setPendingUsers] = useState([]);
@@ -128,11 +128,7 @@ const AdminPage = ({ user, setView }) => {
         ))}
       </ul>
   
-      <RegisterUser handleRegister={handleRegister} />
-      
-      <div className="nav-buttons">
-        <button onClick={() => setView('main')} className="home-button">Home</button>
-      </div>
+      <RegisterUser handleRegister={handleRegister} setView={setView} />
     </div>
   );
 }

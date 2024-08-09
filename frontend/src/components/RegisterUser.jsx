@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const RegisterUser = ({ handleRegister }) => {
+const RegisterUser = ({ handleRegister, setView }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -55,7 +55,8 @@ const RegisterUser = ({ handleRegister }) => {
           />
         </div>
         <div>
-          <button type="submit" className="register-button">Register</button>
+          <button type="submit">Register</button>
+          <button onClick={() => setView('main')}>Home</button>
         </div>
       </form>
     </div>
