@@ -11,7 +11,7 @@ import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
-  const { user, errorMessage: authError, login, logout, isAdmin, loading } = useAuth()
+  const { user, errorMessage: authError, login, logout, register, isAdmin, loading } = useAuth()
   const {
     students,
     errorMessage: studentError,
@@ -39,7 +39,7 @@ const App = () => {
         {loading && <LoadingSpinner />}
         {errorMessage && <ErrorMessage message={errorMessage} />}
         
-        {!user && <LoginFormWrapper handleLogin={login} />}
+        {!user && <LoginFormWrapper handleLogin={login} handleRegister={register} />}
         {user && view === 'main' && (
           <MainContent
             user={user}
