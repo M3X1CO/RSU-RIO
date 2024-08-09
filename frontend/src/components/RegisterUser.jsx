@@ -54,6 +54,9 @@ const RegisterUser = ({ user, handleRegister, setView }) => {
             required
           />
         </div>
+        <div className="register-button-container">
+          <button type="submit">Register</button>
+        </div>
       </form>
     </div>
   );
