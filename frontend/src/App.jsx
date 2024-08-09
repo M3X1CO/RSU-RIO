@@ -30,8 +30,39 @@ const App = () => {
     student.oldPassportNumber.toLowerCase().includes(oldPassportSearch.toLowerCase()) &&
     student.newPassportNumber.toLowerCase().includes(newPassportSearch.toLowerCase())
   )
-  
-  const isRestrictedUser = user && (user.status === 'pending' || user.status === 'denied')
+
+  const renderContent = () => {
+    if (!user) {
+      return <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />
+    }
+
+    if (user.status === 'pending' || user.status === 'denied') {
+      return <RestrictedAccess status={user.status} logout={logout} />
+    }
+
+    if (view === 'main') {
+      return (
+        <MainContent
+          user={user}
+          studentFormRef={studentFormRef}
+          addStudent={addStudent}
+          students={filteredStudents}
+          deleteStudent={deleteStudent}
+          updateStudent={updateStudent}
+          oldPassportSearch={oldPassportSearch}
+          newPassportSearch={newPassportSearch}
+          setOldPassportSearch={setOldPassportSearch}
+          setNewPassportSearch={setNewPassportSearch}
+        />
+      )
+    }
+
+    if (isAdmin && view === 'admin') {
+      return <AdminPage setView={setView} />
+    }
+
+    return null
+  }
 
   return (
     <div className="app-container">
@@ -41,28 +72,10 @@ const App = () => {
         {loading && <LoadingSpinner />}
         {errorMessage && <ErrorMessage message={errorMessage} />}
         
-        {!user && <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />}
-        {isRestrictedUser && <RestrictedAccess status={user.status} />}
-        {user && !isRestrictedUser && view === 'main' && (
-          <MainContent
-            user={user}
-            studentFormRef={studentFormRef}
-            addStudent={addStudent}
-            students={filteredStudents}
-            deleteStudent={deleteStudent}
-            updateStudent={updateStudent}
-            oldPassportSearch={oldPassportSearch}
-            newPassportSearch={newPassportSearch}
-            setOldPassportSearch={setOldPassportSearch}
-            setNewPassportSearch={setNewPassportSearch}
-          />
-        )}
-        {user && !isRestrictedUser && isAdmin && view === 'admin' && (
-          <AdminPage setView={setView} />
-        )}
+        {renderContent()}
       </main>
 
-      {user && !isRestrictedUser && (
+      {user && user.status !== 'pending' && user.status !== 'denied' && (
         <Footer
           addStudent={addStudent}
           user={user}
