@@ -15,10 +15,11 @@ const AdminPage = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('/api/admin/users');
-      setUsers(response.data.users);
-      setAdmins(response.data.admins);
-      setPendingUsers(response.data.pendingUsers);
+      const response = await axios.get('/api/users');
+      const allUsers = response.data;
+      setUsers(allUsers.filter(user => !user.isAdmin && user.status === 'approved'));
+      setAdmins(allUsers.filter(user => user.isAdmin));
+      setPendingUsers(allUsers.filter(user => user.status === 'pending'));
     } catch (err) {
       setError('Error fetching users');
       console.error(err);
