@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
@@ -32,14 +32,16 @@ const App = () => {
   )
 
   const renderContent = () => {
+    if (loading) return <LoadingSpinner />
+
+    if (errorMessage) return <ErrorMessage message={errorMessage} />
+
     if (!user) {
-      return <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />
+      return <LoginFormWrapper handleLogin={login} handleRegister={register} />
     }
 
-    console.log(user.status)
-
-    if (user.status !== 'approved') {
-      return <RestrictedAccess status={user.status} logout={logout} />
+    if (!status || status !== 'approved') {
+      return <RestrictedAccess status={status || 'unknown'} logout={logout} />
     }
 
     if (view === 'main') {
@@ -69,15 +71,10 @@ const App = () => {
   return (
     <div className="app-container">
       <Header />
-      
       <main className="main-content">
-        {loading && <LoadingSpinner />}
-        {errorMessage && <ErrorMessage message={errorMessage} />}
-        
         {renderContent()}
       </main>
-
-      {user && user.status === 'approved' && (
+      {user && status === 'approved' && (
         <Footer
           addStudent={addStudent}
           user={user}

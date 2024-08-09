@@ -17,9 +17,9 @@ const useAuth = () => {
         const user = JSON.parse(loggedUserJSON)
         setUser(user)
         setIsAdmin(user.isAdmin || false)
-        setStatus(user.status)
+        setStatus(user.status || 'Unknown')
         setAuthToken(user.token)
-        
+
         try {
           await studentsService.verifyToken()
         } catch (error) {
@@ -50,7 +50,7 @@ const useAuth = () => {
       setAuthToken(user.token)
       setUser(user)
       setIsAdmin(user.isAdmin || false)
-      setStatus(user.status)
+      setStatus(user.status || 'Unknown')
       return user
     } catch (error) {
       console.error('Login error:', error)
@@ -71,6 +71,7 @@ const useAuth = () => {
       setUser(null)
       setIsAdmin(false)
       setAuthToken(null)
+      setStatus(null)
     } catch (error) {
       console.error('Logout error:', error)
     } finally {
@@ -83,12 +84,12 @@ const useAuth = () => {
       setLoading(true)
       const response = await axios.post('/api/users', { username, password, name })
       const newUser = response.data
-      
+
       window.localStorage.setItem('loggedStudentappUser', JSON.stringify(newUser))
       setAuthToken(newUser.token)
       setUser(newUser)
       setIsAdmin(newUser.isAdmin || false)
-      setStatus(user.status)
+      setStatus(newUser.status || 'Unknown')
       return newUser
     } catch (error) {
       console.error('Registration error:', error)
