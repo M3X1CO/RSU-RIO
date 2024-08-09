@@ -102,7 +102,7 @@ const AdminPage = ({ user, setView }) => {
           </li>
         ))}
       </ul>
-
+  
       <h2>All Users</h2>
       <ul className="user-list">
         {users.map(user => (
@@ -115,7 +115,7 @@ const AdminPage = ({ user, setView }) => {
           </li>
         ))}
       </ul>
-
+  
       <h2>Admins</h2>
       <ul className="user-list">
         {admins.map(admin => (
@@ -127,14 +127,14 @@ const AdminPage = ({ user, setView }) => {
           </li>
         ))}
       </ul>
-
-      <h2>Register New User</h2>
+  
       <RegisterUser handleRegister={handleRegister} />
+      
       <div className="nav-buttons">
         <button onClick={() => setView('main')} className="home-button">Home</button>
       </div>
     </div>
   );
-};
+}
 
 export default AdminPage;
