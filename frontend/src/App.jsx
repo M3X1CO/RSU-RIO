@@ -57,7 +57,6 @@ const App = () => {
         {user && isAdmin && view === 'admin' && (
           <AdminPage user={user} />
         )}
-        {isAdmin && <AdminPanel />}
       </main>
 
       <Footer
