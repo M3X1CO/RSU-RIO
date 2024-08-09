@@ -3,8 +3,6 @@ import React from 'react'
 const RestrictedAccess = ({ status }) => {
   let message = ''
 
-  console.log(status)
-
   switch (status) {
     case 'pending':
       message = 'Your account is currently pending approval. Please contact the administrator for access to the website.'
