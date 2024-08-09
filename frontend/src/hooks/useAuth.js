@@ -50,7 +50,6 @@ const useAuth = () => {
       setAuthToken(user.token)
       setUser(user)
       setIsAdmin(user.isAdmin || false)
-      console.log(user.status)
       setStatus(user.status || 'Unknown')
       return user
     } catch (error) {
