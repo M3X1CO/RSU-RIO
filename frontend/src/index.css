@@ -50,16 +50,17 @@ html, body {
 }
 
 .login-form-wrapper {
-  background-color: #ffffff;
+  background-color: #44443d;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   width: 320px;
+  border: 1px solid var(--color-border);
 }
 
 .login-form h2 {
   text-align: center;
-  color: #333;
+  color: var(--color-text-primary);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
@@ -71,48 +72,53 @@ html, body {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #555;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
 }
 
 .form-input {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 1rem;
+  color: var(--color-text-primary);
   transition: border-color 0.3s ease;
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: var(--color-active);
 }
 
 .button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .button:hover {
-  background-color: #357abd;
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
 }
 
 .cancel-button {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: transparent;
+  color: var(--color-text-secondary);
   margin-top: 1rem;
+  border: 1px solid var(--color-border);
 }
 
 .cancel-button:hover {
-  background-color: #e0e0e0;
+  background-color: var(--color-hover);
+  color: var(--color-text-primary);
 }
 
 .login-button {
