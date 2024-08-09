@@ -8,6 +8,14 @@ const requestLogger = (request, response, next) => {
   next()
 }
 
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next()
+  } else {
+    res.status(403).json({ error: 'Access denied' })
+  }
+}
+
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
@@ -38,4 +46,5 @@ module.exports = {
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  isAdmin
 }

@@ -4,21 +4,23 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
 import MainContent from './components/MainContent'
+import AdminPage from './components/Admin'
 import useStudents from './hooks/useStudents'
 import useAuth from './hooks/useAuth'
 
 const App = () => {
   const { user, errorMessage: authError, login, logout } = useAuth()
-  const { 
-    students, 
-    errorMessage: studentError, 
-    addStudent, 
-    deleteStudent, 
-    updateStudent 
+  const {
+    students,
+    errorMessage: studentError,
+    addStudent,
+    deleteStudent,
+    updateStudent
   } = useStudents(user)
   const studentFormRef = useRef()
   const [oldPassportSearch, setOldPassportSearch] = useState('')
   const [newPassportSearch, setNewPassportSearch] = useState('')
+  const [view, setView] = useState('main')
 
   const errorMessage = authError || studentError
 
@@ -34,7 +36,7 @@ const App = () => {
 
       <main className="main-content">
         {!user && <LoginFormWrapper handleLogin={login} />}
-        {user && (
+        {user && view === 'main' && (
           <MainContent
             user={user}
             studentFormRef={studentFormRef}
@@ -48,9 +50,17 @@ const App = () => {
             setNewPassportSearch={setNewPassportSearch}
           />
         )}
+        {user && user.isAdmin && view === 'admin' && (
+          <AdminPage />
+        )}
       </main>
 
-      <Footer addStudent={addStudent} user={user} logout={logout} />
+      <Footer 
+        addStudent={addStudent} 
+        user={user} 
+        logout={logout} 
+        setView={setView}
+      />
     </div>
   );
 };

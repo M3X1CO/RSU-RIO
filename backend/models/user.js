@@ -8,6 +8,15 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
+  isAdmin: {
+    type: Boolean,
+    default: false
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'denied'],
+    default: 'pending'
+  },
   students: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,6 +35,4 @@ userSchema.set('toJSON', {
   }
 })
 
-const User = mongoose.model('User', userSchema)
-
-module.exports = User
+module.exports = mongoose.model('User', userSchema)
