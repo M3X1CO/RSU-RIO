@@ -54,10 +54,6 @@ const RegisterUser = ({ user, handleRegister, setView }) => {
             required
           />
         </div>
-        <div className="register-button-container">
-          <button type="submit">Register</button>
-          {user && <button onClick={() => setView('main')}>Home</button>}
-        </div>
       </form>
     </div>
   );

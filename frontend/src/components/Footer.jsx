@@ -17,7 +17,10 @@ const Footer = ({ user, logout, addStudent, setView, isAdmin }) => {
             <span>{user.username}</span>
           </div>
           {isAdmin && (
-            <button onClick={() => setView('admin')} className="admin-button">Admin</button>
+            <div className="admin-buttons">
+              <button onClick={() => setView('admin')} className="admin-button">Admin</button>
+              <button onClick={() => setView('main')} className="admin-button">Home</button>
+            </div>
           )}
           <button onClick={logout} className="logout-button">Logout</button>
         </div>
