@@ -153,12 +153,12 @@ button:hover {
 }
 
 .student-list li {
-  margin-bottom: 15px; /* Space between each student */
+  margin-bottom: 15px;
   transition: background-color 0.3s ease;
 }
 
 .student-list li:hover {
-  background-color: #4a4845; /* Darken the background on hover */
+  background-color: #4a4845;
 }
 
 
@@ -275,6 +275,10 @@ input[type="file"] {
 }
 
 .delete-button {
+  color: #CD5C5C;
+}
+
+.logout-button {
   color: #CD5C5C;
 }
 

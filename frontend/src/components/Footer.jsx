@@ -15,7 +15,7 @@ const Footer = ({ user, logout, addStudent }) => {
           <div className="user-info">
             <span>{user.username}</span>
           </div>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout} className="logout-button">Logout</button>
         </div>
       )}
     </footer>
