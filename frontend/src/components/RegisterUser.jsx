@@ -61,10 +61,12 @@ const RegisterUser = ({ user, handleRegister, setView }) => {
       </form>
     </div>
   );
-}  
+};
 
 RegisterUser.propTypes = {
   handleRegister: PropTypes.func.isRequired,
+  user: PropTypes.object,
+  setView: PropTypes.func.isRequired,
 };
 
 export default RegisterUser;
