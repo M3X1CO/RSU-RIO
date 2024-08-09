@@ -287,6 +287,9 @@ input[type="file"] {
   text-align: center;
   position: relative;
   filter: brightness(80%);
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid red;
 }
 
 @media (max-width: 1000px) {
