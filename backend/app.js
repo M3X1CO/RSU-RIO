@@ -32,7 +32,8 @@ app.use(middleware.requestLogger)
 app.use('/api/students', studentRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/admin', adminRouter)
+
+app.use('/api/admin', middleware.auth, middleware.isAdmin, adminRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

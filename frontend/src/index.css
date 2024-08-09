@@ -41,22 +41,78 @@ html, body {
   text-align: center;
 }
 
-button, .custom-file-upload {
-  background-color: var(--color-button);
-  color: var(--color-button-text);
+/* Add this to your CSS file, e.g., App.css or a new file like Auth.css */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.login-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #1877f2;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #606770;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #dddfe2;
+  border-radius: 4px;
+}
+
+.login-button, .cancel-button {
+  width: 100%;
+  padding: 0.5rem;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-button:hover, .custom-file-upload:hover {
-  opacity: 0.8;
+.login-button {
+  background-color: #1877f2;
 }
 
-.custom-file-upload:active {
-  background-color: var(--color-active);
-  color: var(--color-text-primary);
+.login-button:hover {
+  background-color: #166fe5;
+}
+
+.cancel-button {
+  background-color: #e4e6eb;
+  color: #4b4f56;
+  margin-top: 1rem;
+}
+
+.cancel-button:hover {
+  background-color: #d8dadf;
+}
+
+.centered-button-container {
+  text-align: center;
 }
 
 .pagination-container, .pagination-container-2 {
@@ -249,6 +305,24 @@ input[type="file"] {
 
 .footer-h2 {
   color: #33332d;
+}
+
+button, .custom-file-upload {
+  background-color: var(--color-button);
+  color: var(--color-button-text);
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover, .custom-file-upload:hover {
+  opacity: 0.8;
+}
+
+.custom-file-upload:active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
 }
 
 .error-message {
