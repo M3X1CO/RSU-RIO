@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const loginRouter = require('express').Router();
 const User = require('../models/user');
+const config = require('../utils/config'); 
 
 loginRouter.post('/', async (request, response) => {
   try {
@@ -29,7 +30,7 @@ loginRouter.post('/', async (request, response) => {
       isAdmin: user.isAdmin,
     };
 
-    const token = jwt.sign(userForToken, process.env.JWT_SECRET, {
+    const token = jwt.sign(userForToken, config.JWT_SECRET, {
       expiresIn: '1h',
     });
 
