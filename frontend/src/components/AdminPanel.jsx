@@ -1,5 +1,6 @@
 // AdminPage.jsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RegisterUser from './RegisterUser';
 
@@ -8,6 +9,7 @@ const AdminPage = () => {
   const [admins, setAdmins] = useState([]);
   const [pendingUsers, setPendingUsers] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUsers();
@@ -92,39 +94,48 @@ const AdminPage = () => {
       {error && <p className="error">{error}</p>}
       
       <h2>Pending Users</h2>
-      <ul>
+      <ul className="user-list">
         {pendingUsers.map(user => (
-          <li key={user.id}>
-            {user.username} - {user.name}
-            <button onClick={() => handleApprove(user)}>Approve</button>
-            <button onClick={() => handleDeny(user.id)}>Deny</button>
+          <li key={user.id} className="user-item">
+            <span>{user.username} - {user.name}</span>
+            <div className="button-group">
+              <button onClick={() => handleApprove(user)}>Approve</button>
+              <button onClick={() => handleDeny(user.id)}>Deny</button>
+            </div>
           </li>
         ))}
       </ul>
 
       <h2>All Users</h2>
-      <ul>
+      <ul className="user-list">
         {users.map(user => (
-          <li key={user.id}>
-            {user.username} - {user.name}
-            {!user.isAdmin && <button onClick={() => handleMakeAdmin(user.id)}>Make Admin</button>}
-            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+          <li key={user.id} className="user-item">
+            <span>{user.username} - {user.name}</span>
+            <div className="button-group">
+              {!user.isAdmin && <button onClick={() => handleMakeAdmin(user.id)}>Make Admin</button>}
+              <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
 
       <h2>Admins</h2>
-      <ul>
+      <ul className="user-list">
         {admins.map(admin => (
-          <li key={admin.id}>
-            {admin.username} - {admin.name}
-            <button onClick={() => handleRemoveAdmin(admin.id)}>Remove Admin</button>
+          <li key={admin.id} className="user-item">
+            <span>{admin.username} - {admin.name}</span>
+            <div className="button-group">
+              <button onClick={() => handleRemoveAdmin(admin.id)}>Remove Admin</button>
+            </div>
           </li>
         ))}
       </ul>
 
       <h2>Register New User</h2>
       <RegisterUser handleRegister={handleRegister} />
+      <div className="nav-buttons">
+        <button onClick={() => navigate('/')} className="home-button">Home</button>
+      </div>
     </div>
   );
 };
