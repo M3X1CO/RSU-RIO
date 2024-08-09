@@ -1,7 +1,9 @@
-import React from 'react';
-import XLSXImporter from './XLSXImporter';
+import React from 'react'
+import XLSXImporter from './XLSXImporter'
 
 const Footer = ({ user, logout, addStudent, setView }) => {
+  console.log('user', user)
+
   return (
     <footer className="footer">
       <XLSXImporter addStudent={addStudent} />
@@ -25,4 +27,4 @@ const Footer = ({ user, logout, addStudent, setView }) => {
   );
 };
 
-export default Footer;
+export default Footer
