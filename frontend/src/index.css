@@ -165,6 +165,7 @@ button:hover {
   width: calc(100% - 40px);
   margin: 0 auto;
   box-sizing: border-box;
+  color: yellow;
 }
 
 .student-details-wrapper {
@@ -289,7 +290,6 @@ input[type="file"] {
   filter: brightness(80%);
   width: 100%;
   box-sizing: border-box;
-  border: 2px solid red;
 }
 
 @media (max-width: 1000px) {
