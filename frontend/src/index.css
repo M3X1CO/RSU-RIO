@@ -162,11 +162,13 @@ button:hover {
 }
 
 .student-details-container {
-  width: calc(100% - 40px);
+  width: 100%;
   box-sizing: border-box;
-  margin: 0 auto;
-  box-sizing: border-box;
-  background-color: yellow;
+  margin: 20px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .student-details-wrapper {
