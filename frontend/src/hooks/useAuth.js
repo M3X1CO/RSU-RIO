@@ -14,6 +14,7 @@ const useAuth = () => {
       const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
       if (loggedUserJSON) {
         const user = JSON.parse(loggedUserJSON)
+        console.log(user)
         setUser(user)
         setIsAdmin(user.isAdmin || false)
         setAuthToken(user.token)
