@@ -1,15 +1,12 @@
-// AdminPage.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RegisterUser from './RegisterUser';
 
-const AdminPage = () => {
+const AdminPage = ({ user, setView }) => {
   const [users, setUsers] = useState([]);
   const [admins, setAdmins] = useState([]);
   const [pendingUsers, setPendingUsers] = useState([]);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUsers();
@@ -134,7 +131,7 @@ const AdminPage = () => {
       <h2>Register New User</h2>
       <RegisterUser handleRegister={handleRegister} />
       <div className="nav-buttons">
-        <button onClick={() => navigate('/')} className="home-button">Home</button>
+        <button onClick={() => setView('main')} className="home-button">Back to Main</button>
       </div>
     </div>
   );
