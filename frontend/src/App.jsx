@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import Notification from './components/Notification'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
@@ -8,6 +7,8 @@ import AdminPage from './components/AdminPanel'
 import AdminPanel from './components/AdminPanel'
 import useStudents from './hooks/useStudents'
 import useAuth from './hooks/useAuth'
+import LoadingSpinner from './components/LoadingSpinner'
+import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
   const { user, errorMessage: authError, login, logout, isAdmin, loading } = useAuth()
@@ -33,9 +34,11 @@ const App = () => {
   return (
     <div className="app-container">
       <Header />
-      <Notification message={errorMessage} />
-
+      
       <main className="main-content">
+        {loading && <LoadingSpinner />}
+        {errorMessage && <ErrorMessage message={errorMessage} />}
+        
         {!user && <LoginFormWrapper handleLogin={login} />}
         {user && view === 'main' && (
           <MainContent
@@ -54,8 +57,6 @@ const App = () => {
         {user && isAdmin && view === 'admin' && (
           <AdminPage user={user} />
         )}
-        {loading && <LoadingSpinner />}
-        {errorMessage && <ErrorMessage message={errorMessage} />}
         {isAdmin && <AdminPanel />}
       </main>
 
