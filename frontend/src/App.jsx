@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
@@ -36,7 +36,7 @@ const App = () => {
       return <LoginFormWrapper user={user} handleLogin={login} handleRegister={register} />
     }
 
-    if (user.status === 'pending' || user.status === 'denied') {
+    if (user.status !== 'approved') {
       return <RestrictedAccess status={user.status} logout={logout} />
     }
 
@@ -75,7 +75,7 @@ const App = () => {
         {renderContent()}
       </main>
 
-      {user && user.status !== 'pending' && user.status !== 'denied' && (
+      {user && user.status === 'approved' && (
         <Footer
           addStudent={addStudent}
           user={user}
