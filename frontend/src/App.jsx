@@ -59,13 +59,15 @@ const App = () => {
         )}
       </main>
 
-      <Footer
-        addStudent={addStudent}
-        user={user}
-        logout={logout}
-        setView={setView}
-        isAdmin={isAdmin}
-      />
+      {user && (
+        <Footer
+          addStudent={addStudent}
+          user={user}
+          logout={logout}
+          setView={setView}
+          isAdmin={isAdmin}
+        />
+      )}
     </div>
   );
 };
