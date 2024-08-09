@@ -26,9 +26,9 @@ const AdminPage = () => {
     }
   };
 
-  const handleApprove = async (userId) => {
+  const handleApprove = async (user) => {
     try {
-      await axios.put(`/api/admin/approve/${userId}`);
+      await axios.put(`/api/admin/approve/${user.id}`);
       fetchUsers();
     } catch (err) {
       setError('Error approving user');
@@ -94,10 +94,10 @@ const AdminPage = () => {
       <h2>Pending Users</h2>
       <ul>
         {pendingUsers.map(user => (
-          <li key={user._id}>
+          <li key={user.id}>
             {user.username} - {user.name}
-            <button onClick={() => handleApprove(user._id)}>Approve</button>
-            <button onClick={() => handleDeny(user._id)}>Deny</button>
+            <button onClick={() => handleApprove(user)}>Approve</button>
+            <button onClick={() => handleDeny(user.id)}>Deny</button>
           </li>
         ))}
       </ul>
@@ -105,10 +105,10 @@ const AdminPage = () => {
       <h2>All Users</h2>
       <ul>
         {users.map(user => (
-          <li key={user._id}>
+          <li key={user.id}>
             {user.username} - {user.name}
-            {!user.isAdmin && <button onClick={() => handleMakeAdmin(user._id)}>Make Admin</button>}
-            <button onClick={() => handleDeleteUser(user._id)}>Delete</button>
+            {!user.isAdmin && <button onClick={() => handleMakeAdmin(user.id)}>Make Admin</button>}
+            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -116,9 +116,9 @@ const AdminPage = () => {
       <h2>Admins</h2>
       <ul>
         {admins.map(admin => (
-          <li key={admin._id}>
+          <li key={admin.id}>
             {admin.username} - {admin.name}
-            <button onClick={() => handleRemoveAdmin(admin._id)}>Remove Admin</button>
+            <button onClick={() => handleRemoveAdmin(admin.id)}>Remove Admin</button>
           </li>
         ))}
       </ul>
