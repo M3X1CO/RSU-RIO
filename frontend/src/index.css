@@ -12,6 +12,7 @@
   --color-footer-background: papayawhip;
 }
 
+/* Base styles */
 html, body {
   height: 100%;
   margin: 0;
@@ -20,6 +21,7 @@ html, body {
   color: var(--color-text-primary);
 }
 
+/* Layout */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -30,8 +32,8 @@ html, body {
   flex: 1;
 }
 
+/* Header */
 .header-container {
-  position: relative;
   padding: 10px;
 }
 
@@ -42,7 +44,8 @@ html, body {
   text-align: center;
 }
 
-button {
+/* Buttons */
+button, .custom-file-upload {
   background-color: var(--color-button);
   color: var(--color-button-text);
   border: none;
@@ -51,72 +54,61 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover, .custom-file-upload:hover {
   opacity: 0.8;
 }
 
-.pagination-container {
-  position: sticky;
-  bottom: 20px;
+.custom-file-upload:active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
+
+/* Pagination */
+.pagination-container, .pagination-container-2 {
   background-color: var(--color-background);
   padding: 10px 0;
   z-index: 1;
 }
 
-.pagination {
-  display: flex;
-  gap: 5px;
-}
-
-.pagination button {
-  padding: 5px 10px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-button);
-  color: var(--color-button-text);
-}
-
-.pagination button.active {
-  background-color: var(--color-active);
-  color: var(--color-text-primary);
+.pagination-container {
+  position: sticky;
+  bottom: 20px;
 }
 
 .pagination-container-2 {
-  position: relative; 
-  margin-top: 20px; 
-  background-color: var(--color-background);
-  padding: 10px 0;
-  z-index: 1; 
+  position: relative;
+  margin-top: 20px;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
-.pagination-2 {
+.pagination, .pagination-2 {
   display: flex;
   gap: 5px;
 }
 
-.pagination-2 button {
+.pagination button, .pagination-2 button {
   padding: 5px 10px;
   border: 1px solid var(--color-border);
-  background-color: var(--color-button);
-  color: var(--color-button-text);
 }
 
-.pagination-2 button.active {
+.pagination button.active, .pagination-2 button.active {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
 
-
-.copyright {
+/* User info and copyright */
+.copyright, .user-info {
   color: var(--color-text-secondary);
   font-style: italic;
+}
+
+.copyright {
   font-size: 16px;
   margin-top: 20px;
 }
 
 .user-info-container {
-  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -127,15 +119,11 @@ button:hover {
   margin-top: 20px;
 }
 
-.user-info {
-  color: var(--color-text-secondary);
-  margin-bottom: 10px;
-}
-
 .user-info-container button {
   margin-top: 10px;
 }
 
+/* Student list and details */
 .student-list {
   list-style-type: none;
   padding: 0;
@@ -151,24 +139,14 @@ button:hover {
   background-color: #4a4845;
 }
 
-
-.student-fields input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-}
-
 .student-details-container {
   width: 100%;
   box-sizing: border-box;
-  margin: 20px auto;
+  margin: 20px 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 .student-details-wrapper {
@@ -177,8 +155,9 @@ button:hover {
   background-color: var(--color-background);
 }
 
-.student-details {
-  margin-bottom: 20px;
+.student-details, .student-fields {
+  width: 100%;
+  max-width: none;
 }
 
 .student-details table, .student-fields {
@@ -203,30 +182,21 @@ button:hover {
   background-color: var(--color-hover);
 }
 
+.student-fields input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+/* File upload */
 input[type="file"] {
   display: none;
 }
 
-.custom-file-upload {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: var(--color-button);
-  color: var(--color-button-text);
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-}
-
-.custom-file-upload:hover {
-  opacity: 0.8;
-}
-
-.custom-file-upload:active {
-  background-color: var(--color-active);
-  color: var(--color-text-primary);
-}
-
+/* Search */
 .search-container {
   display: flex;
   justify-content: center;
@@ -250,6 +220,7 @@ input[type="file"] {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
 }
 
+/* Student content */
 .student {
   display: flex;
   flex-direction: column;
@@ -270,18 +241,11 @@ input[type="file"] {
   gap: 10px;
 }
 
-.student-details {
-  margin-top: 10px;
-}
-
-.delete-button {
+.delete-button, .logout-button {
   color: #CD5C5C;
 }
 
-.logout-button {
-  color: #CD5C5C;
-}
-
+/* Footer */
 .footer {
   display: flex;
   flex-direction: column;
@@ -289,12 +253,12 @@ input[type="file"] {
   padding: 20px;
   background-color: var(--color-footer-background);
   text-align: center;
-  position: relative;
   filter: brightness(80%);
   width: 100%;
   box-sizing: border-box;
 }
 
+/* Media Queries */
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;
@@ -305,9 +269,7 @@ input[type="file"] {
     margin: 10px 0;
     width: 100%;
   }
-}
-
-@media (max-width: 1000px) {
+  
   .student-content {
     flex-direction: column;
     align-items: flex-start;
@@ -322,12 +284,8 @@ input[type="file"] {
   .button-container button {
     width: 100%;
   }
-}
 
-@media (max-width: 1000px) {
   .student-details-container {
-    width: 100%;
-    box-sizing: border-box;
     margin: 0;
   }
 }
