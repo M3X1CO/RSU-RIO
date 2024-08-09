@@ -12,7 +12,6 @@
   --color-footer-background: papayawhip;
 }
 
-/* Base styles */
 html, body {
   height: 100%;
   margin: 0;
@@ -21,7 +20,6 @@ html, body {
   color: var(--color-text-primary);
 }
 
-/* Layout */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -32,7 +30,6 @@ html, body {
   flex: 1;
 }
 
-/* Header */
 .header-container {
   padding: 10px;
 }
@@ -44,7 +41,6 @@ html, body {
   text-align: center;
 }
 
-/* Buttons */
 button, .custom-file-upload {
   background-color: var(--color-button);
   color: var(--color-button-text);
@@ -63,7 +59,6 @@ button:hover, .custom-file-upload:hover {
   color: var(--color-text-primary);
 }
 
-/* Pagination */
 .pagination-container, .pagination-container-2 {
   background-color: var(--color-background);
   padding: 10px 0;
@@ -97,7 +92,6 @@ button:hover, .custom-file-upload:hover {
   color: var(--color-text-primary);
 }
 
-/* User info and copyright */
 .copyright, .user-info {
   color: var(--color-text-secondary);
   font-style: italic;
@@ -123,7 +117,6 @@ button:hover, .custom-file-upload:hover {
   margin-top: 10px;
 }
 
-/* Student list and details */
 .student-list {
   list-style-type: none;
   padding: 0;
@@ -191,12 +184,10 @@ button:hover, .custom-file-upload:hover {
   color: var(--color-text-primary);
 }
 
-/* File upload */
 input[type="file"] {
   display: none;
 }
 
-/* Search */
 .search-container {
   display: flex;
   justify-content: center;
@@ -220,7 +211,6 @@ input[type="file"] {
   box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
 }
 
-/* Student content */
 .student {
   display: flex;
   flex-direction: column;
@@ -245,7 +235,6 @@ input[type="file"] {
   color: #CD5C5C;
 }
 
-/* Footer */
 .footer {
   display: flex;
   flex-direction: column;
@@ -258,7 +247,10 @@ input[type="file"] {
   box-sizing: border-box;
 }
 
-/* Media Queries */
+.footer-h2 {
+  color: #33332d;
+}
+
 @media (max-width: 1000px) {
   .search-container {
     flex-direction: column;
