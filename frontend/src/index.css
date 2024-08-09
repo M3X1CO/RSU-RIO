@@ -127,6 +127,11 @@ html, body {
   width: 100%;
 }
 
+.login-button.standalone {
+  width: auto;
+  padding: 0.75rem 2rem;
+}
+
 .pagination-container, .pagination-container-2 {
   background-color: var(--color-background);
   padding: 10px 0;

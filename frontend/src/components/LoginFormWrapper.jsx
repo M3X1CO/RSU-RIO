@@ -9,17 +9,14 @@ const LoginFormWrapper = ({ handleLogin }) => {
 
   return (
     <div className="form-container">
-      <div className="login-form-wrapper">
-        {!loginVisible && (
-          <button onClick={() => setLoginVisible(true)} className="button login-button">Log In</button>
-        )}
-        {loginVisible && (
-          <>
-            <LoginForm handleSubmit={handleLogin} />
-            <button onClick={() => setLoginVisible(false)} className="button cancel-button">Cancel</button>
-          </>
-        )}
-      </div>
+      {!loginVisible ? (
+        <button onClick={() => setLoginVisible(true)} className="button login-button standalone">Log In</button>
+      ) : (
+        <div className="login-form-wrapper">
+          <LoginForm handleSubmit={handleLogin} />
+          <button onClick={() => setLoginVisible(false)} className="button cancel-button">Cancel</button>
+        </div>
+      )}
     </div>
   )
 }
