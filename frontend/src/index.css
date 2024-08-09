@@ -66,11 +66,13 @@ button:hover {
 }
 
 .pagination-container {
-  position: sticky;
-  bottom: 20px;
+  position: fixed;
+  bottom: 10px;
   background-color: var(--color-background);
   padding: 10px 0;
-  z-index: 1;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination {

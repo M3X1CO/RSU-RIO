@@ -3,7 +3,7 @@ import Student from './Student'
 
 const StudentList = ({ students, handleDelete, handleUpdate }) => {
   const [currentPage, setCurrentPage] = useState(1)
-  const studentsPerPage = 25
+  const studentsPerPage = 20
 
   if (students.length === 0) {
     return <p>No students found.</p>
@@ -35,8 +35,8 @@ const StudentList = ({ students, handleDelete, handleUpdate }) => {
         ))}
       </ul>
       
-      <div className="pagination-container">
-        <div className="pagination">
+      <div className="pagination-container2">
+        <div className="pagination2">
           {[...Array(totalPages)].map((_, index) => (
             <button
               key={index}
