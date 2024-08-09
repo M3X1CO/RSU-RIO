@@ -50,11 +50,12 @@ html, body {
 }
 
 .login-form {
-  background-color: var(--color-background);
+  background-color: papayawhip;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 300px;
+  filter: brightness(80%);
 }
 
 .login-form h2 {
