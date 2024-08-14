@@ -16,12 +16,23 @@ const getTokenFrom = request => {
 studentRouter.post('/check-exists', async (request, response) => {
   const { oldPassportNumber, newPassportNumber } = request.body;
 
-  const existingStudent = await Student.findOne({
-    $or: [
-      { oldPassportNumber: { $in: [oldPassportNumber, newPassportNumber] } },
-      { newPassportNumber: { $in: [oldPassportNumber, newPassportNumber] } }
-    ]
-  });
+  const query = {
+    $or: []
+  };
+
+  if (oldPassportNumber) {
+    query.$or.push({ oldPassportNumber: oldPassportNumber });
+  }
+
+  if (newPassportNumber) {
+    query.$or.push({ newPassportNumber: newPassportNumber });
+  }
+
+  if (query.$or.length === 0) {
+    return response.json({ exists: false });
+  }
+
+  const existingStudent = await Student.findOne(query);
 
   response.json({ exists: !!existingStudent });
 });

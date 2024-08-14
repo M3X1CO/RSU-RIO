@@ -1,11 +1,10 @@
-import React from 'react';
 import axios from 'axios';
 
 const StudentExists = async (oldPassportNumber, newPassportNumber) => {
   try {
     const response = await axios.post('/api/students/check-exists', { 
-      oldPassportNumber, 
-      newPassportNumber 
+      oldPassportNumber: oldPassportNumber || undefined, 
+      newPassportNumber: newPassportNumber || undefined 
     });
     return response.data.exists;
   } catch (error) {
