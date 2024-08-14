@@ -118,6 +118,7 @@ const App = () => {
           logout={handleLogout}
           setView={setView}
           isAdmin={isAdmin}
+          refreshStudents={refreshStudents}
         />
       )}
     </div>
