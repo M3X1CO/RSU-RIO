@@ -34,6 +34,10 @@ const useStudents = (user) => {
 
   const addStudent = async (studentObject) => {
     try {
+      if (!user || !user.token) {
+        throw new Error('User not authenticated')
+      }
+      studentsService.setToken(user.token)
       const returnedStudent = await studentsService.create(studentObject)
       setStudents(students => [...students, returnedStudent])
       return returnedStudent

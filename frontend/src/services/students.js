@@ -26,8 +26,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('loggedStudentappUser')
-      window.location = '/login'
+      console.error('Authentication error:', error)
     }
     return Promise.reject(error)
   }

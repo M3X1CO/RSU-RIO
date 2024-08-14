@@ -56,29 +56,37 @@ studentRouter.put('/:id', async (request, response, next) => {
 studentRouter.post('/', async (request, response) => {
   const body = request.body
   const token = getTokenFrom(request)
-  const decodedToken = jwt.verify(token, process.env.SECRET)
+  
+  try {
+    const decodedToken = jwt.verify(token, config.JWT_SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
 
-  if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token invalid' })
+    const user = await User.findById(decodedToken.id)
+
+    const student = new Student({
+      ...Object.keys(studentFields).reduce((acc, field) => {
+        if (body[field] !== undefined) {
+          acc[field] = body[field]
+        }
+        return acc
+      }, {}),
+      user: user._id
+    })
+
+    const savedStudent = await student.save()
+    user.students = user.students.concat(savedStudent._id)
+    await user.save()
+
+    response.status(201).json(savedStudent)
+  } catch (error) {
+    console.error('Error in student creation:', error)
+    if (error.name === 'JsonWebTokenError') {
+      return response.status(401).json({ error: 'invalid token' })
+    }
+    response.status(500).json({ error: 'internal server error' })
   }
-
-  const user = await User.findById(decodedToken.id)
-
-  const student = new Student({
-    ...Object.keys(studentFields).reduce((acc, field) => {
-      if (body[field] !== undefined) {
-        acc[field] = body[field]
-      }
-      return acc
-    }, {}),
-    user: user._id
-  })
-
-  const savedStudent = await student.save()
-  user.students = user.students.concat(savedStudent._id)
-  await user.save()
-
-  response.status(201).json(savedStudent)
 })
 
 studentRouter.get('/:id', async (request, response) => {
