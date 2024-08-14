@@ -179,7 +179,7 @@ const XLSXImporter = ({ user, onImportComplete }) => {
             handleInputChange={handleInputChange}
             isEditable
           />
-          <div>
+          <div className="button-container">
             <button onClick={handleSaveStudent}>Save Student</button>
             <button onClick={handleCancel}>Cancel</button>
             <button onClick={handleSaveAll}>Save All</button>

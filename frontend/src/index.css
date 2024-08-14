@@ -4,14 +4,16 @@
   --color-text-secondary: #a0a0a0;
   --color-row-even: #979694;
   --color-row-odd: #a0a0a0;
-  --color-hover: #33332d;
+  --color-hover: #4a4845;
   --color-button: #212121;
   --color-button-text: #a0a0a0;
   --color-border: #ffefd5;
   --color-active: #979684;
   --color-footer-background: papayawhip;
+  --color-error: #cd5c5c;
 }
 
+/* Base styles */
 html, body {
   height: 100%;
   margin: 0;
@@ -28,8 +30,10 @@ html, body {
 
 .main-content {
   flex: 1;
+  padding: 20px;
 }
 
+/* Header styles */
 .header-container {
   padding: 10px;
 }
@@ -41,12 +45,12 @@ html, body {
   text-align: center;
 }
 
+/* Form styles */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--color-background);
 }
 
 .login-form-wrapper,
@@ -95,7 +99,10 @@ html, body {
   border-color: var(--color-active);
 }
 
-.button {
+/* Button styles */
+.button,
+button,
+.custom-file-upload {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--color-border);
@@ -103,68 +110,107 @@ html, body {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
-  box-sizing: border-box;
-}
-
-.button:hover {
-  color: var(--color-text-primary);
-}
-
-.login-button {
   background-color: var(--color-button);
   color: var(--color-button-text);
 }
 
-.login-button:hover {
-  background-color: var(--color-active);
-}
-
-.register-button {
-  background-color: var(--color-button-light);
-  color: var(--color-text-primary);
-}
-
-.register-button:hover {
-  background-color: var(--color-active-light);
-}
-
-.cancel-button {
-  background-color: transparent;
-  color: #CD5C5C;
-  margin-top: 1rem;
-  border: 1px solid var(--color-border);
-}
-
-.cancel-button:hover {
+.button:hover,
+button:hover,
+.custom-file-upload:hover {
   background-color: var(--color-hover);
   color: var(--color-text-primary);
 }
 
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.login-button,
 .register-button {
+  margin-top: 1rem;
+}
+
+.cancel-button,
+.logout-button,
+.admin-no-button {
+  color: var(--color-error);
+}
+
+/* Admin panel styles */
+.admin-page {
+  padding: 20px;
+}
+
+.user-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Student list styles */
+.student-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student {
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.student:hover {
+  background-color: var(--color-hover);
+}
+
+.student-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.student-info {
+  color: var(--color-text-secondary);
+}
+
+/* Search styles */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-input {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+  margin: 0 10px;
+  width: 250px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   background-color: var(--color-background);
   color: var(--color-text-primary);
-  margin-top: 1rem;
-  border: 1px solid var(--color-border);
 }
 
-.register-button:hover {
-  background-color: var(--color-hover);
-  color: var(--color-text-primary);
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-active);
+  box-shadow: 0 0 0 2px rgba(151, 150, 132, 0.25);
 }
 
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.login-button.standalone,
-.register-button.standalone {
-  width: auto;
-  padding: 0.75rem 2rem;
-}
-
-.pagination-container, .pagination-container-2 {
+/* Pagination styles */
+.pagination-container,
+.pagination-container-2 {
   background-color: var(--color-background);
   padding: 10px 0;
   z-index: 1;
@@ -182,164 +228,25 @@ html, body {
   justify-content: center;
 }
 
-.pagination, .pagination-2 {
+.pagination,
+.pagination-2 {
   display: flex;
   gap: 5px;
 }
 
-.pagination button, .pagination-2 button {
+.pagination button,
+.pagination-2 button {
   padding: 5px 10px;
   border: 1px solid var(--color-border);
 }
 
-.pagination button.active, .pagination-2 button.active {
+.pagination button.active,
+.pagination-2 button.active {
   background-color: var(--color-active);
   color: var(--color-text-primary);
 }
 
-.copyright, .user-info {
-  color: var(--color-text-secondary);
-  font-style: italic;
-}
-
-.copyright {
-  font-size: 16px;
-  margin-top: 20px;
-}
-
-.user-info-container {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--color-footer-background);
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.user-info-container button {
-  margin-top: 10px;
-}
-
-.student-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.student-list li {
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.student-list li:hover {
-  background-color: #4a4845;
-}
-
-.student-details-container {
-  width: 100%;
-  box-sizing: border-box;
-  margin: 20px 0;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.student-details-wrapper {
-  padding-bottom: 60px;
-  margin-bottom: 20px;
-  background-color: var(--color-background);
-}
-
-.student-details, .student-fields {
-  width: 100%;
-  max-width: none;
-}
-
-.student-details table, .student-fields {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.student-details td, .student-fields td {
-  padding: 8px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.student-details tr:nth-child(even), .student-fields tr:nth-child(even) {
-  background-color: var(--color-row-even);
-}
-
-.student-details tr:nth-child(odd), .student-fields tr:nth-child(odd) {
-  background-color: var(--color-row-odd);
-}
-
-.student-details tr:hover, .student-fields tr:hover {
-  background-color: var(--color-hover);
-}
-
-.student-fields input {
-  width: 100%;
-  padding: 5px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-}
-
-input[type="file"] {
-  display: none;
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-}
-
-.search-input {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  margin: 0 10px;
-  width: 250px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, .25);
-}
-
-.student {
-  display: flex;
-  flex-direction: column;
-}
-
-.student-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.student-info {
-  color: var(--color-text-secondary);
-}
-
-.button-container {
-  display: flex;
-  gap: 10px;
-}
-
-.delete-button, .logout-button {
-  color: #CD5C5C;
-}
-
+/* Footer styles */
 .footer {
   display: flex;
   flex-direction: column;
@@ -356,24 +263,30 @@ input[type="file"] {
   color: #33332d;
 }
 
-button, .custom-file-upload {
-  background-color: var(--color-button);
-  color: var(--color-button-text);
-  border: none;
-  padding: 10px 20px;
+.copyright {
   font-size: 16px;
-  cursor: pointer;
+  margin-top: 20px;
+  color: var(--color-text-secondary);
+  font-style: italic;
 }
 
-button:hover, .custom-file-upload:hover {
-  opacity: 0.8;
+.user-info-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-footer-background);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
 }
 
-.custom-file-upload:active {
-  background-color: var(--color-active);
-  color: var(--color-text-primary);
+.user-info {
+  color: var(--color-text-secondary);
+  font-style: italic;
 }
 
+/* Error message styles */
 .error-message {
   background-color: #f8d7da;
   color: #721c24;
@@ -383,50 +296,8 @@ button:hover, .custom-file-upload:hover {
   border-radius: 4px;
 }
 
-.admin-page {
-  padding: 20px;
-}
-
-.admin-no-button {
-  color: #CD5C5C;
-}
-
-.admin-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-.user-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
-}
-
-.nav-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.register-button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-@media (max-width: 1000px) {
+/* Responsive design */
+@media (max-width: 768px) {
   .search-container {
     flex-direction: column;
     align-items: stretch;
@@ -450,9 +321,5 @@ button:hover, .custom-file-upload:hover {
 
   .button-container button {
     width: 100%;
-  }
-
-  .student-details-container {
-    margin: 0;
   }
 }
