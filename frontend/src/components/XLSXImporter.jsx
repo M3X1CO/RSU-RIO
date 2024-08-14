@@ -11,6 +11,7 @@ const XLSXImporter = ({ user, onImportComplete }) => {
   const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
   const [error, setError] = useState(null)
   const { addStudent, refreshStudents } = useStudents(user)
+  const [importErrors, setImportErrors] = useState([])
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0]
@@ -128,9 +129,40 @@ const XLSXImporter = ({ user, onImportComplete }) => {
     }
   }
 
+  const handleSaveAll = async () => {
+    const errors = []
+    for (let i = 0; i < students.length; i++) {
+      const student = students[i]
+      try {
+        const exists = await StudentExists(student.oldPassportNumber, student.newPassportNumber)
+        if (exists) {
+          errors.push(student.newPassportNumber || student.oldPassportNumber)
+          continue
+        }
+        await addStudent(student, user)
+      } catch (error) {
+        console.error('Failed to save student:', error)
+        errors.push(student.newPassportNumber || student.oldPassportNumber)
+      }
+    }
+    
+    await refreshStudents()
+    setStudents([])
+    setCurrentStudentIndex(0)
+    onImportComplete()
+
+    if (errors.length > 0) {
+      setImportErrors(errors)
+    }
+  }
+
   const handleCancel = () => {
     setStudents([])
     setCurrentStudentIndex(0)
+  }
+
+  const handleDismissError = () => {
+    setImportErrors([])
   }
 
   return (
@@ -150,10 +182,17 @@ const XLSXImporter = ({ user, onImportComplete }) => {
           <div>
             <button onClick={handleSaveStudent}>Save Student</button>
             <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleSaveAll}>Save All</button>
           </div>
         </div>
       )}
       {error && <ErrorMessage message={error} />}
+      {importErrors.length > 0 && (
+        <ErrorMessage 
+          message={`Error adding students ${importErrors.join(', ')} to the database as they already exist.`}
+          onDismiss={handleDismissError}
+        />
+      )}
     </div>
   )
 }

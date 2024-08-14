@@ -1,7 +1,10 @@
 import React from 'react'
 
-const ErrorMessage = ({ message }) => (
-  <div className="error-message">{message}</div>
+const ErrorMessage = ({ message, onDismiss }) => (
+  <div className="error-message">
+    <p>{message}</p>
+    {onDismiss && <button onClick={onDismiss}>Ok</button>}
+  </div>
 )
 
 export default ErrorMessage
