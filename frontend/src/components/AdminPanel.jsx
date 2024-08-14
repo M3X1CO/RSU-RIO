@@ -85,50 +85,78 @@ const AdminPage = ({ setView }) => {
     }
   };
 
+  const UserItem = ({ user, actions }) => (
+    <li className="user-item">
+      <div className="user-info">
+        <span className="username">{user.username}</span>
+        <span className="name">{user.name}</span>
+      </div>
+      <div className="button-group">
+        {actions.map((action, index) => (
+          <button key={index} onClick={action.handler} className={action.className}>
+            {action.label}
+          </button>
+        ))}
+      </div>
+    </li>
+  );
+
   return (
     <div className="admin-page">
       <h1>Admin Panel</h1>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error-message">{error}</p>}
       
-      <h2>Pending Users</h2>
-      <ul className="user-list">
-        {pendingUsers.map(user => (
-          <li key={user.id} className="user-item">
-            <span>{user.username} - {user.name}</span>
-            <div className="button-group">
-              <button onClick={() => handleApprove(user)}>Approve</button>
-              <button onClick={() => handleDeny(user.id)} className="admin-no-button">Deny</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-  
-      <h2>All Users</h2>
-      <ul className="user-list">
-        {users.map(user => (
-          <li key={user.id} className="user-item">
-            <span>{user.username} - {user.name}</span>
-            <div className="button-group">
-              {!user.isAdmin && <button onClick={() => handleMakeAdmin(user.id)}>Make Admin</button>}
-              <button onClick={() => handleDeleteUser(user.id)} className="admin-no-button">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-  
-      <h2>Admins</h2>
-      <ul className="user-list">
-        {admins.map(admin => (
-          <li key={admin.id} className="user-item">
-            <span>{admin.username} - {admin.name}</span>
-            <div className="button-group">
-              <button onClick={() => handleRemoveAdmin(admin.id)} className="admin-no-button">Remove Admin</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-  
-      <RegisterUser handleRegister={handleRegister} setView={setView} />
+      <div className="admin-section">
+        <h2>Pending Users</h2>
+        <ul className="user-list">
+          {pendingUsers.map(user => (
+            <UserItem 
+              key={user.id} 
+              user={user} 
+              actions={[
+                { label: 'Approve', handler: () => handleApprove(user), className: 'button' },
+                { label: 'Deny', handler: () => handleDeny(user.id), className: 'button admin-no-button' }
+              ]}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <div className="admin-section">
+        <h2>All Users</h2>
+        <ul className="user-list">
+          {users.map(user => (
+            <UserItem 
+              key={user.id} 
+              user={user} 
+              actions={[
+                ...(user.isAdmin ? [] : [{ label: 'Make Admin', handler: () => handleMakeAdmin(user.id), className: 'button' }]),
+                { label: 'Delete', handler: () => handleDeleteUser(user.id), className: 'button admin-no-button' }
+              ]}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <div className="admin-section">
+        <h2>Admins</h2>
+        <ul className="user-list">
+          {admins.map(admin => (
+            <UserItem 
+              key={admin.id} 
+              user={admin} 
+              actions={[
+                { label: 'Remove Admin', handler: () => handleRemoveAdmin(admin.id), className: 'button admin-no-button' }
+              ]}
+            />
+          ))}
+        </ul>
+      </div>
+
+      <div className="admin-section register-section">
+        <h2>Register New User</h2>
+        <RegisterUser handleRegister={handleRegister} setView={setView} />
+      </div>
     </div>
   );
 }
