@@ -63,13 +63,4 @@ const remove = async (id) => {
   return response.data
 }
 
-const studentService = { 
-  setToken,
-  getAll, 
-  create, 
-  update, 
-  remove, 
-  verifyToken
-}
-
-export default studentService
+export default { getAll, create, update, remove, verifyToken, setToken }

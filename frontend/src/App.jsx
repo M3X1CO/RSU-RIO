@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import LoginFormWrapper from './components/LoginFormWrapper'
@@ -11,14 +11,27 @@ import LoadingSpinner from './components/LoadingSpinner'
 import ErrorMessage from './components/ErrorMessage'
 
 const App = () => {
-  const { user, errorMessage: authError, login, logout, register, isAdmin, loading, status } = useAuth()
+  const { 
+    user, 
+    errorMessage: authError, 
+    login, 
+    logout, 
+    register, 
+    isAdmin, 
+    loading: authLoading, 
+    status 
+  } = useAuth()
+
   const {
     students,
     errorMessage: studentError,
+    loading: studentsLoading,
     addStudent,
     deleteStudent,
-    updateStudent
+    updateStudent,
+    refreshStudents
   } = useStudents(user)
+
   const studentFormRef = useRef()
   const [oldPassportSearch, setOldPassportSearch] = useState('')
   const [newPassportSearch, setNewPassportSearch] = useState('')
@@ -26,22 +39,42 @@ const App = () => {
 
   const errorMessage = authError || studentError
 
+  useEffect(() => {
+    if (user) {
+      refreshStudents()
+    }
+  }, [user, refreshStudents])
+
+  const handleLogin = async (username, password) => {
+    try {
+      await login(username, password)
+      refreshStudents()
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
+  }
+
+  const handleLogout = () => {
+    logout()
+    setView('main')
+  }
+
   const filteredStudents = students.filter(student =>
     student.oldPassportNumber.toLowerCase().includes(oldPassportSearch.toLowerCase()) &&
     student.newPassportNumber.toLowerCase().includes(newPassportSearch.toLowerCase())
   )
 
   const renderContent = () => {
-    if (loading) return <LoadingSpinner />
+    if (authLoading || studentsLoading) return <LoadingSpinner />
 
     if (errorMessage) return <ErrorMessage message={errorMessage} />
 
     if (!user) {
-      return <LoginFormWrapper handleLogin={login} handleRegister={register} />
+      return <LoginFormWrapper handleLogin={handleLogin} handleRegister={register} />
     }
 
     if (!status || status !== 'approved') {
-      return <RestrictedAccess status={status || 'unknown'} logout={logout} />
+      return <RestrictedAccess status={status || 'unknown'} logout={handleLogout} />
     }
 
     if (view === 'main') {
@@ -78,13 +111,13 @@ const App = () => {
         <Footer
           addStudent={addStudent}
           user={user}
-          logout={logout}
+          logout={handleLogout}
           setView={setView}
           isAdmin={isAdmin}
         />
       )}
     </div>
-  );
-};
+  )
+}
 
 export default App

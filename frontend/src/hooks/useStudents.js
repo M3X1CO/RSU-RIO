@@ -1,33 +1,46 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import studentsService from '../services/students'
 
 const useStudents = (user) => {
   const [students, setStudents] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
+  const fetchStudents = useCallback(async () => {
     if (user) {
-      studentsService.getAll()
-        .then(initialStudents => setStudents(initialStudents))
-        .catch(error => {
+      try {
+        setLoading(true)
+        const initialStudents = await studentsService.getAll()
+        setStudents(initialStudents)
+      } catch (error) {
+        console.error('Error fetching students:', error)
+        if (error.response && error.response.status === 401) {
+          setErrorMessage('Session expired. Please log in again.')
+        } else {
           setErrorMessage('Failed to fetch students')
-          setTimeout(() => setErrorMessage(null), 5000)
-        })
+        }
+      } finally {
+        setLoading(false)
+      }
+    } else {
+      setStudents([])
+      setLoading(false)
     }
   }, [user])
 
-  const addStudent = (studentObject) => {
-    return studentsService
-      .create(studentObject)
-      .then(returnedStudent => {
-        setStudents(students => [...students, returnedStudent])
-        return returnedStudent
-      })
-      .catch(error => {
-        setErrorMessage('Failed to add student')
-        setTimeout(() => setErrorMessage(null), 5000)
-        throw error
-      })
+  useEffect(() => {
+    fetchStudents()
+  }, [fetchStudents])
+
+  const addStudent = async (studentObject) => {
+    try {
+      const returnedStudent = await studentsService.create(studentObject)
+      setStudents(students => [...students, returnedStudent])
+      return returnedStudent
+    } catch (error) {
+      handleError(error, 'Failed to add student')
+      throw error
+    }
   }
 
   const deleteStudent = async (id) => {
@@ -36,8 +49,7 @@ const useStudents = (user) => {
         await studentsService.remove(id)
         setStudents(students.filter(student => student.id !== id))
       } catch (error) {
-        setErrorMessage('Failed to delete student')
-        setTimeout(() => setErrorMessage(null), 5000)
+        handleError(error, 'Failed to delete student')
       }
     }
   }
@@ -50,13 +62,30 @@ const useStudents = (user) => {
       ))
       return returnedStudent
     } catch (error) {
-      setErrorMessage('Failed to update student')
-      setTimeout(() => setErrorMessage(null), 5000)
+      handleError(error, 'Failed to update student')
       throw error
     }
   }
 
-  return { students, errorMessage, addStudent, deleteStudent, updateStudent }
+  const handleError = (error, defaultMessage) => {
+    console.error(error)
+    if (error.response && error.response.status === 401) {
+      setErrorMessage('Session expired. Please log in again.')
+    } else {
+      setErrorMessage(defaultMessage)
+    }
+    setTimeout(() => setErrorMessage(null), 5000)
+  }
+
+  return { 
+    students, 
+    errorMessage, 
+    loading,
+    addStudent, 
+    deleteStudent, 
+    updateStudent,
+    refreshStudents: fetchStudents
+  }
 }
 
 export default useStudents
