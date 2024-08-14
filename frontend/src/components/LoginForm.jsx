@@ -21,33 +21,35 @@ const LoginForm = ({ handleSubmit }) => {
   };
 
   return (
-    <div className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            className="form-input"
-            placeholder="Enter your username"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            className="form-input"
-            placeholder="Enter your password"
-          />
-        </div>
-        <button type="submit" className="button">Login</button>
-      </form>
+    <div className="form-container">
+      <div className="login-form">
+        <h2>Login</h2>
+        <form onSubmit={handleFormSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={handleUsernameChange}
+              className="form-input"
+              placeholder="Enter your username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              className="form-input"
+              placeholder="Enter your password"
+            />
+          </div>
+          <button type="submit" className="button">Login</button>
+        </form>
+      </div>
     </div>
   );
 }
