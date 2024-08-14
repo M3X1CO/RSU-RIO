@@ -2,16 +2,20 @@ import axios from 'axios'
 
 const baseUrl = '/api/students'
 
+let token = null
+
+const setToken = newToken => {
+  token = `Bearer ${newToken}`
+}
+
 const api = axios.create({
   baseURL: baseUrl,
 })
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('loggedStudentappUser')
     if (token) {
-      const user = JSON.parse(token)
-      config.headers['Authorization'] = `Bearer ${user.token}`
+      config.headers['Authorization'] = token
     }
     return config
   },
@@ -59,4 +63,13 @@ const remove = async (id) => {
   return response.data
 }
 
-export default { getAll, create, update, remove, verifyToken }
+const studentService = { 
+  setToken,
+  getAll, 
+  create, 
+  update, 
+  remove, 
+  verifyToken
+}
+
+export default studentService

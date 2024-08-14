@@ -3,7 +3,6 @@ const User = require('../models/user');
 const middleware = require('../utils/middleware');
 const logger = require('../utils/logger');
 const bcrypt = require('bcrypt');
-
 adminRouter.use(middleware.auth);
 
 adminRouter.get('/panel', middleware.isAdmin, async (req, res) => {
