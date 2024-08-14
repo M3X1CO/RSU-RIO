@@ -64,8 +64,7 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  height: 100vh;
 }
 
 .login-form-wrapper,
@@ -76,6 +75,16 @@ h2 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   width: 300px;
   border: 1px solid var(--color-border);
+  max-height: 33vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form,
+.register-form {
+  display: flex;
+  flex-direction: column;
 }
 
 .login-form h2,
@@ -140,10 +149,18 @@ button:hover,
   color: var(--color-text-primary);
 }
 
-.login-button,
-.register-button {
+.login-form .button-container,
+.register-form .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 1rem;
-  width: 100%;
+}
+
+.login-button,
+.register-button,
+.cancel-button {
+  flex: 0 1 auto;
 }
 
 .button-container {
