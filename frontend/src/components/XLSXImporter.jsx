@@ -167,10 +167,17 @@ const XLSXImporter = ({ user, onImportComplete }) => {
 
   return (
     <div style={{ width: '100%' }}>
-      <label htmlFor="file-upload" className="custom-file-upload">
-        Upload File
-      </label>
-      <input id="file-upload" type="file" onChange={handleFileUpload} accept=".xlsx" />
+      <div>
+        <input
+          id="file-upload"
+          type="file"
+          onChange={handleFileUpload}
+          accept=".xlsx"
+        />
+        <label htmlFor="file-upload" className="custom-file-upload">
+          Upload File
+        </label>
+      </div>
       {students.length > 0 && (
         <div className="student-details-container">
           <h2 className="footer-h2">Student {currentStudentIndex + 1} of {students.length}</h2>

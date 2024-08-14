@@ -102,8 +102,8 @@ h2 {
 .button,
 button,
 .custom-file-upload {
-  width: 100%;
-  padding: 0.75rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   font-size: 1rem;
@@ -111,6 +111,7 @@ button,
   transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   background-color: var(--color-button);
   color: var(--color-button-text);
+  text-align: center;
 }
 
 .button:hover,
@@ -135,6 +136,16 @@ button:hover,
 .logout-button,
 .admin-no-button {
   color: var(--color-error);
+}
+
+/* File input styles */
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  cursor: pointer;
 }
 
 /* List styles */
