@@ -5,7 +5,7 @@ const Footer = ({ user, logout, addStudent, setView, isAdmin }) => {
 
   return (
     <footer className="footer">
-      <XLSXImporter addStudent={addStudent} />
+      <XLSXImporter addStudent={addStudent} user={user} />
       <div className="copyright">
         <em>Student Management App<br/></em>
         <em>Department of Computer Science<br/></em>

@@ -32,7 +32,7 @@ const useStudents = (user) => {
     fetchStudents()
   }, [fetchStudents])
 
-  const addStudent = async (studentObject) => {
+  const addStudent = async (studentObject, user) => {
     try {
       if (!user || !user.token) {
         throw new Error('User not authenticated')

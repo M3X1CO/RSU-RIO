@@ -26,11 +26,15 @@ const App = () => {
     students,
     errorMessage: studentError,
     loading: studentsLoading,
-    addStudent,
+    addStudent: addStudentHook,
     deleteStudent,
     updateStudent,
     refreshStudents
   } = useStudents(user)
+
+  const addStudent = (studentObject) => {
+    return addStudentHook(studentObject, user)
+  }
 
   const studentFormRef = useRef()
   const [oldPassportSearch, setOldPassportSearch] = useState('')

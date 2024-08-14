@@ -49,6 +49,7 @@ const useAuth = () => {
       const user = await loginService.login({ username, password })
       window.localStorage.setItem('loggedStudentappUser', JSON.stringify(user))
       setAuthToken(user.token)
+      studentsService.setToken(user.token)
       setUser(user)
       setIsAdmin(user.isAdmin || false)
       setStatus(user.status || 'Unknown')

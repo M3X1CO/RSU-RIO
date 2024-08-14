@@ -4,7 +4,7 @@ import StudentDetails from './StudentDetails'
 import { initialStudentState } from './InitialStudentState'
 import useStudents from '../hooks/useStudents'
 
-const XLSXImporter = ({ user }) => {
+const XLSXImporter = ({ addStudentProp, user }) => {
   const [students, setStudents] = useState([])
   const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
   const { addStudent, errorMessage } = useStudents(user)
@@ -90,7 +90,7 @@ const XLSXImporter = ({ user }) => {
   const handleSaveStudent = async () => {
     const currentStudent = students[currentStudentIndex]
     try {
-      await addStudent(currentStudent)
+      await addStudent(currentStudent, user)
 
       if (currentStudentIndex < students.length - 1) {
         setCurrentStudentIndex(prevIndex => prevIndex + 1)
