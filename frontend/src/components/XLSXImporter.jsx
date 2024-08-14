@@ -128,6 +128,11 @@ const XLSXImporter = ({ user, onImportComplete }) => {
     }
   }
 
+  const handleCancel = () => {
+    setStudents([])
+    setCurrentStudentIndex(0)
+  }
+
   return (
     <div style={{ width: '100%' }}>
       <label htmlFor="file-upload" className="custom-file-upload">
