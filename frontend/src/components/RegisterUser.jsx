@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
-const RegisterUser = ({ user, handleRegister, setView }) => {
+const RegisterUser = ({ handleRegister }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -60,12 +59,6 @@ const RegisterUser = ({ user, handleRegister, setView }) => {
       </form>
     </div>
   );
-};
-
-RegisterUser.propTypes = {
-  handleRegister: PropTypes.func.isRequired,
-  user: PropTypes.object,
-  setView: PropTypes.func.isRequired,
 };
 
 export default RegisterUser;
