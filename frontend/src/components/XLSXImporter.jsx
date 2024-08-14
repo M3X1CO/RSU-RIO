@@ -7,7 +7,7 @@ import useStudents from '../hooks/useStudents'
 const XLSXImporter = ({ addStudentProp, user }) => {
   const [students, setStudents] = useState([])
   const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
-  const { addStudent, errorMessage } = useStudents(user)
+  const { addStudent, errorMessage, refreshStudents } = useStudents(user)
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0]
@@ -96,7 +96,9 @@ const XLSXImporter = ({ addStudentProp, user }) => {
         setCurrentStudentIndex(prevIndex => prevIndex + 1)
       } else {
         console.log('All students processed')
+        await refreshStudents()
         setStudents([])
+        setCurrentStudentIndex(0)
       }
     } catch (error) {
       console.error('Failed to save student:', error)
