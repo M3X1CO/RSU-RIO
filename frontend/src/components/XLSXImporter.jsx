@@ -4,7 +4,7 @@ import StudentDetails from './StudentDetails'
 import { initialStudentState } from './InitialStudentState'
 import useStudents from '../hooks/useStudents'
 
-const XLSXImporter = ({ addStudentProp, user }) => {
+const XLSXImporter = ({ user, onImportComplete }) => {
   const [students, setStudents] = useState([])
   const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
   const { addStudent, errorMessage, refreshStudents } = useStudents(user)
@@ -99,6 +99,7 @@ const XLSXImporter = ({ addStudentProp, user }) => {
         await refreshStudents()
         setStudents([])
         setCurrentStudentIndex(0)
+        onImportComplete()
       }
     } catch (error) {
       console.error('Failed to save student:', error)
