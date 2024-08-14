@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import loginService from '../services/login'
 import studentsService from '../services/students'
@@ -10,29 +10,7 @@ const useAuth = () => {
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState(null)
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
-      if (loggedUserJSON) {
-        const user = JSON.parse(loggedUserJSON)
-        setUser(user)
-        setIsAdmin(user.isAdmin || false)
-        setStatus(user.status || 'Unknown')
-        setAuthToken(user.token)
-
-        try {
-          await studentsService.verifyToken()
-        } catch (error) {
-          console.error('Token verification failed:', error)
-          await logout()
-        }
-      }
-      setLoading(false)
-    }
-    fetchUser()
-  }, [])
-
-  const setAuthToken = (token) => {
+  const setAuthToken = useCallback((token) => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       studentsService.setToken(token)
@@ -40,7 +18,30 @@ const useAuth = () => {
       delete axios.defaults.headers.common['Authorization']
       studentsService.setToken(null)
     }
-  }
+  }, [])
+
+  const loadUser = useCallback(async () => {
+    const loggedUserJSON = window.localStorage.getItem('loggedStudentappUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      setIsAdmin(user.isAdmin || false)
+      setStatus(user.status || 'Unknown')
+      setAuthToken(user.token)
+
+      try {
+        await studentsService.verifyToken()
+      } catch (error) {
+        console.error('Token verification failed:', error)
+        await logout()
+      }
+    }
+    setLoading(false)
+  }, [setAuthToken])
+
+  useEffect(() => {
+    loadUser()
+  }, [loadUser])
 
   const login = async (username, password) => {
     try {
