@@ -3,6 +3,7 @@ const studentRouter = require('express').Router()
 const Student = require('../models/student')
 const User = require('../models/user')
 const studentFields = require('../utils/studentFields')
+const config = require('../utils/config')
 
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
@@ -11,6 +12,24 @@ const getTokenFrom = request => {
   }
   return null
 }
+
+studentRouter.get('/verify-token', async (request, response) => {
+  try {
+    const token = getTokenFrom(request)
+    const decodedToken = jwt.verify(token, config.JWT_SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+    const user = await User.findById(decodedToken.id)
+    if (!user) {
+      return response.status(401).json({ error: 'user not found' })
+    }
+    response.status(200).json({ message: 'Token is valid' })
+  } catch (error) {
+    console.error('Token verification error:', error)
+    response.status(401).json({ error: 'token invalid' })
+  }
+})
 
 studentRouter.get('/', async (request, response) => {
   const students = await Student.find({}).populate('user', { username: 1, name: 1 })
