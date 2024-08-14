@@ -11,15 +11,17 @@
   --color-active: #979684;
   --color-footer-background: papayawhip;
   --color-error: #cd5c5c;
+  --border-radius: 4px;
+  --transition-speed: 0.3s;
 }
 
 /* Base styles */
-html, body {
-  height: 100%;
-  margin: 0;
+body {
   font-family: Arial, sans-serif;
   background-color: var(--color-background);
   color: var(--color-text-primary);
+  margin: 0;
+  min-height: 100vh;
 }
 
 .app-container {
@@ -33,16 +35,21 @@ html, body {
   padding: 20px;
 }
 
-/* Header styles */
-.header-container {
-  padding: 10px;
+/* Typography */
+h2 {
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
 }
 
+/* Header styles */
 .header-title {
   color: var(--color-text-secondary);
   font-style: italic;
   font-size: 24px;
   text-align: center;
+  padding: 10px;
 }
 
 /* Form styles */
@@ -57,18 +64,10 @@ html, body {
 .register-form-wrapper {
   background-color: #44443d;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   width: 320px;
   border: 1px solid var(--color-border);
-}
-
-.login-form h2,
-.register-form h2 {
-  text-align: center;
-  color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
 }
 
 .form-group {
@@ -87,10 +86,10 @@ html, body {
   padding: 0.75rem;
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 1rem;
   color: var(--color-text-primary);
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transition-speed) ease;
   box-sizing: border-box;
 }
 
@@ -106,10 +105,10 @@ button,
   width: 100%;
   padding: 0.75rem;
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   background-color: var(--color-button);
   color: var(--color-button-text);
 }
@@ -138,44 +137,30 @@ button:hover,
   color: var(--color-error);
 }
 
-/* Admin panel styles */
-.admin-page {
-  padding: 20px;
-}
-
-.user-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.user-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-/* Student list styles */
+/* List styles */
+.user-list,
 .student-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
+.user-item,
 .student {
-  margin-bottom: 15px;
-  transition: background-color 0.3s ease;
+  padding: 10px;
+  border-bottom: 1px solid var(--color-border);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.user-item,
+.student-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .student:hover {
   background-color: var(--color-hover);
-}
-
-.student-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 }
 
 .student-info {
@@ -194,10 +179,10 @@ button:hover,
   padding: 10px 15px;
   font-size: 16px;
   border: 2px solid var(--color-border);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   margin: 0 10px;
   width: 250px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   background-color: var(--color-background);
   color: var(--color-text-primary);
 }
@@ -222,7 +207,6 @@ button:hover,
 }
 
 .pagination-container-2 {
-  position: relative;
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -277,7 +261,7 @@ button:hover,
   align-items: center;
   background-color: var(--color-footer-background);
   padding: 10px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   margin-top: 20px;
 }
 
@@ -293,33 +277,21 @@ button:hover,
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #f5c6cb;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .search-container {
+  .search-container,
+  .student-content,
+  .button-container {
     flex-direction: column;
     align-items: stretch;
   }
   
-  .search-input {
-    margin: 10px 0;
-    width: 100%;
-  }
-  
-  .student-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .button-container {
-    margin-top: 10px;
-    justify-content: space-between;
-    width: 100%;
-  }
-
+  .search-input,
   .button-container button {
     width: 100%;
+    margin: 10px 0;
   }
 }
