@@ -3,11 +3,14 @@ import * as XLSX from 'exceljs'
 import StudentDetails from './StudentDetails'
 import { initialStudentState } from './InitialStudentState'
 import useStudents from '../hooks/useStudents'
+import StudentExists from './StudentExists'
+import ErrorMessage from './ErrorMessage'
 
 const XLSXImporter = ({ user, onImportComplete }) => {
   const [students, setStudents] = useState([])
   const [currentStudentIndex, setCurrentStudentIndex] = useState(0)
-  const { addStudent, errorMessage, refreshStudents } = useStudents(user)
+  const [error, setError] = useState(null)
+  const { addStudent, refreshStudents } = useStudents(user)
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0]
@@ -90,6 +93,23 @@ const XLSXImporter = ({ user, onImportComplete }) => {
   const handleSaveStudent = async () => {
     const currentStudent = students[currentStudentIndex]
     try {
+      const exists = await StudentExists(currentStudent.oldPassportNumber, currentStudent.newPassportNumber)
+      if (exists) {
+        setError(`Student with passport number ${currentStudent.oldPassportNumber || currentStudent.newPassportNumber} already exists. Skipping...`)
+        setTimeout(() => setError(null), 5000)
+        
+        if (currentStudentIndex < students.length - 1) {
+          setCurrentStudentIndex(prevIndex => prevIndex + 1)
+        } else {
+          console.log('All students processed')
+          await refreshStudents()
+          setStudents([])
+          setCurrentStudentIndex(0)
+          onImportComplete()
+        }
+        return
+      }
+
       await addStudent(currentStudent, user)
 
       if (currentStudentIndex < students.length - 1) {
@@ -103,12 +123,9 @@ const XLSXImporter = ({ user, onImportComplete }) => {
       }
     } catch (error) {
       console.error('Failed to save student:', error)
+      setError('Failed to save student. Please try again.')
+      setTimeout(() => setError(null), 5000)
     }
-  }
-
-  const handleCancel = () => {
-    setStudents([])
-    setCurrentStudentIndex(0)
   }
 
   return (
@@ -131,7 +148,7 @@ const XLSXImporter = ({ user, onImportComplete }) => {
           </div>
         </div>
       )}
-      {errorMessage && <div className="error">{errorMessage}</div>}
+      {error && <ErrorMessage message={error} />}
     </div>
   )
 }

@@ -1,32 +1,29 @@
 import React, { useState } from 'react'
 import { initialStudentState } from './InitialStudentState'
 import StudentDetails from './StudentDetails'
+import StudentExists from './StudentExists'
+import ErrorMessage from './ErrorMessage'
 
 const StudentForm = ({ addStudent, studentFormRef }) => {
   const [newStudent, setNewStudent] = useState(initialStudentState)
   const [error, setError] = useState(null)
 
   const handleInputChange = (key, value) => {
-    setNewStudent(prevState => {
-      const updatedState = { ...prevState, [key]: value }
-      
-      if (['firstName', 'middleName', 'lastName'].includes(key)) {
-        updatedState.name = [
-          updatedState.firstName,
-          updatedState.middleName,
-          updatedState.lastName
-        ].filter(Boolean).join(' ')
-      }
-
-      updatedState.newPassportNumber = ''
-      
-      return updatedState
-    })
+    setNewStudent(prevState => ({
+      ...prevState,
+      [key]: value
+    }))
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
+      const exists = await StudentExists(newStudent.oldPassportNumber, newStudent.newPassportNumber)
+      if (exists) {
+        setError('A student with this passport number already exists in the database.')
+        return
+      }
+
       await addStudent(newStudent)
       setNewStudent(initialStudentState)
       if (studentFormRef.current) {
@@ -34,16 +31,14 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
       }
     } catch (err) {
       setError('Failed to add student. Please try again.')
-      setTimeout(() => setError(null), 5000)
     }
+    setTimeout(() => setError(null), 5000)
   }
 
   return (
     <div className="student-form">
       <h2>Create a new Student</h2>
-
-      {error && <div className="error-message">{error}</div>}
-
+      {error && <ErrorMessage message={error} />}
       <form onSubmit={handleSubmit}>
         <StudentDetails 
           student={newStudent} 
