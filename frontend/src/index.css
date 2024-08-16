@@ -292,13 +292,24 @@ input[type="file"] {
 .pagination,
 .pagination-2 {
   display: flex;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
 }
 
 .pagination button,
 .pagination-2 button {
   padding: 5px 10px;
   border: 1px solid var(--color-border);
+  flex-grow: 1;
+  min-width: 15px;
+}
+
+.pagination button.active,
+.pagination-2 button.active {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
 }
 
 .pagination button.active,
@@ -451,5 +462,30 @@ input[type="file"] {
 
   .user-info {
     margin-bottom: 10px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .pagination,
+  .pagination-2 {
+    gap: 10px;
+  }
+
+  .pagination button,
+  .pagination-2 button {
+    flex-basis: 0;
+  }
+}
+
+@media (max-width: 999px) {
+  .pagination,
+  .pagination-2 {
+    gap: 5px;
+  }
+
+  .pagination button,
+  .pagination-2 button {
+    flex-basis: calc((100% - 20px) / 5);
+    min-width: 15px;
   }
 }
