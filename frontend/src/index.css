@@ -218,6 +218,27 @@ input[type="file"] {
   color: var(--color-text-secondary);
 }
 
+.student-form .button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.student-form .button-container button {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.student-form .submit-button {
+  background-color: var(--color-active);
+  color: var(--color-text-primary);
+}
+
+.student-form .cancel-button {
+  background-color: var(--color-button);
+  color: var(--color-error);
+}
+
 /* Search styles */
 .search-container {
   display: flex;

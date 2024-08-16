@@ -35,6 +35,13 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
     setTimeout(() => setError(null), 5000)
   }
 
+  const handleCancel = () => {
+    setNewStudent(initialStudentState)
+    if (studentFormRef.current) {
+      studentFormRef.current.toggleVisibility()
+    }
+  }
+
   return (
     <div className="student-form">
       <h2>Create a new Student</h2>
@@ -45,7 +52,10 @@ const StudentForm = ({ addStudent, studentFormRef }) => {
           handleInputChange={handleInputChange} 
           isEditable={true}
         />
-        <button type="submit" className="submit-button">Save</button>
+        <div className="button-container">
+          <button type="submit" className="submit-button">Save</button>
+          <button type="button" onClick={handleCancel} className="cancel-button">Cancel</button>
+        </div>
       </form>
     </div>
   )
