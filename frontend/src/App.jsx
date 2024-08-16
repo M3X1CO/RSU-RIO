@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import LoginFormWrapper from './components/LoginFormWrapper'
+import LoginForm from './components/LoginForm'
 import MainContent from './components/MainContent'
 import AdminPage from './components/AdminPanel'
 import RestrictedAccess from './components/RestrictedAccess'
@@ -74,7 +74,7 @@ const App = () => {
     if (errorMessage) return <ErrorMessage message={errorMessage} />
 
     if (!user) {
-      return <LoginFormWrapper handleLogin={handleLogin} handleRegister={register} />
+      return <LoginForm handleLogin={handleLogin} handleRegister={register} />
     }
 
     if (!status || status !== 'approved') {
