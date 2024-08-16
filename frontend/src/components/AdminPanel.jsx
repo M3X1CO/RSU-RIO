@@ -154,7 +154,6 @@ const AdminPage = ({ setView }) => {
       </div>
 
       <div className="admin-section register-section">
-        <h2>Register New User</h2>
         <RegisterUser handleRegister={handleRegister} setView={setView} />
       </div>
     </div>
