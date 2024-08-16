@@ -230,13 +230,18 @@ input[type="file"] {
 }
 
 .student-form .submit-button {
-  background-color: var(--color-active);
+  background-color: var(--color-button);
   color: var(--color-text-primary);
 }
 
 .student-form .cancel-button {
   background-color: var(--color-button);
   color: var(--color-error);
+}
+
+.student-form .submit-button:hover,
+.student-form .cancel-button:hover {
+  background-color: var(--color-hover);
 }
 
 /* Search styles */
