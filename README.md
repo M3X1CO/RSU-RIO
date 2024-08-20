@@ -85,3 +85,6 @@ To log in and explore the application, use the following credentials:
 
 - **Username:** test12
 - **Password:** test12
+
+- **Username:** admin4
+- **Password:** J20W£j3)/b$c
