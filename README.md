@@ -74,6 +74,7 @@ This project is a **Student Management Application** built as part of the Univer
 ## Live Demo
 
 You can view the live demo of the Student Management Application at:
+Keep in mind the demo is a free version and can take up to a minute to spool up.
 
 [https://rsu-rio.onrender.com/](https://rsu-rio.onrender.com/)
 
