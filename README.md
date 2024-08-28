@@ -79,6 +79,8 @@ Keep in mind the demo is a free version and can take up to a minute to spool up.
 [https://rsu-rio.onrender.com/](https://rsu-rio.onrender.com/)
 
 Feel free to explore the features and see the application in action.
+You can delete items in the DB and use the test file to add new students.
+DATA is fictitious. 
 
 ### Login Details
 
